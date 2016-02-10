@@ -1,0 +1,21 @@
+<div class="globe__container">
+    <svg>
+        <g>
+            <path data-ng-attr-d="{{globeGraticule}}"
+                class="globe-graticule"></path>
+        </g>
+        <g
+            data-ng-repeat="(city, value) in cityList"
+            data-ng-click="state.selectedCity = city">
+            <circle
+                data-ng-attr-cx="{{globeProjection(value.coordinates)[0]}}"
+                data-ng-attr-cy="{{globeProjection(value.coordinates)[1]}}"
+                r="3"
+                class="globe-city"></circle>
+            <text
+                data-ng-attr-x="{{globeProjection(value.coordinates)[0] + 5}}"
+                data-ng-attr-y="{{globeProjection(value.coordinates)[1]}}"
+                class="globe-names">{{value.name}}</text>
+        </g>
+    </svg>
+</div>

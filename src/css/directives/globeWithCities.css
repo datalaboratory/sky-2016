@@ -1,0 +1,26 @@
+.globe__container {
+    width: 210px;
+    height: 210px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.globe-graticule {
+    stroke: #0D434F;
+    fill: none;
+}
+.globe-city {
+    fill: #0D434F;
+}
+.globe-names {
+    fill: #fff;
+    alignment-baseline: middle;
+}
+
+.landscape {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
