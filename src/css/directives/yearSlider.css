@@ -1,0 +1,21 @@
+.year-slider__container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+}
+
+.slider-handle {
+    fill: #fff;
+}
+
+.year-axis {
+    shape-rendering: crispEdges;
+    fill: none;
+    stroke: #fff;
+}
+.year-axis text {
+    fill: #fff;
+    stroke: none;
+}

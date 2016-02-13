@@ -1,15 +1,35 @@
 angular.module('zodiac').factory('constellationLoader', function () {
     return {
-        load: function (data) {
+        load: function (constellations) {
                 var geoConstellations = [];
                 var starsMag = [];
-                data = data.map(function (constellation) {
+                var starCount = 0;
+                var maxMag = 5;
+                var zodiacNames = {
+                    'Aquarius': 'Водолей',
+                    'Aries': 'Овен',
+                    'Cancer': 'Рак',
+                    'Capricornus': 'Козерог',
+                    'Gemini': 'Близнецы',
+                    'Leo': 'Лев',
+                    'Libra': 'Весы',
+                    'Pisces': 'Рыбы',
+                    'Sagittarius': 'Стрелец',
+                    'Scorpius': 'Скорпион',
+                    'Taurus': 'Телец',
+                    'Virgo': 'Дева'
+                };
+                constellations = constellations.map(function (constellation) {
                     constellation.stars = constellation.stars.filter(function (star) {
-                        if (star.mag < 6) starsMag.push(star.mag);
-                        return star.mag < 6
+                        if (star.mag < maxMag) {
+                            starsMag.push(star.mag);
+                            starCount++
+                        }
+                        return star.mag < maxMag
                     });
                     return constellation
                 });
+                console.log(starCount, 'звёзд');
                 var minMaxMag = d3.extent(starsMag);
                 var opacityScale = d3.scale.linear()
                     .domain(minMaxMag)
@@ -19,20 +39,29 @@ angular.module('zodiac').factory('constellationLoader', function () {
                     .domain(minMaxMag)
                     .range([4.7, 1.7]);
 
-                data.forEach(function (constellation) {
+                constellations.forEach(function (constellation) {
                     var geometries = [];
 
-                    var lines = constellation.lines.map(function (line) {
-                        var p1 = [-line.ra1, line.dec1];
-                        var p2 = [-line.ra2, line.dec2];
+                    if (constellation.zodiac) {
+                        var ra = d3.mean(constellation.stars, function (d) { return -d.ra });
+                        var dec = d3.mean(constellation.stars, function (d) { return d.dec });
 
-                        return [p1, p2]
-                    });
+                        var lines = constellation.lines.map(function (line) {
+                            var p1 = [-line.ra1, line.dec1];
+                            var p2 = [-line.ra2, line.dec2];
 
-                    geometries.push({
-                        type: "MultiLineString",
-                        coordinates: lines
-                    });
+                            return [p1, p2]
+                        });
+
+                        geometries.push({
+                            type: "MultiLineString",
+                            coordinates: lines,
+                            properties: {
+                                name: zodiacNames[constellation.name],
+                                center:  [ra, dec]
+                            }
+                        });
+                    }
 
                     constellation.stars.map(function (star) {
                         var opacity = opacityScale(star.mag);

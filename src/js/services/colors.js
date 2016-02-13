@@ -19,6 +19,8 @@ angular.module('zodiac').constant('colors', {
             ])
             .clamp(true)
     ],
-    zodiacLine: "#f2f237",
+    zodiacLine: "#323192",
+    zodiacText: "#fff",
+    ecliptic: "#0D434F",
     constellationLine: "#999"
 });

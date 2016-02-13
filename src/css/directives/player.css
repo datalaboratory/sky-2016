@@ -1,0 +1,13 @@
+.player__container {
+    width: 100px;
+    position: absolute;
+    left: 30px;
+    top: 300px;
+}
+
+.player__href {
+    cursor: pointer;
+}
+.player__href--active {
+    color: white;
+}

@@ -1,0 +1,26 @@
+.sky__container {
+    width: 100%;
+    height: 100%;
+}
+.sky__canvas, .sky__top-layer-svg, .sky__background-layer-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.sky__top-layer-svg {
+    pointer-events: none;
+}
+
+.graticule {
+    fill: none;
+    stroke: #fff;
+    stroke-width: .1;
+}
+
+.sun-path {
+    fill: none;
+    stroke: #fff;
+    stroke-width: .4;
+    stroke-dasharray: 5;
+}

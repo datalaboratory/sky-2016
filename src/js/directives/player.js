@@ -4,7 +4,7 @@ angular.module('zodiac').directive('player', function () {
         templateUrl: 'directives/player.html',
         replace: true,
         link: function link($scope, $element) {
-            $scope.play = function (velocity) {
+            $scope.setVelocity = function (velocity) {
                 if (velocity == $scope.player.velocity) {
                     $scope.player.play = !$scope.player.play
                 } else {

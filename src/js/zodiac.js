@@ -5,7 +5,7 @@ angular.module('zodiac').controller('ZodiacController', function ($scope, $rootS
 
     $scope.state = {
         selectedCity: 'Moscow',
-        currentTime: 0,
+        currentDate: new Date(2015, 5, 5),
         atmosphere: true
     }
 

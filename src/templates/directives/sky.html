@@ -1,3 +1,13 @@
-<div>
+<div class="sky__container">
+    <svg class="sky__background-layer-svg"></svg>
     <canvas class="sky__canvas"></canvas>
+    <svg class="sky__top-layer-svg">
+        <defs>
+            <radialGradient id="sunGradient">
+                <stop offset="40%" style="stop-color: rgba(255,255,255,1);"></stop>
+                <stop offset="80%" style="stop-color: rgba(255,255,255,0.2);"></stop>
+                <stop offset="100%" style="stop-color: rgba(255,255,255,0);"></stop>
+            </radialGradient>
+        </defs>
+    </svg>
 </div>
