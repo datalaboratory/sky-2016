@@ -1,0 +1,27 @@
+<div class="earth-orbit__container">
+    <svg>
+        <g class="earth-orbit__orbit-g">
+            <ellipse
+                class="earth-orbit__orbit"
+                rx="170" ry="50">
+            </ellipse>
+            <circle fill="url(#sunGradient)"
+                    class="earth-orbit__back-sun"
+                    r="50"></circle>
+            <defs>
+                <radialGradient id="sunGradient">
+                    <stop offset="40%" style="stop-color: rgba(255,255,255,1);"></stop>
+                    <stop offset="80%" style="stop-color: rgba(255,255,255,0.2);"></stop>
+                    <stop offset="100%" style="stop-color: rgba(255,255,255,0);"></stop>
+                </radialGradient>
+            </defs>
+
+            <g class="earth-orbit__earth-group">
+                <image class="earth-orbit__earth"></image>
+            </g>
+            <circle fill="url(#sunGradient)"
+                    class="earth-orbit__forward-sun"
+                    r="50"></circle>
+        </g>
+    </svg>
+</div>

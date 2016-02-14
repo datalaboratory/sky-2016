@@ -1,4 +1,4 @@
-angular.module('zodiac').directive('player', function () {
+angular.module('zodiac').directive('player', function ($document) {
     return {
         restrict: 'E',
         templateUrl: 'directives/player.html',
@@ -23,8 +23,14 @@ angular.module('zodiac').directive('player', function () {
                     $scope.player.play = false;
 
                 }
+            };
 
-            }
+            $document.on('keydown', function(e) {
+                if (e.keyCode == 32) {
+                    $scope.player.play = !$scope.player.play;
+                    $scope.player.tails = false;
+                }
+            })
 
         }
     }

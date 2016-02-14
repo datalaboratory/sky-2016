@@ -7,13 +7,14 @@ angular.module('zodiac').directive('yearSlider', function ($document) {
             var width = $element.width();
             var offset = 20;
             $scope.yearScale = d3.time.scale()
-                .domain([new Date(2015, 0, 1), new Date(2016, 0, 1)])
+                .domain([moment($scope.state.currentDate).startOf('year').toDate(),
+                    moment($scope.state.currentDate).endOf('year').subtract(1, 'h').toDate()])
                 .range([offset, width - offset]);
 
             $scope.monthScale = d3.time.scale()
-                .domain([moment($scope.state.currentDate).startOf('month').toDate(), moment($scope.state.currentDate).endOf('month').toDate()])
+                .domain([moment($scope.state.currentDate).startOf('month').toDate(),
+                    moment($scope.state.currentDate).endOf('month').toDate()])
                 .range([offset, width - offset]);
-            console.log(moment($scope.state.currentDate).startOf('month'));
 
             $scope.moveHandle = function($event, period) {
                 var scale = (period == 'year') ? $scope.yearScale : $scope.monthScale;
