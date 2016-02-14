@@ -7,20 +7,27 @@
 }
 
 .globe-graticule {
-    stroke: #0D434F;
+    stroke: #084654;
+    stroke-width: 0.4;
     fill: none;
 }
 .globe-city {
-    fill: #0D434F;
+    fill: #29E6E6;
 }
+
 .globe-names {
     fill: #fff;
     alignment-baseline: middle;
+    font-style: italic;
+}
+.globe-names:hover {
+    fill: #29E6E6;
 }
 
-.landscape {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
+.globe-city--active circle {
+    fill: #fff;
 }
+.globe-city--active text {
+    font-style: normal;
+}
+

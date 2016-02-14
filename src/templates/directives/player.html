@@ -1,12 +1,17 @@
 <div class="player__container">
+    <input type="checkbox" data-ng-model="state.atmosphere"/>атмосфера<br>
+    <input type="checkbox" data-ng-model="state.constellations"/>созвездия<br>
+    <input type="checkbox" data-ng-model="state.graticule"/>сетка<br>
     Ускориться в
     <span
           data-ng-click="setVelocity(600)"
           data-ng-class="{'player__href': true,'player__href--active': player.velocity == 600 && player.play}">600</span>,<br>
-    <span class="player__href"
+    <span
           data-ng-click="setVelocity(3600)"
           data-ng-class="{'player__href': true,'player__href--active': player.velocity == 3600 && player.play}">3600</span>, или<br>
-    <span class="player__href"
+    <span
           data-ng-click="setVelocity(7200)"
-          data-ng-class="{'player__href': true,'player__href--active': player.velocity == 7200 && player.play}">7200</span> раз
+          data-ng-class="{'player__href': true,'player__href--active': player.velocity == 7200 && player.play}">7200</span> раз. <br>
+    <span data-ng-click="showStarsTails()"
+          data-ng-class="{'player__href': true,'player__href--active': player.tails}">Показать хвосты</span>
 </div>

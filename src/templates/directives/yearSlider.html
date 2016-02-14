@@ -1,15 +1,18 @@
 <div class="year-slider__container">
     <svg>
         <g class="month-slider" transform="translate(0,10)">
+            <g class="month-axis"></g>
+            <rect width="20" height="30" class="slider-handle"
+                  data-ng-mousedown="moveHandle($event, 'month')"
+                  data-ng-attr-x="{{monthScale(state.currentDate) - 10}}"
+                  y="15"></rect>
+        </g>
+        <g class="year-slider" transform="translate(0,50)">
             <g class="year-axis"></g>
             <rect width="20" height="30" class="slider-handle"
-                data-ng-mousedown="moveHandle($event)"
+                data-ng-mousedown="moveHandle($event, 'year')"
                 data-ng-attr-x="{{yearScale(state.currentDate) - 10}}"
                 y="15"></rect>
         </g>
-        <!--<g class="year-slider" transform="translate(0,80)">
-            <g class="yearAxis"></g>
-            <rect width="20" height="30" class="slider-handle"></rect>
-        </g>-->
     </svg>
 </div>

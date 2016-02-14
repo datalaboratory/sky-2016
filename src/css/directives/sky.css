@@ -24,3 +24,23 @@
     stroke-width: .4;
     stroke-dasharray: 5;
 }
+.zodiac {
+    fill: none;
+    stroke: #323192;
+    stroke-width: .4;
+}
+
+.ecliptic {
+    fill: none;
+    stroke: #0D434F;
+    stroke-width: .4;
+}
+
+.zodiac-text {
+    font-family: Times New Roman;
+    font-style:  italic;
+    font-weight: lighter;
+    font-size: 14px;
+    text-anchor: middle;
+    fill: #fff;
+}

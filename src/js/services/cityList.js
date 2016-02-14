@@ -21,6 +21,7 @@ angular.module('zodiac').constant('cityList', {
     },
     Johannesburg: {
         coordinates:[28.04, -26.19],
-        name: 'Йоханнесбург'
+        name: 'Йоханнесбург',
+        reverse: true
     }
 });

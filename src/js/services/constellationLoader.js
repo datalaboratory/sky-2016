@@ -39,28 +39,30 @@ angular.module('zodiac').factory('constellationLoader', function () {
                     .domain(minMaxMag)
                     .range([4.7, 1.7]);
 
+
                 constellations.forEach(function (constellation) {
                     var geometries = [];
 
                     if (constellation.zodiac) {
-                        var ra = d3.mean(constellation.stars, function (d) { return -d.ra });
-                        var dec = d3.mean(constellation.stars, function (d) { return d.dec });
-
                         var lines = constellation.lines.map(function (line) {
                             var p1 = [-line.ra1, line.dec1];
                             var p2 = [-line.ra2, line.dec2];
 
                             return [p1, p2]
                         });
-
-                        geometries.push({
+                        var geometry = {
                             type: "MultiLineString",
                             coordinates: lines,
                             properties: {
-                                name: zodiacNames[constellation.name],
-                                center:  [ra, dec]
+                                name: zodiacNames[constellation.name]
                             }
+                        };
+
+                        geometry.properties.center = d3.geo.centroid({
+                            type: 'GeometryCollection',
+                            geometries: [geometry]
                         });
+                        geometries.push(geometry);
                     }
 
                     constellation.stars.map(function (star) {
@@ -101,6 +103,7 @@ angular.module('zodiac').factory('constellationLoader', function () {
                 });
                 console.log('constellations loaded');
                 return geoConstellations
+
         }
     }
 });

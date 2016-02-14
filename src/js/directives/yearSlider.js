@@ -10,7 +10,13 @@ angular.module('zodiac').directive('yearSlider', function ($document) {
                 .domain([new Date(2015, 0, 1), new Date(2016, 0, 1)])
                 .range([offset, width - offset]);
 
-            $scope.moveHandle = function($event) {
+            $scope.monthScale = d3.time.scale()
+                .domain([moment($scope.state.currentDate).startOf('month').toDate(), moment($scope.state.currentDate).endOf('month').toDate()])
+                .range([offset, width - offset]);
+            console.log(moment($scope.state.currentDate).startOf('month'));
+
+            $scope.moveHandle = function($event, period) {
+                var scale = (period == 'year') ? $scope.yearScale : $scope.monthScale;
                 $event.preventDefault();
                 $document.on('mousemove', mousemove);
                 $document.on('mouseup', mouseup);
@@ -18,7 +24,7 @@ angular.module('zodiac').directive('yearSlider', function ($document) {
                     var pxValue = e.pageX;
                     pxValue = Math.max(offset, pxValue);
                     pxValue = Math.min(width - offset, pxValue);
-                    $scope.state.currentDate = $scope.yearScale.invert(pxValue);
+                    $scope.state.currentDate = scale.invert(pxValue);
                     $scope.$apply();
                 }
                 function mouseup(){
@@ -27,13 +33,28 @@ angular.module('zodiac').directive('yearSlider', function ($document) {
                 }
             };
 
-            var axisX = d3.svg.axis()
+            var axisYear = d3.svg.axis()
                 .scale($scope.yearScale)
                 .orient('bottom');
-            var axisG = d3.select($element[0])
+            var axisMonth = d3.svg.axis()
+                .scale($scope.monthScale)
+                .orient('bottom');
+            d3.select($element[0])
                 .select('.year-axis')
                 .attr("transform", "translate(0," + 30 + ")")
-                .call(axisX);
+                .call(axisYear);
+            d3.select($element[0])
+                .select('.month-axis')
+                .attr("transform", "translate(0," + 30 + ")")
+                .call(axisMonth);
+            $scope.$watch('state.currentDate', function () {
+                if ($scope.monthScale.domain()[0].getMonth() != $scope.state.currentDate.getMonth()) {
+                    $scope.monthScale.domain([moment($scope.state.currentDate).startOf('month').toDate(), moment($scope.state.currentDate).endOf('month').toDate()]);
+                    d3.select($element[0])
+                        .select('.month-axis')
+                        .call(axisMonth);
+                }
+            })
 
         }
     }

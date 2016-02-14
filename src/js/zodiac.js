@@ -5,8 +5,16 @@ angular.module('zodiac').controller('ZodiacController', function ($scope, $rootS
 
     $scope.state = {
         selectedCity: 'Moscow',
-        currentDate: new Date(2015, 5, 5),
-        atmosphere: true
-    }
+        currentDate: new Date(2015, 5, 5, 18),
+        atmosphere: true,
+        constellations: false,
+        graticule: true
+    };
+
+    $scope.player = {
+        play: true,
+        velocity: 600,
+        tails: false
+    };
 
 });
