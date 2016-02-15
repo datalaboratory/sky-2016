@@ -241,7 +241,7 @@ angular.module('zodiac').directive('sky', function (cityList, colors) {
             $scope.showCitySunPath = false;
 
             function draw() {
-                var center = [currentLon, currentLat];
+                var center = [currentLon, currentLat, currentReverse];
                 var constellations = $scope.geoConstellations;
                 projection.rotate(center);
                 c.clearRect(0, 0, width, height);
@@ -284,7 +284,7 @@ angular.module('zodiac').directive('sky', function (cityList, colors) {
                     Object.keys(cityList).forEach(function (city) {
                         c.strokeStyle = "#fff";
                         if (city == $scope.showCitySunPath) c.strokeStyle = colors.ecliptic;
-                        projection.rotate([0, 90 - cityList[city].coordinates[1]]);
+                        projection.rotate([0, getCurrentLat(city), getReverse(city)]);
                         drawSunPath(sunLat);
                     })
                 } else {
@@ -364,9 +364,16 @@ angular.module('zodiac').directive('sky', function (cityList, colors) {
                     date.getMinutes() * 60 +
                     date.getSeconds()
             }
-
+            function getCurrentLat(city) {
+                var lat = cityList[city].coordinates[1];
+                return (cityList[city].reverse)? 270 - lat : 90 - lat;
+            }
+            function getReverse(city) {
+                return (cityList[city].reverse)? 180 : 0;
+            }
             var currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate));
-            var currentLat = 90 - cityList[$scope.state.selectedCity].coordinates[1];
+            var currentLat = getCurrentLat($scope.state.selectedCity);
+            var currentReverse = getReverse($scope.state.selectedCity);
 
             $scope.$watch('geoConstellations', function (geoConstellations) {
                 if (!geoConstellations) return;
@@ -377,8 +384,7 @@ angular.module('zodiac').directive('sky', function (cityList, colors) {
 
                 function getStart() {
                     raStart = projection.invert(d3.mouse(this))[0];
-                    decStart = fixedProjection.invert(d3.mouse(this))[1]
-                    console.log(projection.invert(d3.mouse(this)))
+                    decStart = fixedProjection.invert(d3.mouse(this))[1];
                 }
 
                 function move() {
@@ -422,9 +428,10 @@ angular.module('zodiac').directive('sky', function (cityList, colors) {
                     frames = 0
                 }, 10000)
             });
-            $scope.$watch('state.selectedCity', function () {
+            $scope.$watch('state.selectedCity', function (city) {
                 if (!$scope.geoConstellations) return;
-                var newLat = (cityList[$scope.state.selectedCity].reverse) ? 270 - cityList[$scope.state.selectedCity].coordinates[1] : 90 - cityList[$scope.state.selectedCity].coordinates[1];
+                var newLat = getCurrentLat(city);
+                currentReverse = getReverse(city);
                 d3.transition()
                     .duration(1250)
                     .tween("rotate", function () {
@@ -438,7 +445,9 @@ angular.module('zodiac').directive('sky', function (cityList, colors) {
 
             }, true);
             $scope.$watch('player.tails', function () {
+                if (!$scope.geoConstellations) return;
                 clearCtx(tailCtx);
+                draw();
             });
             $scope.$watch('state.atmosphere', function (atmosphere) {
                 if (!$scope.geoConstellations) return;
@@ -483,6 +492,11 @@ angular.module('zodiac').directive('sky', function (cityList, colors) {
             });
             $scope.$watch('state.currentDate', function() {
                 if ($scope.player.play) return;
+                currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate));
+                draw();
+            });
+            $scope.$watch('showCitySunPath', function() {
+                if (!$scope.geoConstellations) return;
                 draw();
             })
         }
