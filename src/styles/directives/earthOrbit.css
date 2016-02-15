@@ -1,0 +1,14 @@
+.earth-orbit__container {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 400px;
+  height: 200px;
+}
+
+.earth-orbit__orbit {
+  fill: none;
+  stroke: #610E7A;
+  stroke-dasharray: 5;
+}

@@ -1,7 +1,7 @@
 angular.module('zodiac').directive('player', function ($document) {
     return {
         restrict: 'E',
-        templateUrl: 'directives/player.html',
+        templateUrl: 'templates/directives/player.html',
         replace: true,
         link: function link($scope, $element) {
             $scope.setVelocity = function (velocity) {

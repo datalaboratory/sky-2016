@@ -1,7 +1,7 @@
 angular.module('zodiac').directive('yearSlider', function ($document) {
     return {
         restrict: 'E',
-        templateUrl: 'directives/yearSlider.html',
+        templateUrl: 'templates/directives/yearSlider.html',
         replace: true,
         link: function link($scope, $element) {
             var width = $element.width();

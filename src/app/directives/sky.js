@@ -1,7 +1,7 @@
 angular.module('zodiac').directive('sky', function (cityList, colors) {
     return {
         restrict: 'E',
-        templateUrl: 'directives/sky.html',
+        templateUrl: 'templates/directives/sky.html',
         replace: true,
         link: function link($scope, $element) {
 

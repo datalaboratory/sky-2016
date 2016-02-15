@@ -1,7 +1,7 @@
 angular.module('zodiac').directive('earthOrbit', function () {
     return {
         restrict: 'E',
-        templateUrl: 'directives/earthOrbit.html',
+        templateUrl: 'templates/directives/earthOrbit.html',
         replace: true,
         link: function link($scope, $element) {
             var width = $element.width();
