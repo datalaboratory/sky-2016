@@ -1,4 +1,4 @@
-angular.module('zodiac').directive('globeWithCities', function (cityList) {
+zodiac.directive('globeWithCities', function (cityList) {
     return {
         restrict: 'E',
         templateUrl: 'templates/directives/globeWithCities.html',

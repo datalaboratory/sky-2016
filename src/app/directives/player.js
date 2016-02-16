@@ -1,4 +1,4 @@
-angular.module('zodiac').directive('player', function ($document) {
+zodiac.directive('player', function ($document) {
     return {
         restrict: 'E',
         templateUrl: 'templates/directives/player.html',

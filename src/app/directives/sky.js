@@ -1,4 +1,4 @@
-angular.module('zodiac').directive('sky', function (cityList, colors) {
+zodiac.directive('sky', function (cityList, colors) {
     return {
         restrict: 'E',
         templateUrl: 'templates/directives/sky.html',

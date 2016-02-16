@@ -1,4 +1,4 @@
-angular.module('zodiac').constant('colors', {
+zodiac.constant('colors', {
     skyColorScale: [
         d3.scale.linear()
             .domain([10, 3, -3, -10]) //высота Солнца над горизонтом в градусах при восходе

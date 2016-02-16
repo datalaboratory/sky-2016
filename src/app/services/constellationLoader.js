@@ -1,4 +1,4 @@
-angular.module('zodiac').factory('constellationLoader', function () {
+zodiac.factory('constellationLoader', function () {
     return {
         load: function (constellations) {
                 var geoConstellations = [];

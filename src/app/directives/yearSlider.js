@@ -1,4 +1,4 @@
-angular.module('zodiac').directive('yearSlider', function ($document) {
+zodiac.directive('yearSlider', function ($document) {
     return {
         restrict: 'E',
         templateUrl: 'templates/directives/yearSlider.html',

@@ -1,4 +1,4 @@
-angular.module('zodiac').directive('earthOrbit', function () {
+zodiac.directive('earthOrbit', function () {
     return {
         restrict: 'E',
         templateUrl: 'templates/directives/earthOrbit.html',

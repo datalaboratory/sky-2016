@@ -1,4 +1,4 @@
-angular.module('zodiac').constant('cityList', {
+zodiac.constant('cityList', {
     Murmansk: {
         coordinates: [33.10, 68.95],
         name: 'Мурманск'
