@@ -1,7 +1,7 @@
 zodiac.directive('yearSlider', function ($document) {
     return {
         restrict: 'E',
-        templateUrl: 'templates/directives/yearSlider.html',
+        templateUrl: 'templates/directives/year-slider.html',
         replace: true,
         link: function link($scope, $element) {
             var width = $element.width();
@@ -49,6 +49,7 @@ zodiac.directive('yearSlider', function ($document) {
                 .attr("transform", "translate(0," + 30 + ")")
                 .call(axisMonth);
             $scope.$watch('state.currentDate', function () {
+                console.log($scope.state.currentDate)
                 if ($scope.monthScale.domain()[0].getMonth() != $scope.state.currentDate.getMonth()) {
                     $scope.monthScale.domain([moment($scope.state.currentDate).startOf('month').toDate(), moment($scope.state.currentDate).endOf('month').toDate()]);
                     d3.select($element[0])

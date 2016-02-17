@@ -1,0 +1,35 @@
+@font-face {
+	font-family: 'OriginalGaramondBTWeb';
+	font-weight: normal;
+	font-style: normal;
+
+	src: url('../fonts/Original_Garamond_Regular/ORG45__W.eot');
+	src: url('../fonts/Original_Garamond_Regular/ORG45__W.eot?#iefix') format('embedded-opentype'),
+	     url('../fonts/Original_Garamond_Regular/ORG45__W.woff') format('woff'),
+	     url('../fonts/Original_Garamond_Regular/ORG45__W.ttf') format('truetype'),
+	     url('../fonts/Original_Garamond_Regular/ORG45__W.svg#OriginalGaramondBTWeb') format('svg');
+}
+
+@font-face {
+	font-family: 'OriginalGaramondBTWebItalic';
+	font-weight: normal;
+	font-style: normal;
+
+	src: url('../fonts/Original_Garamond_Italic/ORG46__W.eot');
+	src: url('../fonts/Original_Garamond_Italic/ORG46__W.eot?#iefix') format('embedded-opentype'),
+	     url('../fonts/Original_Garamond_Italic/ORG46__W.woff') format('woff'),
+	     url('../fonts/Original_Garamond_Italic/ORG46__W.ttf') format('truetype'),
+	     url('../fonts/Original_Garamond_Italic/ORG46__W.svg#OriginalGaramondBTWeb-Italic') format('svg');
+}
+
+.garamond {
+	font-family: 'OriginalGaramondBTWeb';
+}
+
+.garamond-italic {
+	font-family: 'OriginalGaramondBTWebItalic';
+}
+
+.helvetica-neue {
+	font-family: 'HelveticaNeueRegular', 'HelveticaNeue-Regular', 'Helvetica Neue Regular', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+}

@@ -1,5 +1,6 @@
 appDependencies = [
   'ngRoute'
+  'once'
 ]
 
 zodiac = angular.module 'zodiac', appDependencies
@@ -15,3 +16,7 @@ zodiac = angular.module 'zodiac', appDependencies
     $locationProvider.html5Mode true
     return
 ]
+.constant '_', window._
+.run ($rootScope) ->
+  $rootScope._ = window._
+  return

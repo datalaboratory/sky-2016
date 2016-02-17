@@ -1,3 +1,57 @@
+.main-page .datalaboartory-sign {
+  position: absolute;
+  z-index: 1;
+  bottom: 70px;
+  left: 20px;
+
+  box-sizing: border-box;
+  height: 30px;
+  padding-top: 1px;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 14px;
+}
+
+.main-page .datalaboartory-sign a {
+  transition: color 0.25s ease-out, border-color 0.25s ease-out;
+  text-decoration: none;
+
+  color: inherit;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.main-page .datalaboartory-sign a:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.main-page .velocity-selector-container {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+
+  width: 100%;
+}
+
+.main-page .sliders-container {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+}
+
+.main-page .likely {
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  bottom: 78px;
+}
+
 .main-page .landscape {
   position: absolute;
   bottom: 0;
