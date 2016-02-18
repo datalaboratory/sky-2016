@@ -5,9 +5,11 @@ zodiac.directive 'header', ->
   link: ($scope, $element, $attrs) ->
     $scope.getFormattedDate = ->
       currentDate = moment $scope.state.currentDate
-      currentDate.date() + ' ' +
-      $scope.monthNames[currentDate.month()]['full'] + ' ' +
-      currentDate.year()
+      day = currentDate.date()
+      month = $scope.monthNames[currentDate.month()]['full']
+      year = currentDate.year()
+
+      day + ' ' + month + ' ' + year
 
     $scope.getHour = -> ('0' + moment($scope.state.currentDate).hour()).slice(-2)
 

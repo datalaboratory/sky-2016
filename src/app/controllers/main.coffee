@@ -1,6 +1,6 @@
 zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) ->
-  $http.get('../data/starData.json').then (responce) ->
-    $scope.geoConstellations = constellationLoader.load responce.data
+  $http.get('../data/starData.json').then (response) ->
+    $scope.geoConstellations = constellationLoader.load response.data
     $('.loading-cover').fadeOut()
     return
 

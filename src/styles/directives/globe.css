@@ -1,0 +1,25 @@
+.globe__graticule {
+  stroke: rgba(0, 255, 255, 0.3);
+  stroke-width: 0.5;
+  fill: none;
+}
+
+.globe__city {
+  cursor: pointer;
+}
+
+.globe__city-circle {
+  fill: #0ff;
+}
+
+.globe__city-name {
+  font-size: 14px;
+
+  fill: #fff;
+  dominant-baseline: central;
+  text-anchor: start;
+}
+
+.globe__city.active .globe__city-name {
+  fill: #0ff;
+}

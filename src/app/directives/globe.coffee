@@ -1,7 +1,7 @@
-zodiac.directive 'globeWithCities', (cityList) ->
+zodiac.directive 'globe', (cityList) ->
   restrict: 'E'
   replace: true
-  templateUrl: 'templates/directives/globe-with-cities.html'
+  templateUrl: 'templates/directives/globe.html'
   link: ($scope, $element, $attrs) ->
     $scope.cityList = cityList
 
@@ -19,31 +19,30 @@ zodiac.directive 'globeWithCities', (cityList) ->
 
     graticulePath = svg.append 'path'
       .attr 'd', globePath(graticule())
-      .attr 'class', 'graticule'
+      .attr 'class', 'globe__graticule'
 
     cityGroup = svg
       .selectAll 'g'
       .data _.keys(cityList)
       .enter()
       .append 'g'
+      .attr 'class', 'globe__city'
 
     cityGroup.append 'circle'
       .attr 'cx', (d) -> globeProjection(cityList[d].coordinates)[0]
       .attr 'cy', (d) -> globeProjection(cityList[d].coordinates)[1]
       .attr 'r', 3
-      .attr 'class', 'city-circle'
+      .attr 'class', 'globe__city-circle'
 
     cityGroup.append 'text'
       .text (d) -> cityList[d].name
       .attr 'x', (d) -> globeProjection(cityList[d].coordinates)[0] + 5
       .attr 'y', (d) -> globeProjection(cityList[d].coordinates)[1]
-      .attr 'class', 'city-name'
+      .attr 'class', (d) -> 'globe__city-name' + if d is $scope.state.selectedCity then ' garamond' else ' garamond-italic'
 
     checkClass = ->
       cityGroup.classed 'active', (d) -> d is $scope.state.selectedCity
       return
-
-    checkClass()
 
     cityGroup.on 'click', (d) ->
       $scope.state.selectedCity = d
@@ -60,5 +59,7 @@ zodiac.directive 'globeWithCities', (cityList) ->
       $scope.showCitySunPath = false
       $scope.$apply()
       return
+
+    checkClass()
 
     return
