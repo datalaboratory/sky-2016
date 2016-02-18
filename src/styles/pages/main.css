@@ -1,7 +1,7 @@
 .main-page .globe-container {
   position: absolute;
   z-index: 1;
-  top: 16px;
+  top: 17px;
   left: 18px;
 
   width: 200px;
@@ -10,11 +10,11 @@
 
 .red {
   position: absolute;
-  top: 16px;
-  left: 18px;
+  top: 17px;
+  left: 17px;
 
   width: calc(100% - 36px);
-  height: calc(100% - 18px);
+  height: calc(100% - 19px);
 
   border: 1px solid rgba(255, 0, 0, 0.5);
   background-color: rgba(0, 0, 0, 0);
