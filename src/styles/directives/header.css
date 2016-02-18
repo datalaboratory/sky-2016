@@ -1,0 +1,27 @@
+.header__caption {
+  position: relative;
+  left: 50%;
+
+	display: inline-block;
+
+  transform: translateX(-50%);
+  text-align: center;
+
+  color: #fff;
+
+  font-size: 28px;
+}
+
+.header__date-time-wrapper {
+  position: relative;
+  left: 50%;
+
+	display: inline-block;
+
+  transform: translateX(-50%);
+  text-align: center;
+
+  color: #fff;
+
+  font-size: 14px;
+}

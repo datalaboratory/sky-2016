@@ -1,8 +1,38 @@
+.main-page .globe-container {
+  position: absolute;
+  z-index: 1;
+  top: 16px;
+  left: 18px;
+
+  width: 200px;
+  height: 200px;
+}
+
+.red {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+
+  width: calc(100% - 36px);
+  height: calc(100% - 18px);
+
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.main-page .header-container {
+  position: absolute;
+  top: 10px;
+  left: 0;
+
+  width: 100%;
+}
+
 .main-page .datalaboartory-sign {
   position: absolute;
   z-index: 1;
   bottom: 70px;
-  left: 20px;
+  left: 18px;
 
   box-sizing: border-box;
   height: 30px;
@@ -43,21 +73,4 @@
   left: 0;
 
   width: 100%;
-}
-
-.main-page .likely {
-  position: absolute;
-  z-index: 1;
-  right: 20px;
-  bottom: 78px;
-}
-
-.main-page .landscape {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-
-  pointer-events: none;
 }

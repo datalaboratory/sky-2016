@@ -1,0 +1,28 @@
+.globe-with-cities .graticule {
+  stroke: rgba(0, 255, 255, 0.3);
+  stroke-width: 0.5;
+  fill: none;
+}
+
+.globe-with-cities .city-circle {
+  fill: #0ff;
+}
+
+.globe-with-cities .city-name {
+  cursor: pointer;
+
+  font-family: 'OriginalGaramondBTWebItalic';
+  font-size: 14px;
+
+  fill: #fff;
+  dominant-baseline: central;
+  text-anchor: start;
+}
+
+.globe-with-cities .active .city-circle {
+  fill: #fff;
+}
+
+.globe-with-cities .active .city-name {
+  font-family: 'OriginalGaramondBTWeb';
+}

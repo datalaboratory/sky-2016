@@ -1,4 +1,4 @@
-zodiac.directive 'velocitySelector', ($document) ->
+zodiac.directive 'velocitySelector', ->
   restrict: 'E'
   replace: true
   templateUrl: 'templates/directives/velocity-selector.html'

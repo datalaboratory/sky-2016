@@ -31,9 +31,9 @@
 .sliders__hour-slider .frame {
   position: absolute;
   top: 0;
-  left: 20px;
+  left: 18px;
 
-  width: calc(100% - 42px);
+  width: calc(100% - 36px);
   height: 30px;
 
   border-radius: 3px;
@@ -61,7 +61,7 @@
 
 .sliders__hour-slider .sliders__comet-tail {
   top: 15px;
-  left: 20px;
+  left: 18px;
 }
 
 .sliders__month-slider .sliders__comet-tail {
@@ -84,7 +84,7 @@
 
 .sliders__hour-slider .sliders__comet {
   top: 9px;
-  left: 20px;
+  left: 18px;
 }
 
 .sliders__month-slider .sliders__comet {
