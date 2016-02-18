@@ -19,8 +19,8 @@ zodiac.constant('colors', {
             ])
             .clamp(true)
     ],
-    zodiacLine: "#323192",
+    zodiacLine: d3.rgb("#323192"),
     zodiacText: "#fff",
-    ecliptic: "#29E6E6",
+    ecliptic: d3.rgb("#29E6E6"),
     constellationLine: "#999"
 });

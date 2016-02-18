@@ -19,10 +19,10 @@ zodiac.directive('sky', function (cityList, colors) {
             var projection = d3.geo.stereographic()
                 .translate([width / 2, height])
                 .clipAngle(179)
-                .scale(328);
+                .scale(450);
 
             var fixedProjection = d3.geo.stereographic()
-                .scale(328)
+                .scale(450)
                 .translate([width / 2, height])
                 .rotate([0, 0]);
 
@@ -140,13 +140,16 @@ zodiac.directive('sky', function (cityList, colors) {
             var atmosphereOpacity = 0;
             var constellationOpacity = 0;
             var graticuleOpacity = 1;
+            var eclipticOpacity = 1;
 
             var lineOpacityScale = d3.scale.linear()
                 .domain([10, -5])
                 .range([atmosphereOpacity, 1])
                 .clamp(true);
-            var start = new Date(2015, 2, 21);
-            var sunScale = d3.time.scale()
+
+            var start = moment(new Date((new Date()).getFullYear(), 2, 21)).dayOfYear();
+
+            var sunScale = d3.scale.linear()
                 /*.domain([
                     new Date(2015, 2, 21),
                     new Date(2015, 5, 22),
@@ -154,10 +157,13 @@ zodiac.directive('sky', function (cityList, colors) {
                     new Date(2015, 11, 22),
                     new Date(2015, 2, 21)
                 ])*/
-                .domain(d3.range(0, 15, 1).map(function(days, i) {
-                    return moment(start).add(i * 15, 'd').year(2015).toDate()
-                }))
+                .domain(rangeDates())
                 .range(eclipticCoordinates);
+            function rangeDates() {
+                return d3.range(0, 365, 15.8).map(function(days, i) {
+                    return start + days;
+                })
+            }
 
             var sunCoordinates = sunScale($scope.state.currentDate);
             var sunPx = projection(sunCoordinates);
@@ -167,9 +173,9 @@ zodiac.directive('sky', function (cityList, colors) {
                 return 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + opacity + ')'
             }
 
-            function makeRadialGradient(geo, sunDeg) {
-                var x = projection(geo.coordinates)[0];
-                var y = projection(geo.coordinates)[1];
+            function makeRadialGradient(geo, coordinates, sunDeg) {
+                var x = coordinates[0];
+                var y = coordinates[1];
                 var r = geo.properties.mag;
                 var currentOpacity = geo.properties.currentOpacity;
                 var radialGradient = c.createRadialGradient(x, y, 0, x, y, r);
@@ -209,6 +215,7 @@ zodiac.directive('sky', function (cityList, colors) {
             function drawSkyBackground() {
                 var left = (horizontSunCoord[0] < 0) * 1;
 
+                left = (currentReverse) ? Math.abs(left - 1) : left;
                 var degrees = horizontSunCoord[1] - backgroundDegreesCorrector(atmosphereOpacity);
 
                 $scope.backgroundColors = colors.skyColorScale[left](degrees);
@@ -224,7 +231,7 @@ zodiac.directive('sky', function (cityList, colors) {
             }
 
             function updateSunCoordinates() {
-                sunCoordinates = sunScale($scope.state.currentDate);
+                sunCoordinates = sunScale(moment($scope.state.currentDate).dayOfYear() + $scope.state.currentDate.getHours() / 24);
                 sunPx = projection(sunCoordinates);
                 horizontSunCoord =  fixedProjection.invert(sunPx);
             }
@@ -267,7 +274,7 @@ zodiac.directive('sky', function (cityList, colors) {
                 c.stroke();
 
                 //эклиптика
-                c.strokeStyle = colors.ecliptic;
+                c.strokeStyle = rgbaFromRgb(colors.ecliptic, eclipticOpacity);
                 c.beginPath();
                 path({type: "LineString", coordinates: eclipticCoordinates});
                 c.stroke();
@@ -298,7 +305,9 @@ zodiac.directive('sky', function (cityList, colors) {
                     constellation.geometry.geometries.forEach(function drawStarsAndLines(geo) {
                         if (geo.type == 'Point') {
                             if (Math.random() < 0.005) return;
-                            makeRadialGradient(geo, horizontSunCoord[1]);
+                            var coordinates = projection(geo.coordinates);
+                            if (coordinates[0] < 0 || coordinates[0] > width || coordinates[1] < 0 ||coordinates[1] > height) return;
+                            makeRadialGradient(geo, coordinates, horizontSunCoord[1]);
                             path.pointRadius([geo.properties.mag]);
                             c.beginPath();
                             path(geo);
@@ -318,7 +327,7 @@ zodiac.directive('sky', function (cityList, colors) {
                             path(geo);
                             c.stroke();
 
-                            color = d3.rgb(colors.zodiacText);
+                            color = colors.zodiacText;
                             c.textAlign = "center";
                             c.font = "italic lighter 14px Times New Roman";
                             c.fillStyle = rgbaFromRgb(color, opacity);
@@ -385,6 +394,7 @@ zodiac.directive('sky', function (cityList, colors) {
                 function getStart() {
                     raStart = projection.invert(d3.mouse(this))[0];
                     decStart = fixedProjection.invert(d3.mouse(this))[1];
+                    console.log(projection.invert(d3.mouse(this)))
                 }
 
                 function move() {
@@ -486,6 +496,19 @@ zodiac.directive('sky', function (cityList, colors) {
                         var r = d3.interpolate(graticuleOpacity, newOpacity);
                         return function (t) {
                             graticuleOpacity = r(t);
+                            draw();
+                        }
+                    })
+            });
+            $scope.$watch('state.ecliptic', function (graticule) {
+                if (!$scope.geoConstellations) return;
+                d3.transition()
+                    .duration(1250)
+                    .tween("rotate", function () {
+                        var newOpacity = (graticule) ? 1 : 0;
+                        var r = d3.interpolate(eclipticOpacity, newOpacity);
+                        return function (t) {
+                            eclipticOpacity = r(t);
                             draw();
                         }
                     })
