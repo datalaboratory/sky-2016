@@ -25,6 +25,10 @@ zodiac.directive('player', function ($document) {
                 }
             };
 
+            $scope.changeViewDirection = function () {
+                $scope.state.viewDirection = ($scope.state.viewDirection == 'horizon') ? 'up' : 'horizon';
+            };
+
             $document.on('keydown', function(e) {
                 if (e.keyCode == 32) {
                     $scope.player.play = !$scope.player.play;

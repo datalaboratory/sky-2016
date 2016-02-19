@@ -1,4 +1,4 @@
-zodiac.directive('sky', function (cityList, colors) {
+zodiac.directive('sky', function (cityList, colors, $document) {
     return {
         restrict: 'E',
         templateUrl: 'templates/directives/sky.html',
@@ -15,16 +15,18 @@ zodiac.directive('sky', function (cityList, colors) {
 
             var bufferCanvas = document.createElement('canvas');
 
+            var normalProjectionScale = 450;
+            var normalProjectionTranslate = [width / 2, height];
+            var normalProjectionRotate = [0, 0];
+
+            var upProjectionScale = 700;
+            var upProjectionTranslate = [width / 2, height / 2];
+            var upProjectionRotate = [0, -90];
 
             var projection = d3.geo.stereographic()
-                .translate([width / 2, height])
-                .clipAngle(179)
-                .scale(450);
+                .clipAngle(179);
 
-            var fixedProjection = d3.geo.stereographic()
-                .scale(450)
-                .translate([width / 2, height])
-                .rotate([0, 0]);
+            var fixedProjection = d3.geo.stereographic();
 
             var c = canvas.node().getContext("2d");
             var tailCtx = offScreenCanvas.getContext('2d');
@@ -51,11 +53,19 @@ zodiac.directive('sky', function (cityList, colors) {
             function updateWidthHeight() {
                 width = $element.width();
                 height = $element.height() - landscapeHeight;
+                normalProjectionTranslate = [width / 2, height];
+                upProjectionTranslate = [width / 2, height / 2];
 
+                var translate = ($scope.state.viewDirection == 'horizon') ? normalProjectionTranslate : upProjectionTranslate;
+                var rotate = ($scope.state.viewDirection == 'horizon') ? normalProjectionRotate : upProjectionRotate;
+                var scale = ($scope.state.viewDirection == 'horizon')? normalProjectionScale : upProjectionScale;
                 projection
-                    .translate([width / 2, height]);
+                    .translate(translate)
+                    .scale(scale);
                 fixedProjection
-                    .translate([width / 2, height]);
+                    .translate(translate)
+                    .scale(scale)
+                    .rotate(rotate);
                 scaledWidth = width * ratio;
                 scaledHeight = height * ratio;
 
@@ -110,6 +120,12 @@ zodiac.directive('sky', function (cityList, colors) {
             var graticule = d3.geo.graticule()
                 .step([15, 15]);
             var eclipticCoordinates = [
+                [-270, -23.26],
+                [-255, -22.45],
+                [-240, -20.26],
+                [-225, -16.9],
+                [-210, -12],
+                [-195, -6.2],
                 [-180, 0],
                 [-165, 6.2],
                 [-150, 12],
@@ -129,12 +145,8 @@ zodiac.directive('sky', function (cityList, colors) {
                 [60, -20.26],
                 [75, -22.45],
                 [90, -23.26],
-                [105, -22.45],
-                [120, -20.26],
-                [135, -16.9],
-                [150, -12],
-                [165, -6.2],
-                [180, 0]];
+                [105, -22.45]
+            ];
             var minEclipticCoordinates = [[-180, 0], [-90, 23.26], [0, 0], [90, -23.26], [180, 0]];
 
             var atmosphereOpacity = 0;
@@ -147,27 +159,47 @@ zodiac.directive('sky', function (cityList, colors) {
                 .range([atmosphereOpacity, 1])
                 .clamp(true);
 
-            var start = moment(new Date((new Date()).getFullYear(), 2, 21)).dayOfYear();
+            var start = -10.2;//moment(new Date((new Date()).getFullYear(), 2, 21)).dayOfYear();
+
 
             var sunScale = d3.scale.linear()
-                /*.domain([
-                    new Date(2015, 2, 21),
-                    new Date(2015, 5, 22),
-                    new Date(2015, 8, 23),
-                    new Date(2015, 11, 22),
-                    new Date(2015, 2, 21)
-                ])*/
                 .domain(rangeDates())
                 .range(eclipticCoordinates);
             function rangeDates() {
-                return d3.range(0, 365, 15.8).map(function(days, i) {
-                    return start + days;
+                return d3.range(0, 26, 1).map(function(days, i) {
+                    return start + i * 15.2;
                 })
+            }
+
+            function generateSunTail(date) {
+                var points = d3.range(0, date, 5).map(function(day) {
+                    return sunScale(day);
+                });
+                points.push(sunScale(date));
+                return points
+            }
+
+            function drawSunTail(date) {
+                var points = generateSunTail(date);
+                c.beginPath();
+                var start = projection(points[0]);
+                c.moveTo(start[0], start[1]);
+                points.forEach(function(p) {
+                    var point = projection(p);
+                    c.lineTo(point[0], point[1] + 1)
+                });
+                points.reverse();
+                points.forEach(function(p) {
+                    var point = projection(p);
+                    c.lineTo(point[0], point[1] - 1)
+                });
+                c.fill();
             }
 
             var sunCoordinates = sunScale($scope.state.currentDate);
             var sunPx = projection(sunCoordinates);
             var horizontSunCoord = fixedProjection.invert(sunPx);
+            var sunTail = [];
 
             function rgbaFromRgb(rgb, opacity) {
                 return 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + opacity + ')'
@@ -232,6 +264,7 @@ zodiac.directive('sky', function (cityList, colors) {
 
             function updateSunCoordinates() {
                 sunCoordinates = sunScale(moment($scope.state.currentDate).dayOfYear() + $scope.state.currentDate.getHours() / 24);
+                //sunTail = generateSunTail(moment($scope.state.currentDate).dayOfYear());
                 sunPx = projection(sunCoordinates);
                 horizontSunCoord =  fixedProjection.invert(sunPx);
             }
@@ -279,6 +312,11 @@ zodiac.directive('sky', function (cityList, colors) {
                 path({type: "LineString", coordinates: eclipticCoordinates});
                 c.stroke();
 
+                c.fillStyle = rgbaFromRgb(d3.rgb("#fff"), eclipticOpacity);
+                /*c.beginPath();
+                path({type: "LineString", coordinates: sunTail});
+                c.stroke();*/
+                drawSunTail(moment($scope.state.currentDate).dayOfYear());
                 drawSkyBackground();
 
                 //траектории Солнца
@@ -304,7 +342,7 @@ zodiac.directive('sky', function (cityList, colors) {
                 constellations.forEach(function drawConstellation(constellation) {
                     constellation.geometry.geometries.forEach(function drawStarsAndLines(geo) {
                         if (geo.type == 'Point') {
-                            if (Math.random() < 0.005) return;
+                            if ($scope.state.atmosphere && Math.random() < 0.005) return;
                             var coordinates = projection(geo.coordinates);
                             if (coordinates[0] < 0 || coordinates[0] > width || coordinates[1] < 0 ||coordinates[1] > height) return;
                             makeRadialGradient(geo, coordinates, horizontSunCoord[1]);
@@ -321,7 +359,7 @@ zodiac.directive('sky', function (cityList, colors) {
                             }
                         } else if (geo.type == 'MultiLineString') {
                             var opacity = lineOpacityScale(horizontSunCoord[1]) * constellationOpacity;
-                            var color = d3.rgb(colors.zodiacLine);
+                            var color = colors.zodiacLine;
                             c.strokeStyle = rgbaFromRgb(color, opacity);
                             c.beginPath();
                             path(geo);
@@ -375,8 +413,16 @@ zodiac.directive('sky', function (cityList, colors) {
             }
             function getCurrentLat(city) {
                 var lat = cityList[city].coordinates[1];
-                return (cityList[city].reverse)? 270 - lat : 90 - lat;
+                var direction = $scope.state.viewDirection;
+                if (direction == 'horizon') {
+                    return (cityList[city].reverse)? 270 - lat : 90 - lat;
+                } else if (direction == 'up') {
+                    return -lat;
+                }
+
+
             }
+
             function getReverse(city) {
                 return (cityList[city].reverse)? 180 : 0;
             }
@@ -442,7 +488,7 @@ zodiac.directive('sky', function (cityList, colors) {
                 if (!$scope.geoConstellations) return;
                 var newLat = getCurrentLat(city);
                 currentReverse = getReverse(city);
-                d3.transition()
+                d3.transition('city')
                     .duration(1250)
                     .tween("rotate", function () {
                         var r = d3.interpolate(currentLat, newLat);
@@ -461,7 +507,7 @@ zodiac.directive('sky', function (cityList, colors) {
             });
             $scope.$watch('state.atmosphere', function (atmosphere) {
                 if (!$scope.geoConstellations) return;
-                d3.transition()
+                d3.transition('atmosphere')
                     .duration(1250)
                     .tween("rotate", function () {
                         var newOpacity = (atmosphere) ? 0 : 1;
@@ -476,7 +522,7 @@ zodiac.directive('sky', function (cityList, colors) {
             });
             $scope.$watch('state.constellations', function (constellations) {
                 if (!$scope.geoConstellations) return;
-                d3.transition()
+                d3.transition('constellations')
                     .duration(1250)
                     .tween("rotate", function () {
                         var newOpacity = (constellations) ? 1 : 0;
@@ -489,7 +535,7 @@ zodiac.directive('sky', function (cityList, colors) {
             });
             $scope.$watch('state.graticule', function (graticule) {
                 if (!$scope.geoConstellations) return;
-                d3.transition()
+                d3.transition('graticule')
                     .duration(1250)
                     .tween("rotate", function () {
                         var newOpacity = (graticule) ? 1 : 0;
@@ -502,7 +548,7 @@ zodiac.directive('sky', function (cityList, colors) {
             });
             $scope.$watch('state.ecliptic', function (graticule) {
                 if (!$scope.geoConstellations) return;
-                d3.transition()
+                d3.transition('ecliptic')
                     .duration(1250)
                     .tween("rotate", function () {
                         var newOpacity = (graticule) ? 1 : 0;
@@ -521,7 +567,58 @@ zodiac.directive('sky', function (cityList, colors) {
             $scope.$watch('showCitySunPath', function() {
                 if (!$scope.geoConstellations) return;
                 draw();
-            })
+            });
+            $scope.$watch('state.viewDirection', function(direction) {
+                if (!$scope.geoConstellations) return;
+                if (direction == 'horizon') {
+                    var newTranslate = normalProjectionTranslate;
+                    var newScale = normalProjectionScale;
+                    var newRotate = normalProjectionRotate;
+                } else {
+                    newTranslate = upProjectionTranslate;
+                    newScale = upProjectionScale;
+                    newRotate = upProjectionRotate;
+                }
+                d3.transition('viewDirection')
+                    .duration(1250)
+                    .tween("rotate", function () {
+                        var translate = d3.interpolate(projection.translate(), newTranslate);
+                        var scale = d3.interpolate(projection.scale(), newScale);
+                        var rotate = d3.interpolate(fixedProjection.rotate(), newRotate);
+                        var newLat = getCurrentLat($scope.state.selectedCity);
+                        if (currentLat > 180) currentLat -= 360;
+                        if (newLat > 180) newLat -= 360;
+                        var lat = d3.interpolate(currentLat, newLat);
+                        console.log(currentLat, newLat);
+
+                        return function (t) {
+                            var tr = translate(t);
+                            var s = scale(t);
+                            projection
+                                .translate(tr)
+                                .scale(s);
+                            fixedProjection
+                                .translate(tr)
+                                .scale(s)
+                                .rotate(rotate(t));
+                            currentLat = lat(t);
+                            draw();
+                        }
+                    });
+            });
+            var angle = 0;
+            var delta = 0.5;
+            function scroll(e) {
+                if (e.originalEvent.wheelDelta > 0 && angle < 90) {
+                    angle += delta
+                } else if (e.originalEvent.wheelDelta < 0 && angle > 0) {
+                    angle -= delta;
+                };
+                currentLat = getCurrentLat($scope.state.selectedCity) - angle;
+                draw()
+            }
+
+            $document.on('mousewheel', _.throttle(scroll, 30))
         }
     }
 });

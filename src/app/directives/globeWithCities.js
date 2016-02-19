@@ -13,18 +13,33 @@ zodiac.directive('globeWithCities', function (cityList) {
                 .translate([width / 2, width / 2])
                 .scale(100)
                 .rotate([-75, -30])
-                .clipAngle(98);
+                .clipAngle(90);
+
             var globePath = d3.geo.path()
                 .projection(globeProjection);
 
             var graticule = d3.geo.graticule()
                 .step([15, 15]);
+            var g = svg.append('g');
 
-            svg.append('path')
+            g.append('circle')
+                .attr('cx', width / 2)
+                .attr('cy', width / 2)
+                .attr('r', 100)
+                .attr('class', 'globe-circle-back')
+                .on('mouseover', function() {
+                    $scope.showCitySunPath = true;
+                    $scope.$apply();
+                })
+                .on('mouseleave', function() {
+                    $scope.showCitySunPath = false;
+                    $scope.$apply();
+                });
+            g.append('path')
                 .attr('d', globePath(graticule()))
                 .attr('class', 'globe-graticule');
 
-            var cityGroup = svg
+            var cityGroup = g
                 .selectAll('g')
                 .data(Object.keys(cityList))
                 .enter()
