@@ -49,7 +49,7 @@ vendors =
 
 # Tasks
 gulp.task 'clean', ->
-  del 'public'
+  del.sync 'public'
   return
 
 gulp.task 'connect', ->
@@ -144,6 +144,10 @@ gulp.task 'build', [
   'scripts:app'
   'templates'
 ]
+
+gulp.task 'rebuild', ['clean'], ->
+  gulp.start 'build'
+  return
 
 gulp.task 'dev', [
   'watch'
