@@ -75,7 +75,7 @@ zodiac.directive('earthOrbit', function () {
                     (height / 2 + ry * Math.sin(degrees)) + ')');
                 earth
                     .attr('xlink:href', function() {
-                        return 'img/earth/' + Math.round(dayImageScale(hours)) + '.png'
+                        return 'img/earth-frames/' + Math.round(dayImageScale(hours)) + '.png'
                     });
                 var rightRadius = shadowWidthLeft(degrees);
                 var leftRadius = shadowWidthRight(degrees);
