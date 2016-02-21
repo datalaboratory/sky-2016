@@ -153,6 +153,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             var constellationOpacity = 0;
             var graticuleOpacity = 1;
             var eclipticOpacity = 1;
+            var starNamesOpacity = 0;
 
             var lineOpacityScale = d3.scale.linear()
                 .domain([5, -5])
@@ -422,7 +423,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 });
 
                 Object.keys(brightStarsList).forEach(function(star) {
-                    var opacity = lineOpacityScale(horizontSunCoord[1]) * constellationOpacity;
+                    var opacity = lineOpacityScale(horizontSunCoord[1]) * starNamesOpacity;
                     _.assign(ctx, {
                         textAlign: "left",
                         font: "italic lighter 14px Times New Roman",
@@ -608,6 +609,19 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         var r = d3.interpolate(eclipticOpacity, newOpacity);
                         return function (t) {
                             eclipticOpacity = r(t);
+                            draw();
+                        }
+                    })
+            });
+            $scope.$watch('state.starNames', function (names) {
+                if (!$scope.geoConstellations) return;
+                d3.transition('starNames')
+                    .duration(1250)
+                    .tween("rotate", function () {
+                        var newOpacity = (names) ? 1 : 0;
+                        var r = d3.interpolate(starNamesOpacity, newOpacity);
+                        return function (t) {
+                            starNamesOpacity = r(t);
                             draw();
                         }
                     })

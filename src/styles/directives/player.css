@@ -1,9 +1,9 @@
 .player__container {
   position: absolute;
-  top: 300px;
+  top: 250px;
   left: 30px;
 
-  width: 100px;
+  width: 150px;
 }
 
 .player__href {
