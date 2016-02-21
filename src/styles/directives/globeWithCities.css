@@ -1,0 +1,43 @@
+.globe__container {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 210px;
+    height: 210px;
+}
+
+.globe-graticule {
+    stroke: #084654;
+    stroke-width: 0.4;
+    fill: none;
+    pointer-events: none;
+}
+
+.globe-circle-back {
+    stroke: #084654;
+    fill: rgba(0, 0, 0, 0);
+}
+
+.globe-city {
+    fill: #29E6E6;
+}
+
+.globe-names {
+    font-style: italic;
+
+    fill: #fff;
+    alignment-baseline: middle;
+}
+
+.globe-names:hover {
+    fill: #29E6E6;
+}
+
+.globe-city--active circle {
+    fill: #fff;
+}
+
+.globe-city--active text {
+    font-style: normal;
+}

@@ -10,6 +10,8 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
     atmosphere: true
     constellations: false
     graticule: true
+    ecliptic: true
+    viewDirection: 'horizon'
 
   $scope.player =
     play: true

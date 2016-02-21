@@ -12,3 +12,11 @@
   stroke: #610E7A;
   stroke-dasharray: 5;
 }
+.earth-orbit__axis {
+  fill: none;
+  stroke: #29E6E6;
+  stroke-dasharray: 2;
+}
+.earth-orbit__shadow {
+    fill: rgba(0,0,0,0.5);
+}
