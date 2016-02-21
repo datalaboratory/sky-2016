@@ -1,9 +1,64 @@
-.main-page .landscape {
+.main-page .globe-container {
   position: absolute;
+  z-index: 1;
+  top: 17px;
+  left: 18px;
+
+  width: 200px;
+  height: 200px;
+}
+
+.main-page .header-container {
+  position: absolute;
+  top: 10px;
+  left: 0;
+
+  width: 100%;
+}
+
+.main-page .datalaboartory-sign-container {
+  position: absolute;
+  z-index: 1;
+  bottom: 70px;
+  left: 18px;
+
+  box-sizing: border-box;
+  height: 30px;
+  padding-top: 1px;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 16px;
+}
+
+.main-page a {
+  text-decoration: none;
+
+  color: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.main-page a:not(:hover) {
+  transition: color 0.25s ease-out;
+}
+
+.main-page a:hover {
+  color: #fff;
+}
+
+.main-page .velocity-selector-container {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+
+  width: 100%;
+}
+
+.main-page .sliders-container {
+  position: absolute;
+  z-index: 2;
   bottom: 0;
   left: 0;
 
   width: 100%;
-
-  pointer-events: none;
 }

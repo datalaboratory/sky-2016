@@ -38,6 +38,7 @@ vendors =
     'node_modules/d3/d3.min.js'
     'node_modules/angular/angular.min.js'
     'node_modules/angular-route/angular-route.min.js'
+    'node_modules/angular-once/once.js'
     'node_modules/lodash/lodash.js'
     'node_modules/moment/min/moment.min.js'
     'node_modules/ilyabirman-likely/release/likely.js'
@@ -48,7 +49,7 @@ vendors =
 
 # Tasks
 gulp.task 'clean', ->
-  del 'public'
+  del.sync 'public'
   return
 
 gulp.task 'connect', ->
@@ -143,6 +144,10 @@ gulp.task 'build', [
   'scripts:app'
   'templates'
 ]
+
+gulp.task 'rebuild', ['clean'], ->
+  gulp.start 'build'
+  return
 
 gulp.task 'dev', [
   'watch'

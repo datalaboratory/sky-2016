@@ -1,0 +1,32 @@
+<div class="sliders">
+  <div class="sliders__hour-slider">
+    <div class="frame"></div>
+    <div
+      class="frame-arrow"
+      data-ng-style="{'transform': 'translateX(' + (currentMonthX - 2) + 'px)'}"></div>
+    <div
+      class="sliders__comet-tail"
+      data-ng-style="{'width': (hourSliderOffset - hourSliderPadding + currentHourX) + 'px'}"></div>
+    <div
+      class="sliders__comet"
+      data-ng-style="{'width': (hourSliderOffset - hourSliderPadding + currentHourX + 4) + 'px'}"></div>
+    <div
+      class="sliders__caption garamond-italic"
+      data-ng-repeat="i in _.range(25) track by $index"
+      once-style="{'transform': 'translateX(' + getHourX(i) + 'px)'}"
+      once-text="getHourCaption(i)"></div>
+  </div>
+  <div class="sliders__month-slider">
+    <div
+      class="sliders__comet-tail"
+      data-ng-style="{'width': (monthSliderOffset + currentMonthX) + 'px'}"></div>
+    <div
+      class="sliders__comet"
+      data-ng-style="{'width': (monthSliderOffset + currentMonthX + 4) + 'px'}"></div>
+    <div
+      class="sliders__caption garamond-italic"
+      data-ng-repeat="i in _.range(13) track by $index"
+      once-style="{'transform': 'translateX(' + getMonthX(i) + 'px)'}"
+      once-text="getMonthCaption(i)"></div>
+  </div>
+</div>

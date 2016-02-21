@@ -1,0 +1,57 @@
+.velocity-selector {
+  position: relative;
+  left: 50%;
+
+	display: inline-block;
+
+  height: 30px;
+
+  transform: translateX(-50%);
+}
+
+.velocity-selector__caption {
+  margin-top: 1px;
+
+  color: #fff;
+
+  font-size: 16px;
+}
+
+.velocity-selector__button {
+  position: relative;
+
+  padding: 0 1px;
+
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.25s ease-out, border-color 0.25s ease-out;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.velocity-selector__button.active {
+  border-color: rgba(0, 255, 255, 0);
+  background-color: rgba(0, 255, 255, 0.2);
+}
+
+.velocity-selector__button .tooltip {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+
+  transform: translateX(-50%);
+  white-space: nowrap;
+
+  color: #0ff;
+
+  font-size: 12px;
+}
+
+.velocity-selector__button .value {
+  color: #0ff;
+
+  font-size: 16px;
+}

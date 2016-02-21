@@ -1,0 +1,16 @@
+.likely {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 78px;
+}
+
+.likely-light .likely__widget {
+  background: rgba(255, 255, 255, 0.1);
+
+  fill: rgba(255, 255, 255, 0.4);
+}
+
+.likely-light .likely__widget:hover {
+  fill: #fff;
+}

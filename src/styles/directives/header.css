@@ -1,0 +1,18 @@
+.header__caption, .header__date-time-wrapper {
+  position: relative;
+  left: 50%;
+
+	display: inline-block;
+
+  transform: translateX(-50%);
+
+  color: #fff;
+}
+
+.header__caption {
+  font-size: 32px;
+}
+
+.header__date-time-wrapper {
+  font-size: 16px;
+}
