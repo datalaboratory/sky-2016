@@ -1,4 +1,4 @@
-zodiac.directive('sky', function (cityList, colors, $document) {
+zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) {
     return {
         restrict: 'E',
         templateUrl: 'templates/directives/sky.html',
@@ -155,7 +155,7 @@ zodiac.directive('sky', function (cityList, colors, $document) {
             var eclipticOpacity = 1;
 
             var lineOpacityScale = d3.scale.linear()
-                .domain([10, -5])
+                .domain([5, -5])
                 .range([atmosphereOpacity, 1])
                 .clamp(true);
 
@@ -222,14 +222,17 @@ zodiac.directive('sky', function (cityList, colors, $document) {
                 ctx.fillStyle = linearGradient;
             }
 
-            var startYearCoordinates = sunScale(0);
+            var sunTailDayLength = 20;
+            var startYearSunPosition = sunScale(0);
+            var startTailSunPosition = sunScale(sunTailDayLength);
+            var tailCoordinates = [startTailSunPosition, startYearSunPosition];
 
-            function makeEclipticGradient() {
-                var startYearPx = projection(startYearCoordinates);
-                var linearGradient = ctx.createLinearGradient(sunPx[0], sunPx[1], startYearPx[0], startYearPx[1]);
-                linearGradient.addColorStop(0.0, rgbaFromRgb(d3.rgb("#fff"), 0));
-                linearGradient.addColorStop(0.3, rgbaFromRgb(d3.rgb("#f00"), 1));
-                linearGradient.addColorStop(0.8, rgbaFromRgb(d3.rgb("#fff"), 1));
+            function makeEclipticGradient(startTailCoordinates) {
+                var endTailPx = projection(startYearSunPosition);
+                var startTailPx = projection(startTailCoordinates);
+                var linearGradient = ctx.createLinearGradient(startTailPx[0], startTailPx[1], endTailPx[0], endTailPx[1]);
+                linearGradient.addColorStop(0.0, rgbaFromRgb(d3.rgb("#fff"), 1));
+                linearGradient.addColorStop(0.2, rgbaFromRgb(d3.rgb("#fff"), 1));
                 linearGradient.addColorStop(1, rgbaFromRgb(d3.rgb("#fff"), 0));
                 ctx.strokeStyle = linearGradient;
             }
@@ -320,7 +323,6 @@ zodiac.directive('sky', function (cityList, colors, $document) {
 
             $scope.showCitySunPath = false;
 
-
             function draw() {
                 var center = [currentLon, currentLat, currentReverse];
                 var constellations = $scope.geoConstellations;
@@ -338,6 +340,7 @@ zodiac.directive('sky', function (cityList, colors, $document) {
                 };
                 drawSkyBackground();
                 drawSunTrajectory(center);
+
                 //сетка + экватор
                 ctx.strokeStyle = rgbaFromRgb(d3.rgb("#fff"), graticuleOpacity);
                 ctx.lineWidth = .1;
@@ -358,17 +361,25 @@ zodiac.directive('sky', function (cityList, colors, $document) {
                 ctx.stroke();
 
                 //эклиптика
-                ctx.strokeStyle = rgbaFromRgb(colors.ecliptic, eclipticOpacity);
-                makeEclipticGradient();
+                ctx.strokeStyle = rgbaFromRgb(d3.rgb("#fff"), eclipticOpacity);
+
+                var eclipticPart = eclipticCoordinates.filter(function (coord) {
+                    return coord[0] > sunCoordinates[0] && coord[0] < startTailSunPosition[0]
+                });
+                if (eclipticPart.length < 2) {
+                    var tail = [sunCoordinates, startYearSunPosition];
+                } else {
+                    eclipticPart = [startTailSunPosition].concat(eclipticPart).concat([sunCoordinates]);
+                    tail = tailCoordinates;
+                    ctx.beginPath();
+                    path({type: "LineString", coordinates: eclipticPart});
+                    ctx.stroke();
+                }
+
+                makeEclipticGradient(tail[0]);
                 ctx.beginPath();
-
-                var ec = [sunCoordinates].concat(eclipticCoordinates.filter(function (coord) {
-                    return coord[0] > sunCoordinates[0]
-                }));
-                path({type: "LineString", coordinates: eclipticCoordinates});
+                path({type: "LineString", coordinates: tail});
                 ctx.stroke();
-
-                ctx.fillStyle = rgbaFromRgb(d3.rgb("#fff"), eclipticOpacity);
 
 
                 //линии созвездий и звезды
@@ -408,6 +419,18 @@ zodiac.directive('sky', function (cityList, colors, $document) {
                             ctx.fillText(geo.properties.name, projectedCenter[0], projectedCenter[1])
                         }
                     })
+                });
+
+                Object.keys(brightStarsList).forEach(function(star) {
+                    var opacity = lineOpacityScale(horizontSunCoord[1]) * constellationOpacity;
+                    _.assign(ctx, {
+                        textAlign: "left",
+                        font: "italic lighter 14px Times New Roman",
+                        textBaseline: 'middle',
+                        fillStyle: rgbaFromRgb(d3.rgb("#fff"), opacity)
+                    });
+                    var projectedCenter = projection(brightStarsList[star].coordinates);
+                    ctx.fillText(brightStarsList[star].name, projectedCenter[0] + 3, projectedCenter[1]);
                 });
                 if ($scope.player.tails) {
                     ctx.scale(1 / ratio, 1 / ratio);
@@ -515,13 +538,15 @@ zodiac.directive('sky', function (cityList, colors, $document) {
             $scope.$watch('state.selectedCity', function (city) {
                 if (!$scope.geoConstellations) return;
                 var newLat = getCurrentLat(city);
-                currentReverse = getReverse(city);
+                var newReverse = getReverse(city);
                 d3.transition('city')
                     .duration(1250)
                     .tween("rotate", function () {
-                        var r = d3.interpolate(currentLat, newLat);
+                        var l = d3.interpolate(currentLat, newLat);
+                        var r = d3.interpolate(currentReverse, newReverse);
                         return function (t) {
-                            currentLat = r(t);
+                            currentLat = l(t);
+                            currentReverse = r(t);
                             clearCtx(tailCtx);
                             draw();
                         }
