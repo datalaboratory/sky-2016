@@ -9,6 +9,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
     currentDate: moment().toDate()
     atmosphere: true
     constellations: false
+    currentConstellation: false
     graticule: true
     ecliptic: true
     viewDirection: 'horizon'
