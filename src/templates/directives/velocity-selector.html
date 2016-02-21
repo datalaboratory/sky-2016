@@ -3,36 +3,24 @@
   <div
     class="velocity-selector__button inline"
     data-ng-class="{'active': player.velocity === 600}"
-    data-ng-mouseover="isTooltipShown['600'] = true"
-    data-ng-mouseout="isTooltipShown['600'] = false"
     data-ng-click="player.velocity = 600">
-    <span
-      class="tooltip helvetica-neue"
-      data-ng-show="isTooltipShown['600']">10 минут за секунду</span>
+    <span class="tooltip helvetica-neue">10 минут за секунду</span>
     <span class="value garamond-italic">600</span>
   </div>
   <div class="velocity-selector__caption garamond-italic inline">,&thinsp;</div>
   <div
     class="velocity-selector__button inline"
     data-ng-class="{'active': player.velocity === 3600}"
-    data-ng-mouseover="isTooltipShown['3600'] = true"
-    data-ng-mouseout="isTooltipShown['3600'] = false"
     data-ng-click="player.velocity = 3600">
-    <span
-      class="tooltip helvetica-neue"
-      data-ng-show="isTooltipShown['3600']">Час за секунду</span>
+    <span class="tooltip helvetica-neue">Час за секунду</span>
     <span class="value garamond-italic">3600</span>
   </div>
   <div class="velocity-selector__caption garamond-italic inline">&thinsp;или&thinsp;</div>
   <div
     class="velocity-selector__button inline"
     data-ng-class="{'active': player.velocity === 7200}"
-    data-ng-mouseover="isTooltipShown['7200'] = true"
-    data-ng-mouseout="isTooltipShown['7200'] = false"
     data-ng-click="player.velocity = 7200">
-    <span
-      class="tooltip helvetica-neue"
-      data-ng-show="isTooltipShown['7200']">Два часа за секунду</span>
+    <span class="tooltip helvetica-neue">Два часа за секунду</span>
     <span class="value garamond-italic">7200</span>
   </div>
   <div class="velocity-selector__caption garamond-italic inline">&thinsp;раз</div>

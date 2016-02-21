@@ -16,6 +16,14 @@
   width: 100%;
 }
 
+.main-page .page-indicator-container {
+  position: absolute;
+  top: 350px;
+  left: 0;
+
+  width: 100%;
+}
+
 .main-page .datalaboartory-sign-container {
   position: absolute;
   z-index: 1;

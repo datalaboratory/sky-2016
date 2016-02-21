@@ -1,0 +1,28 @@
+.page-indicator__circles-wrapper {
+  position: relative;
+  left: 50%;
+
+  display: inline-block;
+
+  transform: translateX(-50%);
+}
+
+.page-indicator__circle {
+  display: inline-block;
+
+  width: 6px;
+  height: 6px;
+
+  transition: background-color 0.25s ease-out;
+
+  border-radius: 50%;
+  background-color: rgba(0, 255, 255, 0.2);
+}
+
+.page-indicator__circle:not(:last-child) {
+  margin-right: 12px;
+}
+
+.page-indicator__circle.active {
+  background-color: #0ff;
+}

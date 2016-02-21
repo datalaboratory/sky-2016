@@ -42,12 +42,18 @@
   top: -20px;
   left: 50%;
 
+  visibility: hidden;
+
   transform: translateX(-50%);
   white-space: nowrap;
 
   color: #0ff;
 
   font-size: 12px;
+}
+
+.velocity-selector__button:hover .tooltip {
+  visibility: visible;
 }
 
 .velocity-selector__button .value {

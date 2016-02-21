@@ -33,4 +33,8 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
     {full: 'декабря', short: 'дек'}
   ]
 
+  $scope.scenario =
+    nOfPages: 9
+    currentPage: 0
+
   return
