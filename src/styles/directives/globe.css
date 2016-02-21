@@ -4,6 +4,11 @@
   fill: none;
 }
 
+.globe__circle-back {
+    stroke: rgba(0, 255, 255, 0.3);
+    fill: rgba(0, 0, 0, 0);
+}
+
 .globe__city {
   cursor: pointer;
 }
@@ -13,7 +18,7 @@
 }
 
 .globe__city-name {
-  font-size: 14px;
+  font-size: 16px;
 
   fill: #fff;
   dominant-baseline: central;

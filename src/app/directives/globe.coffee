@@ -11,18 +11,33 @@ zodiac.directive 'globe', (cityList) ->
     globeProjection = d3.geo.orthographic()
       .translate [width / 2, width / 2]
       .scale 100
-      .rotate [-70, -35]
-      .clipAngle 98
+      .rotate [-75, -30]
+      .clipAngle 90
 
     globePath = d3.geo.path().projection globeProjection
     graticule = d3.geo.graticule().step [15, 15]
 
-    graticulePath = svg.append 'path'
+    g = svg.append 'g'
+
+    g.append 'circle'
+    .attr 'cx', width / 2
+    .attr 'cy', width / 2
+    .attr 'r', 100
+    .attr 'class', 'globe__circle-back'
+    .on 'mouseover', ->
+      $scope.showCitySunPath = true
+      $scope.$apply()
+      return
+    .on 'mouseleave', ->
+      $scope.showCitySunPath = false
+      $scope.$apply()
+      return
+
+    graticulePath = g.append 'path'
       .attr 'd', globePath(graticule())
       .attr 'class', 'globe__graticule'
 
-    cityGroup = svg
-      .selectAll 'g'
+    cityGroup = g.selectAll 'g'
       .data _.keys(cityList)
       .enter()
       .append 'g'

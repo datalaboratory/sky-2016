@@ -14,7 +14,7 @@
   box-sizing: border-box;
   width: 100%;
   height: 30px;
-  padding: 6px 44px 0 30px;
+  padding: 5px 48px 0 30px;
 }
 
 .sliders__month-slider {
@@ -25,7 +25,7 @@
   box-sizing: border-box;
   width: 100%;
   height: 40px;
-  padding: 5px 44px 0 30px;
+  padding: 5px 48px 0 30px;
 }
 
 .sliders__hour-slider .frame {
@@ -34,7 +34,7 @@
   left: 18px;
 
   width: calc(100% - 36px);
-  height: 30px;
+  height: 31px;
 
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.15);
@@ -42,7 +42,7 @@
 
 .sliders__hour-slider .frame-arrow {
 	position: absolute;
-	top: 30px;
+	top: 31px;
 
 	margin-left: -7px;
 
@@ -54,9 +54,9 @@
 .sliders__comet-tail {
   position: absolute;
 
-  height: 0;
+  height: 1px;
 
-  border-top: 1px solid rgba(0, 255, 255, 0.5);
+  background-color: rgba(0, 255, 255, 0.5);
 }
 
 .sliders__hour-slider .sliders__comet-tail {
@@ -65,7 +65,7 @@
 }
 
 .sliders__month-slider .sliders__comet-tail {
-  top: 15px;
+  top: 16px;
   left: 0;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .sliders__month-slider .sliders__comet {
-  top: 9px;
+  top: 10px;
   left: 0;
 }
 
@@ -100,7 +100,7 @@
 
   color: #fff;
 
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .sliders__caption:last-child {
