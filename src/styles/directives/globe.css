@@ -26,6 +26,10 @@
   text-anchor: start;
 }
 
-.globe__city.active .globe__city-name {
+.globe__city:hover .globe__city-name {
   fill: #0ff;
+}
+
+.globe__city.active .globe__city-circle {
+  fill: #fff;
 }

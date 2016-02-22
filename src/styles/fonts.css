@@ -22,12 +22,28 @@
 	     url('../fonts/Original_Garamond_Italic/ORG46__W.svg#OriginalGaramondBTWeb-Italic') format('svg');
 }
 
+@font-face {
+	font-family: 'OriginalGaramondBTWebBold';
+	font-weight: normal;
+	font-style: normal;
+
+	src: url('../fonts/Original_Garamond_Bold/ORG65__W.eot');
+	src: url('../fonts/Original_Garamond_Bold/ORG65__W.eot?#iefix') format('embedded-opentype'),
+	     url('../fonts/Original_Garamond_Bold/ORG65__W.woff') format('woff'),
+	     url('../fonts/Original_Garamond_Bold/ORG65__W.ttf') format('truetype'),
+	     url('../fonts/Original_Garamond_Bold/ORG65__W.svg#OriginalGaramondBTWeb-Bold') format('svg');
+}
+
 .garamond {
 	font-family: 'OriginalGaramondBTWeb';
 }
 
 .garamond-italic {
 	font-family: 'OriginalGaramondBTWebItalic';
+}
+
+.garamond-bold {
+	font-family: 'OriginalGaramondBTWebBold';
 }
 
 .helvetica-neue {

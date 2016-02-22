@@ -11,7 +11,7 @@ zodiac.directive 'globe', (cityList) ->
     globeProjection = d3.geo.orthographic()
     .translate [width / 2, width / 2]
     .scale 99
-    .rotate [-60, -30]
+    .rotate [-70, -30]
     .clipAngle 90
 
     globePath = d3.geo.path().projection globeProjection
@@ -53,11 +53,11 @@ zodiac.directive 'globe', (cityList) ->
     .text (d) -> cityList[d].name
     .attr 'x', (d) -> globeProjection(cityList[d].coordinates)[0] + 5
     .attr 'y', (d) -> globeProjection(cityList[d].coordinates)[1]
-    .attr 'class', (d) ->
-      'globe__city-name' + if d is $scope.state.selectedCity then ' garamond' else ' garamond-italic'
+    .attr 'class', 'globe__city-name garamond-italic'
 
     checkClass = ->
       cityGroup.classed 'active', (d) -> d is $scope.state.selectedCity
+      cityGroup.selectAll('.globe__city-name').classed 'garamond-bold', (d) -> d is $scope.state.selectedCity
       return
 
     cityGroup.on 'click', (d) ->
