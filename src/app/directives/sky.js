@@ -118,7 +118,11 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 .context(ctx);
 
             var graticule = d3.geo.graticule()
-                .step([15, 15]);
+                .minorStep([15, 15])
+                .minorExtent([[-180, -75.0001], [180, 75.0001]])
+                .majorStep([90, 360])
+                .majorExtent([[-180, -90], [180, 90]]);
+            //console.log(graticule.extent())
             var eclipticCoordinates = [
                 [90, -23.26],
                 [75, -22.45],
@@ -352,13 +356,13 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 drawSunTrajectory(center);
 
                 //сетка + экватор
-                ctx.strokeStyle = rgbaFromRgb(d3.rgb("#fff"), graticuleOpacity);
+                ctx.strokeStyle = rgbaFromRgb(d3.rgb("#fff"), graticuleOpacity * 0.7);
                 ctx.lineWidth = .1;
                 ctx.beginPath();
                 path(graticule());
                 ctx.stroke();
 
-                ctx.lineWidth = .4;
+                ctx.lineWidth = .2;
                 ctx.beginPath();
                 var equator = [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]];
                 path({type: "LineString", coordinates: equator});
