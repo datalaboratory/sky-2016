@@ -8,6 +8,13 @@
   height: 200px;
 }
 
+.main-page .checkboxes-container {
+  position: absolute;
+  z-index: 1;
+  top: 250px;
+  left: 18px;
+}
+
 .main-page .header-container {
   position: absolute;
   top: 10px;

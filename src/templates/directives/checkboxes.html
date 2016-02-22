@@ -1,0 +1,50 @@
+<div class="checkboxes garamond-italic">
+  <div class="checkboxes__view-switch">
+    <div class="caption inline">Взгляд</div>
+    <div
+      class="button left inline"
+      data-ng-class="{'active': state.viewDirection === 'horizon'}"
+      data-ng-click="state.viewDirection = 'horizon'">на горизонт</div>
+    <div
+      class="button right inline"
+      data-ng-class="{'active': state.viewDirection === 'up'}"
+      data-ng-click="state.viewDirection = 'up'">вверх</div>
+    <br class="clear-both" />
+  </div>
+  <div
+    class="checkboxes__checkbox"
+    data-ng-click="state.atmosphere = !state.atmosphere">
+    <img class="checkboxes__icon empty inline" src="../img/accessories/checkbox-empty.png" data-ng-show="!state.atmosphere" />
+    <img class="checkboxes__icon hover inline" src="../img/accessories/checkbox-hover.png" data-ng-show="!state.atmosphere" />
+    <img class="checkboxes__icon mark inline" src="../img/accessories/checkbox-mark.png" data-ng-show="state.atmosphere"/>
+    <div class="checkboxes__label inline">Атмосфера</div>
+    <br class="clear-both" />
+  </div>
+  <div
+    class="checkboxes__checkbox"
+    data-ng-click="state.constellations = !state.constellations">
+    <img class="checkboxes__icon empty inline" src="../img/accessories/checkbox-empty.png" data-ng-show="!state.constellations" />
+    <img class="checkboxes__icon hover inline" src="../img/accessories/checkbox-hover.png" data-ng-show="!state.constellations" />
+    <img class="checkboxes__icon mark inline" src="../img/accessories/checkbox-mark.png" data-ng-show="state.constellations"/>
+    <div class="checkboxes__label inline">Созвездия зодиака</div>
+    <br class="clear-both" />
+  </div>
+  <div
+    class="checkboxes__checkbox"
+    data-ng-click="state.graticule = !state.graticule">
+    <img class="checkboxes__icon empty inline" src="../img/accessories/checkbox-empty.png" data-ng-show="!state.graticule" />
+    <img class="checkboxes__icon hover inline" src="../img/accessories/checkbox-hover.png" data-ng-show="!state.graticule" />
+    <img class="checkboxes__icon mark inline" src="../img/accessories/checkbox-mark.png" data-ng-show="state.graticule"/>
+    <div class="checkboxes__label inline">Сетка небесной сферы</div>
+    <br class="clear-both" />
+  </div>
+  <div
+    class="checkboxes__checkbox"
+    data-ng-click="state.ecliptic = !state.ecliptic">
+    <img class="checkboxes__icon empty inline" src="../img/accessories/checkbox-empty.png" data-ng-show="!state.ecliptic" />
+    <img class="checkboxes__icon hover inline" src="../img/accessories/checkbox-hover.png" data-ng-show="!state.ecliptic" />
+    <img class="checkboxes__icon mark inline" src="../img/accessories/checkbox-mark.png" data-ng-show="state.ecliptic"/>
+    <div class="checkboxes__label inline">Эклиптика</div>
+    <br class="clear-both" />
+  </div>
+</div>

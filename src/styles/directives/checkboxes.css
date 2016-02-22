@@ -1,0 +1,80 @@
+.checkboxes {
+  font-size: 16px;
+}
+
+.checkboxes__view-switch {
+  margin: 0 0 8px 16px;
+}
+
+.checkboxes__view-switch .caption {
+  margin-right: 5px;
+
+  color: #fff;
+}
+
+.checkboxes__view-switch .button {
+  padding: 2px 3px 3px 3px;
+
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.25s ease-out, border-color 0.25s ease-out;
+
+  color: #0ff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 255, 255, 0.2);
+  border-radius: 3px;
+
+  line-height: 1;
+}
+
+.checkboxes__view-switch .button.active {
+  border-color: rgba(0, 255, 255, 0);
+  background-color: rgba(0, 255, 255, 0.2);
+}
+
+.checkboxes__view-switch .left {
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.checkboxes__view-switch .right {
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.checkboxes__checkbox {
+  cursor: pointer;
+}
+
+.checkboxes__checkbox:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.checkboxes__label {
+  color: #fff;
+}
+
+.checkboxes__checkbox:hover .checkboxes__label {
+  color: #0ff;
+}
+
+.checkboxes__checkbox .checkboxes__icon {
+  width: 16px;
+  height: 15px;
+  margin-top: 1px;
+}
+
+.checkboxes__checkbox:hover .checkboxes__icon.empty {
+  display: none;
+}
+
+.checkboxes__checkbox .checkboxes__icon.hover {
+  display: none;
+}
+
+.checkboxes__checkbox:hover .checkboxes__icon.hover {
+  display: block;
+}
