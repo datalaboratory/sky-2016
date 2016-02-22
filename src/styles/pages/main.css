@@ -8,6 +8,13 @@
   height: 200px;
 }
 
+.main-page .checkboxes-container {
+  position: absolute;
+  z-index: 1;
+  top: 250px;
+  left: 18px;
+}
+
 .main-page .header-container {
   position: absolute;
   top: 10px;
@@ -16,9 +23,17 @@
   width: 100%;
 }
 
+.main-page .text-blocks-container {
+  position: absolute;
+  bottom: calc(100% - 310px);
+  left: 0;
+
+  width: 100%;
+}
+
 .main-page .page-indicator-container {
   position: absolute;
-  top: 350px;
+  top: 320px;
   left: 0;
 
   width: 100%;

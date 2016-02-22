@@ -1,8 +1,12 @@
 <div class="page-indicator">
-  <div class="page-indicator__circles-wrapper">
+  <div class="page-indicator__pages-wrapper">
     <div
-      class="page-indicator__circle"
+      class="page-indicator__page"
       data-ng-repeat="circle in _.range(scenario.nOfPages) track by $index"
-      data-ng-class="{'active': scenario.currentPage === $index}"></div>
+      data-ng-click="scenario.currentPage = $index">
+      <div
+        class="page-indicator__circle"
+        data-ng-class="{'active': scenario.currentPage === $index}"></div>
+    </div>
   </div>
 </div>

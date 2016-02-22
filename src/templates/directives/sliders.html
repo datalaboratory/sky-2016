@@ -1,4 +1,4 @@
-<div class="sliders">
+<div class="sliders garamond-italic">
   <div class="sliders__hour-slider">
     <div class="frame"></div>
     <div
@@ -11,7 +11,7 @@
       class="sliders__comet"
       data-ng-style="{'width': (hourSliderOffset - hourSliderPadding + currentHourX + 4) + 'px'}"></div>
     <div
-      class="sliders__caption garamond-italic"
+      class="sliders__caption"
       data-ng-repeat="i in _.range(25) track by $index"
       once-style="{'transform': 'translateX(' + getHourX(i) + 'px)'}"
       once-text="getHourCaption(i)"></div>
@@ -24,7 +24,7 @@
       class="sliders__comet"
       data-ng-style="{'width': (monthSliderOffset + currentMonthX + 4) + 'px'}"></div>
     <div
-      class="sliders__caption garamond-italic"
+      class="sliders__caption"
       data-ng-repeat="i in _.range(13) track by $index"
       once-style="{'transform': 'translateX(' + getMonthX(i) + 'px)'}"
       once-text="getMonthCaption(i)"></div>

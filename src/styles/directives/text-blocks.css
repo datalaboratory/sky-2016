@@ -1,0 +1,52 @@
+.text-blocks {
+  position: relative;
+  left: 50%;
+
+  display: inline-block;
+
+  transform: translateX(-50%);
+}
+
+.text-blocks__block {
+  white-space: nowrap;
+
+  color: #fff;
+
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.text-blocks__button {
+  display: inline-block;
+
+  padding: 2px 3px 3px 3px;
+
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.25s ease-out, border-color 0.25s ease-out;
+
+  color: #0ff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 255, 255, 0.3);
+  border-radius: 3px;
+
+  line-height: 1;
+}
+
+.text-blocks__button:hover {
+  background-color: rgba(0, 255, 255, 0.2);
+}
+
+.text-blocks__button.standalone {
+  margin-left: -6px;
+}
+
+.text-blocks__button.next {
+  padding: 6px 7px;
+}
+
+.text-blocks__button.next img {
+  width: 6px;
+  height: 9px;
+}

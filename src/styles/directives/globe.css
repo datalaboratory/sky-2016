@@ -5,8 +5,9 @@
 }
 
 .globe__circle-back {
-    stroke: rgba(0, 255, 255, 0.3);
-    fill: rgba(0, 0, 0, 0);
+  stroke: rgba(0, 255, 255, 0.4);
+  fill: rgba(0, 0, 0, 0);
+  stroke-width: 1;
 }
 
 .globe__city {
@@ -25,6 +26,10 @@
   text-anchor: start;
 }
 
-.globe__city.active .globe__city-name {
+.globe__city:hover .globe__city-name {
   fill: #0ff;
+}
+
+.globe__city.active .globe__city-circle {
+  fill: #fff;
 }
