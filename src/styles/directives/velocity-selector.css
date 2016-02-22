@@ -20,7 +20,7 @@
 .velocity-selector__button {
   position: relative;
 
-  padding: 0 2px;
+  padding: 0 3px;
 
   cursor: pointer;
   user-select: none;
