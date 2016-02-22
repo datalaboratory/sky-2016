@@ -9,10 +9,10 @@ zodiac.directive 'globe', (cityList) ->
     svg = d3.select $element[0]
 
     globeProjection = d3.geo.orthographic()
-      .translate [width / 2, width / 2]
-      .scale 99
-      .rotate [-60, -30]
-      .clipAngle 90
+    .translate [width / 2, width / 2]
+    .scale 99
+    .rotate [-60, -30]
+    .clipAngle 90
 
     globePath = d3.geo.path().projection globeProjection
     graticule = d3.geo.graticule().step [30, 30]
@@ -34,26 +34,27 @@ zodiac.directive 'globe', (cityList) ->
       return
 
     graticulePath = g.append 'path'
-      .attr 'd', globePath(graticule())
-      .attr 'class', 'globe__graticule'
+    .attr 'd', globePath graticule()
+    .attr 'class', 'globe__graticule'
 
     cityGroup = g.selectAll 'g'
-      .data _.keys(cityList)
-      .enter()
-      .append 'g'
-      .attr 'class', 'globe__city'
+    .data _.keys(cityList)
+    .enter()
+    .append 'g'
+    .attr 'class', 'globe__city'
 
     cityGroup.append 'circle'
-      .attr 'cx', (d) -> globeProjection(cityList[d].coordinates)[0]
-      .attr 'cy', (d) -> globeProjection(cityList[d].coordinates)[1]
-      .attr 'r', 3
-      .attr 'class', 'globe__city-circle'
+    .attr 'cx', (d) -> globeProjection(cityList[d].coordinates)[0]
+    .attr 'cy', (d) -> globeProjection(cityList[d].coordinates)[1]
+    .attr 'r', 3
+    .attr 'class', 'globe__city-circle'
 
     cityGroup.append 'text'
-      .text (d) -> cityList[d].name
-      .attr 'x', (d) -> globeProjection(cityList[d].coordinates)[0] + 5
-      .attr 'y', (d) -> globeProjection(cityList[d].coordinates)[1]
-      .attr 'class', (d) -> 'globe__city-name' + if d is $scope.state.selectedCity then ' garamond' else ' garamond-italic'
+    .text (d) -> cityList[d].name
+    .attr 'x', (d) -> globeProjection(cityList[d].coordinates)[0] + 5
+    .attr 'y', (d) -> globeProjection(cityList[d].coordinates)[1]
+    .attr 'class', (d) ->
+      'globe__city-name' + if d is $scope.state.selectedCity then ' garamond' else ' garamond-italic'
 
     checkClass = ->
       cityGroup.classed 'active', (d) -> d is $scope.state.selectedCity
