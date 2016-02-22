@@ -16,9 +16,17 @@
   width: 100%;
 }
 
+.main-page .text-blocks-container {
+  position: absolute;
+  bottom: calc(100% - 310px);
+  left: 0;
+
+  width: 100%;
+}
+
 .main-page .page-indicator-container {
   position: absolute;
-  top: 350px;
+  top: 320px;
   left: 0;
 
   width: 100%;

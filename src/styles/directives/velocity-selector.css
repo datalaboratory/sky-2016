@@ -29,7 +29,7 @@
   border-width: 1px;
   border-style: solid;
   border-color: rgba(0, 255, 255, 0.3);
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .velocity-selector__button.active {
