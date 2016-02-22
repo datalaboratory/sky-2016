@@ -15,8 +15,6 @@ zodiac = angular.module 'zodiac', dependencies
         templateUrl: 'templates/pages/proto.html'
         controller: 'protoCtrl'
       .otherwise redirectTo: '/'
-
-      $locationProvider.html5Mode true
       return
   ]
   .constant '_', window._
