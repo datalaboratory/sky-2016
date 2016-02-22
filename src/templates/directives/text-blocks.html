@@ -4,7 +4,10 @@
     data-ng-show="scenario.currentPage === 0">
     Звёзды кажутся неподвижными.<br />
     Чтобы увидеть их движение<br />
-    по небосводу, <div class="text-blocks__button">ускорьте время</div>.
+    по небосводу,
+    <div
+      class="text-blocks__button"
+      data-ng-click="scenario.currentPage = 1">ускорьте время</div>.
   </div>
   <div
     class="text-blocks__block"
@@ -14,6 +17,11 @@
     вокруг своей оси в неподвижном космическом<br />
     пространстве. Звёзды проплывают мимо,<br />
     как пейзаж за бортом корабля.
+    <div
+      class="text-blocks__button next"
+      data-ng-click="scenario.currentPage = 2">
+      <img src="../img/accessories/next.png" />
+    </div>
   </div>
   <div
     class="text-blocks__block"
@@ -23,6 +31,11 @@
     от полюса к экватору звёздной сферы, тем быстрее<br />
     она движется (Альтаир, Арктур и Вега). Звёзд, расположенных<br />
     над южным полушарием, в северном не видно.
+    <div
+      class="text-blocks__button next"
+      data-ng-click="scenario.currentPage = 3">
+      <img src="../img/accessories/next.png" />
+    </div>
   </div>
   <div
     class="text-blocks__block"
@@ -31,7 +44,10 @@
     наблюдателя к Солнцу &mdash; наступает утро.<br />
     С восходом солнца, звёзды исчезают с небосвода,<br />
     их затмевает ярко освещённая земная атмосфера.<br />
-    Чтобы увидеть звёзды, <div class="text-blocks__button">отключите атмосферу</div>.
+    Чтобы увидеть звёзды,
+    <div
+      class="text-blocks__button"
+      data-ng-click="scenario.currentPage = 4">отключите атмосферу</div>.
   </div>
   <div
     class="text-blocks__block"
@@ -40,6 +56,11 @@
     вместе со звёздами. Сейчас оно<br />
     располагается в созвездии Овна,<br />
     а в январе &mdash; находилось в Козероге.
+    <div
+      class="text-blocks__button next"
+      data-ng-click="scenario.currentPage = 5">
+      <img src="../img/accessories/next.png" />
+    </div>
   </div>
   <div
     class="text-blocks__block"
@@ -48,6 +69,11 @@
     Земли вокруг Солнца. Перемещающийся вокруг<br />
     Солнца наблюдатель видит его на фоне разных<br />
     звёзд, при этом Солнце и звёзды неподвижны.
+    <div
+      class="text-blocks__button next"
+      data-ng-click="scenario.currentPage = 6">
+      <img src="../img/accessories/next.png" />
+    </div>
   </div>
   <div
     class="text-blocks__block"
@@ -56,7 +82,9 @@
     незаметно в течение суток. Оно медленно<br />
     перемещается из созвездия в созвездие,<br />
     описывая за год полный круг по небосводу.<br />
-    <div class="text-blocks__button standalone">Турбо-ускорение времени</div>.
+    <div
+      class="text-blocks__button standalone"
+      data-ng-click="scenario.currentPage = 7">Турбо-ускорение времени</div>.
   </div>
   <div
     class="text-blocks__block"
@@ -65,6 +93,11 @@
     сфере называется <span class="garamond-italic">эклиптикой</span>. Вдоль эклиптики<br />
     располагаются зодиакальные созвездия,<br />
     известные нам, как знаки зодиака.
+    <div
+      class="text-blocks__button next"
+      data-ng-click="scenario.currentPage = 8">
+      <img src="../img/accessories/next.png" />
+    </div>
   </div>
   <div
     class="text-blocks__block"

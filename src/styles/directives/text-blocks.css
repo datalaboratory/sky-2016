@@ -19,7 +19,7 @@
 .text-blocks__button {
   display: inline-block;
 
-  padding: 1px 5px 2px 5px;
+  padding: 2px 5px 3px 5px;
 
   cursor: pointer;
   user-select: none;
@@ -40,4 +40,13 @@
 
 .text-blocks__button.standalone {
   margin-left: -6px;
+}
+
+.text-blocks__button.next {
+  padding: 6px 7px;
+}
+
+.text-blocks__button.next img {
+  width: 6px;
+  height: 9px;
 }
