@@ -11,6 +11,9 @@ zodiac = angular.module 'zodiac', dependencies
       .when '/',
         templateUrl: 'templates/pages/main.html'
         controller: 'mainCtrl'
+      .when '/proto',
+        templateUrl: 'templates/pages/proto.html'
+        controller: 'protoCtrl'
       .otherwise redirectTo: '/'
 
       $locationProvider.html5Mode true
