@@ -10,8 +10,8 @@ zodiac.directive 'globe', (cityList) ->
 
     globeProjection = d3.geo.orthographic()
       .translate [width / 2, width / 2]
-      .scale 100
-      .rotate [-75, -30]
+      .scale 99
+      .rotate [-60, -30]
       .clipAngle 90
 
     globePath = d3.geo.path().projection globeProjection
@@ -22,7 +22,7 @@ zodiac.directive 'globe', (cityList) ->
     g.append 'circle'
     .attr 'cx', width / 2
     .attr 'cy', width / 2
-    .attr 'r', 100
+    .attr 'r', 99
     .attr 'class', 'globe__circle-back'
     .on 'mouseover', ->
       $scope.showCitySunPath = true
