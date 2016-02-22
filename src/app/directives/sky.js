@@ -120,7 +120,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             var graticule = d3.geo.graticule()
                 .minorStep([15, 15])
                 .minorExtent([[-180, -75.0001], [180, 75.0001]])
-                .majorStep([90, 360])
+                .majorStep([45, 360])
                 .majorExtent([[-180, -90], [180, 90]]);
             //console.log(graticule.extent())
             var eclipticCoordinates = [
@@ -284,6 +284,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
             function drawSunTrajectory(center) {
                 var r = 15;
+
                 if ($scope.showCitySunPath) {
                     Object.keys(cityList).forEach(function (city) {
                         ctx.strokeStyle = "#fff";
@@ -292,10 +293,12 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         }
                         projection.rotate([currentLon, getCurrentLat(city), getReverse(city)]);
                         ctx.setLineDash([5]);
+                        ctx.lineWidth = 0.4;
                         drawSunPath();
                         ctx.setLineDash([]);
 
                         var sunCenter = projection(sunCoordinates);
+                        ctx.lineWidth = 0.8;
                         ctx.beginPath();
                         ctx.moveTo(sunCenter[0] + r, sunCenter[1]);
                         ctx.arc(sunCenter[0], sunCenter[1], r, 0, 2 * Math.PI);
@@ -305,15 +308,15 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
                     });
                     Object.keys(cityList).forEach(function (city) {
-                        ctx.fillStyle = "#fff";
+                        ctx.fillStyle = rgbaFromRgb(d3.rgb("#fff"), 0.4);
                         if (city == $scope.showCitySunPath) {
-                            ctx.fillStyle = colors.ecliptic;
+                            ctx.fillStyle = rgbaFromRgb(colors.ecliptic, 0.4);
                         }
                         projection.rotate([currentLon, getCurrentLat(city), getReverse(city)]);
                         var sunCenter = projection(sunCoordinates);
                         _.assign(ctx, {
                             textAlign: "left",
-                            font: "italic lighter 14px Times New Roman"
+                            font: "italic 16px Garamond"
                         });
                         ctx.fillText(cityList[city].name, sunCenter[0] + r + 5, sunCenter[1])
                     })
@@ -356,13 +359,13 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 drawSunTrajectory(center);
 
                 //сетка + экватор
-                ctx.strokeStyle = rgbaFromRgb(d3.rgb("#fff"), graticuleOpacity * 0.7);
+                ctx.strokeStyle = rgbaFromRgb(d3.rgb("#fff"), graticuleOpacity * 0.8);
                 ctx.lineWidth = .1;
                 ctx.beginPath();
                 path(graticule());
                 ctx.stroke();
 
-                ctx.lineWidth = .2;
+                ctx.lineWidth = 0.15;
                 ctx.beginPath();
                 var equator = [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]];
                 path({type: "LineString", coordinates: equator});
@@ -376,7 +379,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
                 //эклиптика
                 ctx.strokeStyle = rgbaFromRgb(d3.rgb("#fff"), eclipticOpacity);
-
+                ctx.lineWidth = 0.5;
                 var eclipticPart = eclipticCoordinates.filter(function (coord) {
                     return coord[0] > sunCoordinates[0] && coord[0] < startTailSunPosition[0]
                 });
@@ -407,6 +410,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         minDistance = currentDistance
                     }
                 });
+                ctx.lineWidth = 0.7;
                 constellations.forEach(function drawConstellation(constellation, i) {
                     constellation.geometry.geometries.forEach(function drawStarsAndLines(geo) {
                         if (geo.type == 'Point') {
@@ -432,7 +436,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                                 opacity = lineOpacityScale(horizontSunCoord[1]) * constellationOpacity;
                             }
                             var color = colors.zodiacLine;
-                            ctx.strokeStyle = rgbaFromRgb(color, opacity);
+                            ctx.strokeStyle = rgbaFromRgb(color, opacity * 0.5);
                             ctx.beginPath();
                             path(geo);
                             ctx.stroke();
@@ -440,9 +444,10 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                             color = colors.zodiacText;
                             _.assign(ctx, {
                                 textAlign: "center",
-                                font: "italic lighter 14px Times New Roman",
-                                fillStyle: rgbaFromRgb(color, opacity)
+                                font: "italic 16px Garamond",
+                                fillStyle: rgbaFromRgb(color, opacity * 0.4)
                             });
+
                             var projectedCenter = projection(geo.properties.center);
                             ctx.fillText(geo.properties.name, projectedCenter[0], projectedCenter[1])
                         }
@@ -453,9 +458,9 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                     var opacity = lineOpacityScale(horizontSunCoord[1]) * starNamesOpacity;
                     _.assign(ctx, {
                         textAlign: "left",
-                        font: "italic lighter 14px Times New Roman",
+                        font: "italic 16px Garamond",
                         textBaseline: 'middle',
-                        fillStyle: rgbaFromRgb(d3.rgb("#fff"), opacity)
+                        fillStyle: rgbaFromRgb(d3.rgb("#fff"), opacity * 0.4)
                     });
                     var projectedCenter = projection(brightStarsList[star].coordinates);
                     ctx.fillText(brightStarsList[star].name, projectedCenter[0] + 3, projectedCenter[1]);
