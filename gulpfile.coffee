@@ -55,9 +55,6 @@ gulp.task 'clean', ->
 gulp.task 'connect', ->
   connect.server
     root: 'public'
-    port: 8080
-    host: 'localhost'
-    fallback: 'public/index.html'
     livereload: true
   return
 
