@@ -1,28 +1,34 @@
 zodiac.constant('cityList', {
     Murmansk: {
         coordinates: [33.10, 68.95],
-        name: 'Мурманск'
+        name: 'Мурманск',
+        case: 'Мурманском'
     },
     Moscow: {
         coordinates:[37.50, 55.75],
-        name: 'Москва'
+        name: 'Москва',
+        case: 'Москвой'
     },
     Anapa: {
         coordinates: [37.33, 44.89],
-        name: 'Анапа'
+        name: 'Анапа',
+        case: 'Анапой'
     },
     Mecca: {
         coordinates: [39.81, 21.43],
-        name: 'Мекка'
+        name: 'Мекка',
+        case: 'Меккой'
     },
     Nairobi: {
         coordinates: [36.82, -1.29],
         name: 'Найроби',
+        case: 'Найроби',
         reverse: true
     },
     Johannesburg: {
         coordinates:[28.04, -26.19],
         name: 'Йоханнесбург',
+        case: 'Йоханнесбургом',
         reverse: true
     }
 });
