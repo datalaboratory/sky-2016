@@ -40,7 +40,6 @@ zodiac.directive 'globe', (cityList) ->
       {type: 'LineString', coordinates: [[mscLon + 45, -180], [mscLon + 45, -90], [mscLon + 45, 0], [mscLon + 45, 90], [mscLon + 45, 180]]}
       {type: 'LineString', coordinates: [[mscLon + 90, -180], [mscLon + 90, -90], [mscLon + 90, 0], [mscLon + 90, 90], [mscLon + 90, 180]]}
       {type: 'LineString', coordinates: [[mscLon + 135, -180], [mscLon + 135, -90], [mscLon + 135, 0], [mscLon + 135, 90], [mscLon + 135, 180]]}
-      {type: 'LineString', coordinates: [[mscLon + 180, -180], [mscLon + 180, -90], [mscLon + 180, 0], [mscLon + 180, 90], [mscLon + 180, 180]]}
     ]
 
     g.selectAll '.globe__circle-of-longitude'
