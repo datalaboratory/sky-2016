@@ -23,6 +23,14 @@
   width: 100%;
 }
 
+.main-page .compass-container {
+  position: absolute;
+  top: 80px;
+  left: 0;
+
+  width: 100%;
+}
+
 .main-page .text-blocks-container {
   position: absolute;
   bottom: calc(100% - 310px);

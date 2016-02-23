@@ -1,0 +1,9 @@
+<div
+  class="compass"
+  data-ng-show="state.viewDirection === 'horizon'">
+  <div class="compass__caption garamond-italic">{{cityList[state.selectedCity]['reverse'] ? 'N' : 'S'}}</div>
+  <img
+    class="compass__icon"
+    src="../img/accessories/compass.png"
+    data-ng-class="{'south': !cityList[state.selectedCity]['reverse']}" />
+</div>
