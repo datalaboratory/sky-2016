@@ -25,6 +25,7 @@
 }
 
 .globe__city-name {
+  font-family: 'OriginalGaramondBTWebItalic';
   font-size: 16px;
 
   fill: #fff;
@@ -34,6 +35,10 @@
 
 .globe__city:hover .globe__city-name {
   fill: #0ff;
+}
+
+.globe__city.active .globe__city-name {
+  font-family: 'OriginalGaramondBTWebBold';
 }
 
 .globe__city.active .globe__city-circle {

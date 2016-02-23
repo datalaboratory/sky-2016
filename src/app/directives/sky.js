@@ -153,11 +153,11 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             ];
             var minEclipticCoordinates = [[-180, 0], [-90, 23.26], [0, 0], [90, -23.26], [180, 0]];
 
-            var atmosphereTransparency = 0;
-            var constellationOpacity = 0;
+            var atmosphereTransparency = 1;
+            var constellationOpacity = 1;
             var currentConstellationOpacity = 0;
             var graticuleOpacity = 1;
-            var eclipticOpacity = 1;
+            var eclipticOpacity = 0;
             var starNamesOpacity = 0;
 
             var lineOpacityScale = d3.scale.linear()

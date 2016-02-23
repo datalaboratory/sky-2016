@@ -73,11 +73,10 @@ zodiac.directive 'globe', (cityList) ->
     .text (d) -> cityList[d].name
     .attr 'x', (d) -> globeProjection(cityList[d].coordinates)[0] + 5
     .attr 'y', (d) -> globeProjection(cityList[d].coordinates)[1]
-    .attr 'class', 'globe__city-name garamond-italic'
+    .attr 'class', 'globe__city-name'
 
     checkClass = ->
       cityGroup.classed 'active', (d) -> d is $scope.state.selectedCity
-      cityGroup.selectAll('.globe__city-name').classed 'garamond-bold', (d) -> d is $scope.state.selectedCity
       return
 
     cityGroup.on 'click', (d) ->

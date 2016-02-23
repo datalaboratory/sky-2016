@@ -7,17 +7,17 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
   $scope.state =
     selectedCity: 'Moscow'
     currentDate: moment().toDate()
-    atmosphere: true
-    constellations: false
+    atmosphere: false
+    constellations: true
     currentConstellation: false
     graticule: true
-    ecliptic: true
+    ecliptic: false
     viewDirection: 'horizon'
     starNames: false
 
   $scope.player =
     play: true
-    velocity: 600
+    velocity: 1
     tails: false
 
   $scope.monthNames = [
