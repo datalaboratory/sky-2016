@@ -1,4 +1,4 @@
-.globe__graticule {
+.globe__meridian, .globe__circle-of-latitude {
   stroke: rgba(0, 255, 255, 0.3);
   stroke-width: 0.5;
   fill: none;
