@@ -12,10 +12,11 @@ zodiac.directive 'globe', (cityList) ->
     .translate [width / 2, width / 2]
     .scale 99
     .rotate [-70, -30]
+    .precision .1
     .clipAngle 90
 
     globePath = d3.geo.path().projection globeProjection
-    graticule = d3.geo.graticule().step [37, 30]
+    graticule = d3.geo.graticule().step [90, 30]
 
     g = svg.append 'g'
 
@@ -36,6 +37,14 @@ zodiac.directive 'globe', (cityList) ->
     graticulePath = g.append 'path'
     .attr 'd', globePath graticule()
     .attr 'class', 'globe__graticule'
+
+    equatorPath = g.append 'path'
+    .attr 'd', globePath {type: 'LineString', coordinates: [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]]}
+    .attr 'class', 'globe__equator'
+
+    mscMeridianPath = g.append 'path'
+    .attr 'd', globePath {type: 'LineString', coordinates: [[37, -180], [37, -90], [37, 0], [37, 90], [37, 180]]}
+    .attr 'class', 'globe__msc-meridian'
 
     cityGroup = g.selectAll 'g'
     .data _.keys(cityList)
