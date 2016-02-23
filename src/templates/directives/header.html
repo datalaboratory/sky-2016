@@ -5,7 +5,9 @@
     <div class="inline">{{getFormattedDate()}}</div>
     <div class="inline">&nbsp;в&nbsp;</div>
     <div class="inline">{{getHour()}}</div>
-    <div class="colon inline">&#58;</div>
+    <div
+      class="colon inline"
+      data-ng-class="{'blinking': player.velocity === 1}">&#58;</div>
     <div class="inline">{{getMinute()}}</div>
     <br class="clear-both" />
   </div>

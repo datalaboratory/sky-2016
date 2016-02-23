@@ -16,3 +16,13 @@
 .header__date-time-wrapper {
   font-size: 16px;
 }
+
+.header__date-time-wrapper .colon.blinking {
+  animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
