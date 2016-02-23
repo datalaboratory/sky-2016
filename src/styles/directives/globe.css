@@ -10,12 +10,6 @@
   fill: none;
 }
 
-.globe__msc-meridian {
-  stroke: rgba(0, 255, 255, 0.7);
-  stroke-width: 0.5;
-  fill: none;
-}
-
 .globe__circle-back {
   stroke: rgba(0, 255, 255, 0.3);
   fill: rgba(0, 0, 0, 0);
