@@ -15,7 +15,7 @@ zodiac.directive 'globe', (cityList) ->
     .clipAngle 90
 
     globePath = d3.geo.path().projection globeProjection
-    graticule = d3.geo.graticule().step [30, 30]
+    graticule = d3.geo.graticule().step [37, 30]
 
     g = svg.append 'g'
 
