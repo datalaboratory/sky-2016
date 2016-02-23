@@ -35,7 +35,7 @@ zodiac.directive 'globe', (cityList) ->
       $scope.$apply()
       return
 
-    meridians = [
+    circlesOfLongitude = [
       {type: 'LineString', coordinates: [[mscLon, -180], [mscLon, -90], [mscLon, 0], [mscLon, 90], [mscLon, 180]]}
       {type: 'LineString', coordinates: [[mscLon + 45, -180], [mscLon + 45, -90], [mscLon + 45, 0], [mscLon + 45, 90], [mscLon + 45, 180]]}
       {type: 'LineString', coordinates: [[mscLon + 90, -180], [mscLon + 90, -90], [mscLon + 90, 0], [mscLon + 90, 90], [mscLon + 90, 180]]}
@@ -43,11 +43,11 @@ zodiac.directive 'globe', (cityList) ->
       {type: 'LineString', coordinates: [[mscLon + 180, -180], [mscLon + 180, -90], [mscLon + 180, 0], [mscLon + 180, 90], [mscLon + 180, 180]]}
     ]
 
-    g.selectAll '.globe__meridian'
-    .data meridians
+    g.selectAll '.globe__circle-of-longitude'
+    .data circlesOfLongitude
     .enter()
     .append 'path'
-    .attr 'class', 'globe__meridian'
+    .attr 'class', 'globe__circle-of-longitude'
     .attr 'd', globePath
 
     g.append 'path'
