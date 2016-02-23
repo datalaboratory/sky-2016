@@ -17,6 +17,7 @@ zodiac.directive 'globe', (cityList) ->
 
     globePath = d3.geo.path().projection globeProjection
     graticule = d3.geo.graticule().step [0, 30]
+    mscLon = 37.616667
 
     g = svg.append 'g'
 
@@ -35,8 +36,8 @@ zodiac.directive 'globe', (cityList) ->
       return
 
     meridians = [
-      {type: 'LineString', coordinates: [[37, -180], [37, -90], [37, 0], [37, 90], [37, 180]]}
-      {type: 'LineString', coordinates: [[-37, -180], [-37, -90], [-37, 0], [-37, 90], [-37, 180]]}
+      {type: 'LineString', coordinates: [[mscLon, -180], [mscLon, -90], [mscLon, 0], [mscLon, 90], [mscLon, 180]]}
+      {type: 'LineString', coordinates: [[-mscLon, -180], [-mscLon, -90], [-mscLon, 0], [-mscLon, 90], [-mscLon, 180]]}
     ]
 
     g.selectAll '.globe__meridian'
