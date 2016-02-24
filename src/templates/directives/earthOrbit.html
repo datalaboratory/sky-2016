@@ -5,25 +5,25 @@
                 class="earth-orbit__orbit"
                 rx="170" ry="50">
             </ellipse>
-            <circle fill="url(#sunGradient)"
-                    class="earth-orbit__back-sun"
-                    r="50"></circle>
-            <defs>
-                <radialGradient id="sunGradient">
-                    <stop offset="40%" style="stop-color: rgba(255,255,255,1);"></stop>
-                    <stop offset="80%" style="stop-color: rgba(255,255,255,0.2);"></stop>
-                    <stop offset="100%" style="stop-color: rgba(255,255,255,0);"></stop>
-                </radialGradient>
-            </defs>
+            <image
+                xlink:href="img/accessories/sun-3d.png"
+                width="150px"
+                height="150px"
+                x="80"
+                class="earth-orbit__back-sun"></image>
 
             <g class="earth-orbit__earth-group">
                 <line class="earth-orbit__axis"></line>
                 <image class="earth-orbit__earth"></image>
                 <path class="earth-orbit__shadow"></path>
             </g>
-            <circle fill="url(#sunGradient)"
-                    class="earth-orbit__forward-sun"
-                    r="50"></circle>
+
+            <image
+                xlink:href="img/accessories/sun-3d.png"
+                width="150px"
+                height="150px"
+                x="80"
+                class="earth-orbit__forward-sun"></image>
         </g>
     </svg>
 </div>

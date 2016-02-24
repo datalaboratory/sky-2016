@@ -9,6 +9,11 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             var width = $element.width(),
                 height = $element.height() - landscapeHeight;
 
+            var sunImgWidth = 150;
+            var sunImg = d3.select($element[0]).select('.sky__sun')
+                .attr('width', sunImgWidth)
+                .attr('height', sunImgWidth);
+
 
             var canvas = d3.select($element[0]).select('canvas');
             var offScreenCanvas = document.createElement('canvas');
@@ -269,6 +274,10 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             function updateSunCoordinates() {
                 sunCoordinates = sunScale(moment($scope.state.currentDate).dayOfYear() + $scope.state.currentDate.getHours() / 24);
                 sunPx = projection(sunCoordinates);
+                sunImg.style({
+                    top: sunPx[1] - sunImgWidth / 2 + 'px',
+                    left: sunPx[0] - sunImgWidth / 2 + 'px'
+                });
                 horizontSunCoord = fixedProjection.invert(sunPx);
                 $scope.state.sunRiseDegrees = horizontSunCoord[1];
             }
@@ -477,12 +486,6 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                     ctx.drawImage(bufferCanvas, 0, 0);
                     ctx.scale(ratio, ratio);
                 }
-
-                path.pointRadius([35]);
-                makeSunGradient(sunGeo);
-                ctx.beginPath();
-                path(sunGeo);
-                ctx.fill();
             }
 
 

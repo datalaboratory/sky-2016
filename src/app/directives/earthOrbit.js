@@ -22,8 +22,7 @@ zodiac.directive('earthOrbit', function () {
                 .attr('cx', width / 2)
                 .attr('cy', height / 2);
             svg.selectAll('.earth-orbit__back-sun, .earth-orbit__forward-sun')
-                .attr('cx', 2 * width / 5)
-                .attr('cy', height / 2);
+                .attr('y', height / 2 - 75);
 
             var backSun = svg.select('.earth-orbit__back-sun');
             var forwardSun = svg.select('.earth-orbit__forward-sun');
