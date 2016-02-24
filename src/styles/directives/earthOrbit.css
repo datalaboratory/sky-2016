@@ -3,20 +3,24 @@
   top: 0;
   right: 0;
 
-  width: 400px;
+  width: 405px;
   height: 200px;
 }
 
 .earth-orbit__orbit {
   fill: none;
   stroke: #610E7A;
+  stroke-width: 1;
   stroke-dasharray: 5;
 }
+
 .earth-orbit__axis {
   fill: none;
   stroke: #29E6E6;
+  stroke-width: 1;
   stroke-dasharray: 2;
 }
+
 .earth-orbit__shadow {
-    fill: rgba(0,0,0,0.5);
+  fill: rgba(0,0,0,0.5);
 }
