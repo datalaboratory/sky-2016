@@ -122,7 +122,6 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 .minorExtent([[-180, -75.0001], [180, 75.0001]])
                 .majorStep([45, 360])
                 .majorExtent([[-180, -90], [180, 90]]);
-            //console.log(graticule.extent())
             var eclipticCoordinates = [
                 [90, -23.26],
                 [75, -22.45],
@@ -153,12 +152,12 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             ];
             var minEclipticCoordinates = [[-180, 0], [-90, 23.26], [0, 0], [90, -23.26], [180, 0]];
 
-            var atmosphereTransparency = 1;
-            var constellationOpacity = 1;
-            var currentConstellationOpacity = 0;
-            var graticuleOpacity = 1;
-            var eclipticOpacity = 0;
-            var starNamesOpacity = 0;
+            var atmosphereTransparency = $scope.state.atmosphere * 1;
+            var constellationOpacity = $scope.state.constellations * 1;
+            var currentConstellationOpacity = $scope.state.currentConstellation * 1;
+            var graticuleOpacity = $scope.state.graticule * 1;
+            var eclipticOpacity = $scope.state.ecliptic * 1;
+            var starNamesOpacity = $scope.state.starNames * 1;
 
             var lineOpacityScale = d3.scale.linear()
                 .domain([5, -5])
@@ -270,6 +269,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 sunCoordinates = sunScale(moment($scope.state.currentDate).dayOfYear() + $scope.state.currentDate.getHours() / 24);
                 sunPx = projection(sunCoordinates);
                 horizontSunCoord = fixedProjection.invert(sunPx);
+                $scope.state.sunRiseDegrees = horizontSunCoord[1];
             }
 
             function drawSunPath() {
@@ -292,10 +292,10 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                             ctx.strokeStyle = colors.ecliptic;
                         }
                         projection.rotate([currentLon, getCurrentLat(city), getReverse(city)]);
-                        ctx.setLineDash([5]);
+                        //ctx.setLineDash([5]);
                         ctx.lineWidth = 0.4;
                         drawSunPath();
-                        ctx.setLineDash([]);
+                        //ctx.setLineDash([]);
 
                         var sunCenter = projection(sunCoordinates);
                         ctx.lineWidth = 0.8;
@@ -322,9 +322,9 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                     })
                 } else {
                     ctx.strokeStyle = "#fff";
-                    ctx.setLineDash([5]);
+                    //ctx.setLineDash([5]);
                     drawSunPath();
-                    ctx.setLineDash([0]);
+                    //ctx.setLineDash([0]);
                 }
                 ctx.setLineDash([]);
                 projection.rotate(center);
@@ -486,12 +486,12 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
             var lonHourScale = d3.scale.linear()
                 .domain([0, 24 * 3600])
-                .range([-90, 270]);
+                .range([-180, 180]);
 
             function getSecondsFromStartDay(date) {
-                return date.getHours() * 3600 +
+                return (date.getHours() * 3600 +
                     date.getMinutes() * 60 +
-                    date.getSeconds()
+                    date.getSeconds())
             }
 
             function getCurrentLat(city) {
@@ -509,6 +509,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             }
 
             var currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate));
+            //console.log(currentLon, getSecondsFromStartDay($scope.state.currentDate) / 3600);
             var currentLat = getCurrentLat($scope.state.selectedCity);
             var currentReverse = getReverse($scope.state.selectedCity);
 

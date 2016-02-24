@@ -7,13 +7,14 @@ zodiac.controller 'protoCtrl', ($scope, $rootScope, $http, constellationLoader) 
   $scope.state =
     selectedCity: 'Moscow'
     currentDate: moment().toDate()
-    atmosphere: true
-    constellations: false
+    atmosphere: false
+    constellations: true
     currentConstellation: false
     graticule: true
-    ecliptic: true
+    ecliptic: false
     viewDirection: 'horizon'
-    starNames: false
+    starNames: true
+    sunRiseDegrees: 0
 
   $scope.player =
     play: true
