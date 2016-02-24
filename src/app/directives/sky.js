@@ -90,7 +90,19 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 bufferCtx.scale(ratio, ratio);
                 bgScale
                     .domain([0, $element.height()]);
+                equatorTextPosition = fixedProjection([0, currentLat])
             }
+            $scope.state.scale = {
+                horizon: 450,
+                up: 700
+            };
+
+            $scope.$watch('state.scale', function(scale) {
+                normalProjectionScale = scale.horizon;
+                upProjectionScale = scale.up;
+                updateWidthHeight();
+                draw();
+            });
 
 
             function getImage(ctx) {
@@ -185,6 +197,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             var sunCoordinates = sunScale($scope.state.currentDate);
             var sunPx = projection(sunCoordinates);
             var horizontSunCoord = fixedProjection.invert(sunPx);
+
 
             function rgbaFromRgb(rgb, opacity) {
                 return 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + opacity + ')'
@@ -353,6 +366,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             function draw() {
                 var center = [currentLon, currentLat, currentReverse];
                 var constellations = $scope.geoConstellations;
+                if (!constellations) return;
                 projection.rotate(center);
                 ctx.clearRect(0, 0, width, height);
 
@@ -381,6 +395,13 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 path({type: "LineString", coordinates: equator});
                 ctx.stroke();
 
+                _.assign(ctx, {
+                    textAlign: "center",
+                    font: "italic 16px OriginalGaramondBTWebItalic",
+                    fillStyle: rgbaFromRgb(d3.rgb("#fff"), graticuleOpacity * 0.4)
+                });
+
+                ctx.fillText('Небесный экватор', equatorTextPosition[0], equatorTextPosition[1] - 10);
                 //горизонт
                 ctx.strokeStyle = "#f00";
                 ctx.beginPath();
@@ -516,6 +537,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             var currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate)) + moment($scope.state.currentDate).dayOfYear()/365 * 360;
             var currentLat = getCurrentLat($scope.state.selectedCity);
             var currentReverse = getReverse($scope.state.selectedCity);
+            var equatorTextPosition = fixedProjection([0, currentLat]);
 
             $scope.$watch('geoConstellations', function (geoConstellations) {
                 if (!geoConstellations) return;
@@ -579,9 +601,11 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         var newReverse = getReverse(city);
                         var l = d3.interpolate(currentLat, newLat);
                         var r = d3.interpolate(currentReverse, newReverse);
+                        console.log(fixedProjection([0, -newLat]));
                         return function (t) {
                             currentLat = l(t);
                             currentReverse = r(t);
+                            equatorTextPosition = newReverse ? fixedProjection([0, -currentLat]) : fixedProjection([0, currentLat]);
                             clearCtx(tailCtx);
                             draw();
                         }
@@ -659,14 +683,19 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             });
             $scope.$watch('state.viewDirection', function (direction) {
                 if (!$scope.geoConstellations) return;
+                var newLat = getCurrentLat($scope.state.selectedCity);
+                if (currentLat > 180) currentLat -= 360;
+                if (newLat > 180) newLat -= 360;
                 if (direction == 'horizon') {
                     var newTranslate = normalProjectionTranslate;
                     var newScale = normalProjectionScale;
                     var newRotate = normalProjectionRotate;
+                    var newEquatorTextCoordinates = currentReverse ? [0, -newLat] : [0, newLat];
                 } else {
                     newTranslate = upProjectionTranslate;
                     newScale = upProjectionScale;
                     newRotate = upProjectionRotate;
+                    newEquatorTextCoordinates = currentReverse ? [0, -newLat + 90] : [0, newLat + 90];
                 }
                 d3.transition('viewDirection')
                     .duration(1250)
@@ -674,9 +703,6 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         var translate = d3.interpolate(projection.translate(), newTranslate);
                         var scale = d3.interpolate(projection.scale(), newScale);
                         var rotate = d3.interpolate(fixedProjection.rotate(), newRotate);
-                        var newLat = getCurrentLat($scope.state.selectedCity);
-                        if (currentLat > 180) currentLat -= 360;
-                        if (newLat > 180) newLat -= 360;
                         var lat = d3.interpolate(currentLat, newLat);
                         return function (t) {
                             var tr = translate(t);
@@ -689,6 +715,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                                 .scale(s)
                                 .rotate(rotate(t));
                             currentLat = lat(t);
+                            equatorTextPosition = fixedProjection(newEquatorTextCoordinates);
                             draw();
                         }
                     });
