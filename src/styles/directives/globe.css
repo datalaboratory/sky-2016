@@ -25,6 +25,8 @@
 }
 
 .globe__city-name {
+  user-select: none;
+
   font-family: 'OriginalGaramondBTWebItalic';
   font-size: 16px;
 

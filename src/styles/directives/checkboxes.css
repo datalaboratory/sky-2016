@@ -58,6 +58,8 @@
 }
 
 .checkboxes__checkbox:hover .checkboxes__label {
+  user-select: none;
+
   color: #0ff;
 }
 
