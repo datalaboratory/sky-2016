@@ -450,7 +450,8 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                             });
 
                             var projectedCenter = projection(geo.properties.center);
-                            ctx.fillText(geo.properties.name, projectedCenter[0], projectedCenter[1])
+                            var offset = 50;
+                            ctx.fillText(geo.properties.name, projectedCenter[0], projectedCenter[1] - offset)
                         }
                     })
                 });
@@ -487,7 +488,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
             var lonHourScale = d3.scale.linear()
                 .domain([0, 24 * 3600])
-                .range([-180, 180]);
+                .range([100, 460]);
 
             function getSecondsFromStartDay(date) {
                 return (date.getHours() * 3600 +
@@ -509,8 +510,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 return (cityList[city].reverse) ? 180 : 0;
             }
 
-            var currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate));
-            //console.log(currentLon, getSecondsFromStartDay($scope.state.currentDate) / 3600);
+            var currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate)) + moment($scope.state.currentDate).dayOfYear()/365 * 360;
             var currentLat = getCurrentLat($scope.state.selectedCity);
             var currentReverse = getReverse($scope.state.selectedCity);
 
@@ -540,7 +540,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                     .on("dragstart", getStart)
                     .on("drag", move);
                 canvas.call(drag);
-                var naturalVelocity = 360 / 86400; //градусов в секунду
+
                 playRaf();
                 var frameDuration = 100;
                 var frames = 0;
@@ -557,7 +557,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 function play() {
                     if (!$scope.player.play) return;
                     $scope.state.currentDate = moment($scope.state.currentDate).add($scope.player.velocity / (1000 / frameDuration), 's').toDate();
-                    currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate));
+                    currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate)) + moment($scope.state.currentDate).dayOfYear()/365 * 360;
                     draw();
                 }
 
@@ -647,7 +647,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
             $scope.$watch('state.currentDate', function () {
                 if ($scope.player.play) return;
-                currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate));
+                currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate)) + moment($scope.state.currentDate).dayOfYear()/365 * 360;
                 draw();
             });
             $scope.$watch('showCitySunPath', function () {
@@ -690,20 +690,6 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         }
                     });
             });
-            var angle = 0;
-            var delta = 0.5;
-
-            function scroll(e) {
-                if (e.originalEvent.wheelDelta > 0 && angle < 90) {
-                    angle += delta
-                } else if (e.originalEvent.wheelDelta < 0 && angle > 0) {
-                    angle -= delta;
-                }
-                currentLat = getCurrentLat($scope.state.selectedCity) - angle;
-                draw()
-            }
-
-            //$document.on('mousewheel', _.throttle(scroll, 30))
         }
     }
 });
