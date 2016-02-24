@@ -152,7 +152,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             ];
             var minEclipticCoordinates = [[-180, 0], [-90, 23.26], [0, 0], [90, -23.26], [180, 0]];
 
-            var atmosphereTransparency = $scope.state.atmosphere * 1;
+            var atmosphereTransparency = (!$scope.state.atmosphere) * 1;
             var constellationOpacity = $scope.state.constellations * 1;
             var currentConstellationOpacity = $scope.state.currentConstellation * 1;
             var graticuleOpacity = $scope.state.graticule * 1;
