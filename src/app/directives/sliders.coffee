@@ -11,21 +11,21 @@ zodiac.directive 'sliders', ($document) ->
     startOfYear = currentDate.clone().startOf 'year'
     nOfMinutesInDay = 1440
     nOfDaysInYear = if currentDate.isLeapYear() then 366 else 365
-    nOfMinutesInYear = nOfDaysInYear * nOfMinutesInDay
+    nOfHoursInYear = nOfDaysInYear * 24
     hourSliderStep = hourSliderWidth / nOfMinutesInDay
-    monthSliderStep = monthSliderWidth / nOfMinutesInYear
+    monthSliderStep = monthSliderWidth / nOfHoursInYear
 
     $scope.hourSliderOffset = parseInt $element.find('.sliders__hour-slider').css('padding-left')
     $scope.hourSliderPadding = parseInt $hourHandle.css('left')
     $scope.monthSliderOffset = parseInt $element.find('.sliders__month-slider').css('padding-left')
 
     $scope.currentHourX = currentDate.minute() * hourSliderStep
-    $scope.currentMonthX = currentDate.diff(startOfYear, 'minutes') * monthSliderStep
+    $scope.currentMonthX = currentDate.diff(startOfYear, 'hours') * monthSliderStep
 
     $scope.getHourX = (i) -> i * 60 * hourSliderStep
     $scope.getHourCaption = (i) -> ('0' + i).slice(-2) + unless i then ':00' else ''
 
-    $scope.getMonthX = (i) -> startOfYear.clone().month(i).diff(startOfYear, 'minutes') * monthSliderStep
+    $scope.getMonthX = (i) -> startOfYear.clone().month(i).diff(startOfYear, 'hours') * monthSliderStep
     $scope.getMonthCaption = (i) -> $scope.monthNames[i % 12]['short']
 
     $hourHandle.on 'mousedown', (event) ->
@@ -56,11 +56,11 @@ zodiac.directive 'sliders', ($document) ->
       $('body').css cursor: 'pointer'
 
       mousemove = (event) ->
-        minutesFromStart = Math.ceil (event.clientX - $scope.monthSliderOffset) / monthSliderStep
-        minutesFromStart = 0 if minutesFromStart < 0
-        minutesFromStart = nOfMinutesInYear if minutesFromStart > nOfMinutesInYear
+        hoursFromStart = Math.ceil (event.clientX - $scope.monthSliderOffset) / monthSliderStep
+        hoursFromStart = 0 if hoursFromStart < 0
+        hoursFromStart = nOfHoursInYear if hoursFromStart > nOfHoursInYear
 
-        $scope.state.currentDate = startOfYear.clone().minute(minutesFromStart).toDate()
+        $scope.state.currentDate = startOfYear.clone().hour(hoursFromStart).toDate()
 
         $scope.$apply()
         return
@@ -81,7 +81,7 @@ zodiac.directive 'sliders', ($document) ->
         $scope.state.currentDate = startOfYear.toDate()
 
       $scope.currentHourX = moment(newVal).diff(moment($scope.state.currentDate).clone().startOf('day'), 'minutes') * hourSliderStep
-      $scope.currentMonthX = moment(newVal).diff(startOfYear, 'minutes') * monthSliderStep
+      $scope.currentMonthX = moment(newVal).diff(startOfYear, 'hours') * monthSliderStep
       return
 
     return
