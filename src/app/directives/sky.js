@@ -316,7 +316,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         var sunCenter = projection(sunCoordinates);
                         _.assign(ctx, {
                             textAlign: "left",
-                            font: "italic 16px Garamond"
+                            font: "italic 16px OriginalGaramondBTWebItalic"
                         });
                         ctx.fillText(cityList[city].name, sunCenter[0] + r + 5, sunCenter[1])
                     })
@@ -444,7 +444,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                             color = colors.zodiacText;
                             _.assign(ctx, {
                                 textAlign: "center",
-                                font: "italic 16px Garamond",
+                                font: "italic 16px OriginalGaramondBTWebItalic",
                                 fillStyle: rgbaFromRgb(color, opacity * 0.4)
                             });
 
@@ -458,7 +458,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                     var opacity = lineOpacityScale(horizontSunCoord[1]) * starNamesOpacity;
                     _.assign(ctx, {
                         textAlign: "left",
-                        font: "italic 16px Garamond",
+                        font: "italic 16px OriginalGaramondBTWebItalic",
                         textBaseline: 'middle',
                         fillStyle: rgbaFromRgb(d3.rgb("#fff"), opacity * 0.4)
                     });
