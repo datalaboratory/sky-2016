@@ -15,6 +15,7 @@ zodiac.controller 'protoCtrl', ($scope, $rootScope, $http, constellationLoader) 
     viewDirection: 'horizon'
     starNames: true
     sunRiseDegrees: 0
+    sunTrajectory: false
 
   $scope.player =
     play: true

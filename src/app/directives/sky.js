@@ -158,6 +158,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             var graticuleOpacity = $scope.state.graticule * 1;
             var eclipticOpacity = $scope.state.ecliptic * 1;
             var starNamesOpacity = $scope.state.starNames * 1;
+            var sunTrajectoryOpacity = $scope.state.sunTrajectory * 1;
 
             var lineOpacityScale = d3.scale.linear()
                 .domain([5, -5])
@@ -321,7 +322,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         ctx.fillText(cityList[city].name, sunCenter[0] + r + 5, sunCenter[1])
                     })
                 } else {
-                    ctx.strokeStyle = "#fff";
+                    ctx.strokeStyle = rgbaFromRgb(d3.rgb("#fff"), sunTrajectoryOpacity);
                     //ctx.setLineDash([5]);
                     drawSunPath();
                     //ctx.setLineDash([0]);
@@ -629,6 +630,11 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 return starNamesOpacity
             }, function(interpolatedValue) {
                 starNamesOpacity = interpolatedValue
+            }, 1, 0);
+            createAnimationWatch('sunTrajectory', function() {
+                return sunTrajectoryOpacity
+            }, function(interpolatedValue) {
+                sunTrajectoryOpacity = interpolatedValue
             }, 1, 0);
             createAnimationWatch('atmosphere', function() {
                 return atmosphereTransparency
