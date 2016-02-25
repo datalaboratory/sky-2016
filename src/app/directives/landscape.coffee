@@ -4,7 +4,7 @@ zodiac.directive 'landscape', ->
   templateUrl: 'templates/directives/landscape.html'
   link: ($scope, $element, $attrs) ->
     thresholdAngles = [-5, 10]
-    opacityLimits = [1, .2]
+    opacityLimits = [1, .4]
     opacityScale = d3.scale.linear()
     .domain thresholdAngles
     .range opacityLimits
