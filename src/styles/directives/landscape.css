@@ -1,0 +1,21 @@
+.landscape__images-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+}
+
+.landscape__images-container.hidden {
+  transform: translateY(100%);
+}
+
+.landscape__image {
+  width: 100%;
+}
+
+.landscape__image.top {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}

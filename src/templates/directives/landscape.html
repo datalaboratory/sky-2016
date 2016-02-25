@@ -1,0 +1,14 @@
+<div class="landscape">
+  <div
+    class="landscape__images-container"
+    data-ng-repeat="city in _.keys(cityList) track by $index"
+    data-ng-show="state.selectedCity === city"
+    data-ng-class="{'hidden': true}">
+    <img
+      class="landscape__image"
+      src="../img/landscapes/murmansk-day.png" />
+    <img
+      class="landscape__image top"
+      src="../img/landscapes/murmansk-night.png" />
+  </div>
+</div>

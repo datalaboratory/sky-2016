@@ -1,10 +1,8 @@
-zodiac.directive 'globe', (cityList) ->
+zodiac.directive 'globe', ->
   restrict: 'E'
   replace: true
   templateUrl: 'templates/directives/globe.html'
   link: ($scope, $element, $attrs) ->
-    $scope.cityList = cityList
-
     width = $element.width()
     svg = d3.select $element[0]
 
@@ -58,21 +56,21 @@ zodiac.directive 'globe', (cityList) ->
     .attr 'class', 'globe__equator'
 
     cityGroup = g.selectAll 'g'
-    .data _.keys(cityList)
+    .data _.keys($scope.cityList)
     .enter()
     .append 'g'
     .attr 'class', 'globe__city'
 
     cityGroup.append 'circle'
-    .attr 'cx', (d) -> globeProjection(cityList[d].coordinates)[0]
-    .attr 'cy', (d) -> globeProjection(cityList[d].coordinates)[1]
+    .attr 'cx', (d) -> globeProjection($scope.cityList[d].coordinates)[0]
+    .attr 'cy', (d) -> globeProjection($scope.cityList[d].coordinates)[1]
     .attr 'r', 3
     .attr 'class', 'globe__city-circle'
 
     cityGroup.append 'text'
-    .text (d) -> cityList[d].name
-    .attr 'x', (d) -> globeProjection(cityList[d].coordinates)[0] + 5
-    .attr 'y', (d) -> globeProjection(cityList[d].coordinates)[1]
+    .text (d) -> $scope.cityList[d].name
+    .attr 'x', (d) -> globeProjection($scope.cityList[d].coordinates)[0] + 5
+    .attr 'y', (d) -> globeProjection($scope.cityList[d].coordinates)[1]
     .attr 'class', 'globe__city-name'
 
     checkClass = ->

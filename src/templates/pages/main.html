@@ -1,9 +1,10 @@
 <div class="main-page">
   <sky></sky>
-  <div
-    class="globe-container"
-    data-ng-if="state.globe">
-    <globe></globe>
+  <div class="landscape-container">
+    <landscape></landscape>
+  </div>
+  <div class="globe-container">
+    <globe data-ng-show="state.globe"></globe>
   </div>
   <div
     class="checkboxes-container"

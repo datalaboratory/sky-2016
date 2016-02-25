@@ -1,8 +1,4 @@
-zodiac.directive 'compass', (cityList) ->
+zodiac.directive 'compass', ->
   restrict: 'E'
   replace: true
   templateUrl: 'templates/directives/compass.html'
-  link: ($scope, $element, $attrs) ->
-    $scope.cityList = cityList
-
-    return

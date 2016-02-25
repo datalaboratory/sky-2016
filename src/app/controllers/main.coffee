@@ -1,8 +1,10 @@
-zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) ->
+zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, cityList) ->
   $http.get('../data/starData.json').then (response) ->
     $scope.geoConstellations = constellationLoader.load response.data
     $('.loading-cover').fadeOut()
     return
+
+  $scope.cityList = cityList
 
   $scope.monthNames = [
     {full: 'января', short: 'янв'}
@@ -97,7 +99,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
       currentConstellation: false
       ecliptic: false
       sunTrajectory: true
-      velocity: 7200
+      velocity: 3600
       tails: false
       viewDirection: 'horizon'
 
@@ -223,10 +225,31 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
     }
   ]
 
+  getTimeoutDuration = (minutes) -> (minutes * 60 / $scope.state.velocity) * 1000
+
   $scope.$watch 'scenario.currentPage', ->
     _.forIn $scope.states[$scope.scenario.currentPage], (value, key) ->
       $scope.state[key] = value if $scope.state[key] isnt value
       return
+
+    if $scope.scenario.currentPage is 1
+      amountOfTime = getTimeoutDuration 120
+
+      setTimeout ->
+        $scope.state.velocity = 1
+        return
+      , amountOfTime
+
+    if $scope.scenario.currentPage is 3
+      currentDate = moment $scope.state.currentDate
+      noon = currentDate.clone().startOf('day').add 12, 'h'
+      minutesTillNoon = noon.diff currentDate, 'minutes'
+      amountOfTime = getTimeoutDuration minutesTillNoon
+
+      setTimeout ->
+        $scope.state.velocity = 1
+        return
+      , amountOfTime
 
     if $scope.scenario.currentPage is $scope.scenario.nOfPages
       $('.copyright').css 'visibility', 'visible'

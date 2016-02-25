@@ -4,8 +4,6 @@ zodiac.directive('globeWithCities', function (cityList) {
         templateUrl: 'templates/directives/globeWithCities.html',
         replace: true,
         link: function link($scope, $element) {
-            $scope.cityList = cityList;
-
             var width = $element.width();
             var svg = d3.select($element[0]).select('svg');
 

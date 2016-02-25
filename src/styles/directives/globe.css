@@ -1,10 +1,14 @@
 .globe__circle-of-longitude, .globe__circle-of-latitude {
+  pointer-events: none;
+
   stroke: rgba(0, 255, 255, 0.3);
   stroke-width: 0.5;
   fill: none;
 }
 
 .globe__equator {
+  pointer-events: none;
+
   stroke: #0ff;
   stroke-width: 0.5;
   fill: none;
