@@ -5,22 +5,22 @@ zodiac.directive('player', function ($document) {
         replace: true,
         link: function link($scope, $element) {
             $scope.setVelocity = function (velocity) {
-                if (velocity == $scope.player.velocity) {
-                    $scope.player.play = !$scope.player.play
+                if (velocity == $scope.state.velocity) {
+                    $scope.state.play = !$scope.state.play
                 } else {
-                    $scope.player.play = true;
-                    $scope.player.velocity = velocity;
+                    $scope.state.play = true;
+                    $scope.state.velocity = velocity;
                 }
-                $scope.player.tails = false;
+                $scope.state.tails = false;
             };
             $scope.showStarsTails = function() {
-                if (!$scope.player.tails) {
-                    $scope.player.tails = true;
-                    $scope.player.velocity = 600;
-                    $scope.player.play = true;
+                if (!$scope.state.tails) {
+                    $scope.state.tails = true;
+                    $scope.state.velocity = 600;
+                    $scope.state.play = true;
                 } else {
-                    $scope.player.tails = false;
-                    $scope.player.play = false;
+                    $scope.state.tails = false;
+                    $scope.state.play = false;
 
                 }
             };
@@ -31,8 +31,8 @@ zodiac.directive('player', function ($document) {
 
             $document.on('keydown', function(e) {
                 if (e.keyCode == 32) {
-                    $scope.player.play = !$scope.player.play;
-                    $scope.player.tails = false;
+                    $scope.state.play = !$scope.state.play;
+                    $scope.state.tails = false;
                 }
             })
 

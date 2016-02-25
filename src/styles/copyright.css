@@ -1,0 +1,31 @@
+.copyright {
+  position: absolute;
+  z-index: 1;
+  bottom: 70px;
+  left: 18px;
+
+  visibility: hidden;
+
+  box-sizing: border-box;
+  height: 30px;
+  padding-top: 1px;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 16px;
+}
+
+.copyright a {
+  text-decoration: none;
+
+  color: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.copyright a:not(:hover) {
+  transition: color 0.25s ease-out;
+}
+
+.copyright a:hover {
+  color: #fff;
+}

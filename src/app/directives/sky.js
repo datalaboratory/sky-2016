@@ -432,7 +432,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                             ctx.beginPath();
                             path(geo);
                             ctx.fill();
-                            if ($scope.player.tails) {
+                            if ($scope.state.tails) {
                                 tailCtx.fillStyle = rgbaFromRgb(d3.rgb(geo.properties.color), 0.3);
                                 tailPath.pointRadius([geo.properties.mag / 3]);
                                 tailCtx.beginPath();
@@ -476,7 +476,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                     var projectedCenter = projection(brightStarsList[star].coordinates);
                     ctx.fillText(brightStarsList[star].name, projectedCenter[0] + 3, projectedCenter[1]);
                 });
-                if ($scope.player.tails) {
+                if ($scope.state.tails) {
                     ctx.scale(1 / ratio, 1 / ratio);
                     var starsLayer = getImage(ctx);
                     ctx.clearRect(0, 0, scaledWidth, scaledHeight);
@@ -558,8 +558,8 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 }
 
                 function play() {
-                    if (!$scope.player.play) return;
-                    $scope.state.currentDate = moment($scope.state.currentDate).add($scope.player.velocity / (1000 / frameDuration), 's').toDate();
+                    if (!$scope.state.play) return;
+                    $scope.state.currentDate = moment($scope.state.currentDate).add($scope.state.velocity / (1000 / frameDuration), 's').toDate();
                     currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate)) + moment($scope.state.currentDate).dayOfYear()/365 * 360;
                     draw();
                 }
@@ -587,7 +587,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         }
                     });
             }, true);
-            $scope.$watch('player.tails', function () {
+            $scope.$watch('state.tails', function () {
                 if (!$scope.geoConstellations) return;
                 clearCtx(tailCtx);
                 draw();
@@ -649,7 +649,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
 
             $scope.$watch('state.currentDate', function () {
-                if ($scope.player.play) return;
+                if ($scope.state.play) return;
                 currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate)) + moment($scope.state.currentDate).dayOfYear()/365 * 360;
                 draw();
             });

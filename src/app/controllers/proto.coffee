@@ -16,8 +16,6 @@ zodiac.controller 'protoCtrl', ($scope, $rootScope, $http, constellationLoader) 
     starNames: true
     sunRiseDegrees: 0
     sunTrajectory: false
-
-  $scope.player =
     play: true
     velocity: 600
     tails: false
@@ -36,9 +34,5 @@ zodiac.controller 'protoCtrl', ($scope, $rootScope, $http, constellationLoader) 
     {full: 'ноября', short: 'ноя'}
     {full: 'декабря', short: 'дек'}
   ]
-
-  $scope.scenario =
-    nOfPages: 9
-    currentPage: 0
 
   return

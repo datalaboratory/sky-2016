@@ -1,9 +1,13 @@
 <div class="main-page">
   <sky></sky>
-  <div class="globe-container">
+  <div
+    class="globe-container"
+    data-ng-if="state.globe">
     <globe></globe>
   </div>
-  <div class="checkboxes-container">
+  <div
+    class="checkboxes-container"
+    data-ng-if="state.checkboxes">
     <checkboxes></checkboxes>
   </div>
   <div class="header-container">
@@ -12,20 +16,29 @@
   <div class="compass-container">
     <compass></compass>
   </div>
-  <div class="text-blocks-container">
+  <div
+    class="text-blocks-container"
+    data-ng-if="scenario.currentPage < scenario.nOfPages">
     <text-blocks></text-blocks>
   </div>
-  <div class="page-indicator-container">
+  <div
+    class="page-indicator-container"
+    data-ng-if="scenario.currentPage < scenario.nOfPages">
     <page-indicator></page-indicator>
   </div>
-  <earth-orbit></earth-orbit>
-  <div class="datalaboartory-sign-container garamond-italic">
-    Визуализация&nbsp;<a href="http://www.datalaboratory.ru/" target="_blank">Лаборатории&nbsp;данных</a>
+  <div
+    class="earth-orbit-container"
+    data-ng-if="state.earthOrbit">
+    <earth-orbit data-ng-if="state.earthOrbit"></earth-orbit>
   </div>
-  <div class="velocity-selector-container">
+  <div
+    class="velocity-selector-container"
+    data-ng-if="state.velocitySelector">
     <velocity-selector></velocity-selector>
   </div>
-  <div class="sliders-container">
+  <div
+    class="sliders-container"
+    data-ng-if="state.sliders">
     <sliders></sliders>
   </div>
 </div>

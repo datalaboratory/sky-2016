@@ -3,6 +3,8 @@
   z-index: 1;
   right: 18px;
   bottom: 78px;
+
+  visibility: hidden;
 }
 
 .likely-light .likely__widget {
