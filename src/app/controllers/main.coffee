@@ -30,11 +30,8 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
     {
       currentDate: moment().startOf('day').toDate()
       graticule: false
-      viewDirection: 'horizon'
       sunRiseDegrees: 0
       play: true
-      tails: false
-      globe: false
 
       selectedCity: 'Moscow'
       atmosphere: true
@@ -44,6 +41,8 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
       ecliptic: false
       sunTrajectory: false
       velocity: 1
+      tails: false
+      viewDirection: 'horizon'
 
       globe: false
       checkboxes: false
@@ -61,6 +60,8 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
       ecliptic: false
       sunTrajectory: false
       velocity: 600
+      tails: true
+      viewDirection: 'horizon'
 
       globe: false
       checkboxes: false
@@ -77,7 +78,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
       currentConstellation: false
       ecliptic: false
       sunTrajectory: false
-      velocity: 600
+      velocity: 1
+      tails: false
+      viewDirection: 'up'
 
       globe: false
       checkboxes: false
@@ -94,7 +97,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
       currentConstellation: false
       ecliptic: false
       sunTrajectory: true
-      velocity: 3600
+      velocity: 7200
+      tails: false
+      viewDirection: 'horizon'
 
       globe: false
       checkboxes: false
@@ -111,7 +116,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
       currentConstellation: true
       ecliptic: false
       sunTrajectory: true
-      velocity: 3600
+      velocity: 1
+      tails: false
+      viewDirection: 'horizon'
 
       globe: false
       checkboxes: false
@@ -126,9 +133,11 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
       starNames: true
       constellations: true
       currentConstellation: true
-      ecliptic: true
+      ecliptic: false
       sunTrajectory: true
-      velocity: 3600
+      velocity: 1
+      tails: false
+      viewDirection: 'horizon'
 
       globe: false
       checkboxes: false
@@ -143,9 +152,11 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
       starNames: true
       constellations: true
       currentConstellation: true
-      ecliptic: true
+      ecliptic: false
       sunTrajectory: true
-      velocity: 3600
+      velocity: 1
+      tails: false
+      viewDirection: 'horizon'
 
       globe: false
       checkboxes: false
@@ -163,6 +174,8 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
       ecliptic: true
       sunTrajectory: true
       velocity: 7200
+      tails: false
+      viewDirection: 'horizon'
 
       globe: false
       checkboxes: false
@@ -180,6 +193,8 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
       ecliptic: true
       sunTrajectory: true
       velocity: 7200
+      tails: false
+      viewDirection: 'horizon'
 
       globe: false
       checkboxes: false
@@ -196,7 +211,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader) -
       currentConstellation: false
       ecliptic: false
       sunTrajectory: true
-      velocity: 7200
+      velocity: 1
+      tails: false
+      viewDirection: 'horizon'
 
       globe: true
       checkboxes: true
