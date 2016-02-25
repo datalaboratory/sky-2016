@@ -4,6 +4,8 @@
   left: 0;
 
   width: 100%;
+
+  transition: transform 1s linear;
 }
 
 .landscape__images-container.hidden {

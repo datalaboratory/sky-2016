@@ -3,12 +3,11 @@
     class="landscape__images-container"
     data-ng-repeat="city in _.keys(cityList) track by $index"
     data-ng-show="state.selectedCity === city"
-    data-ng-class="{'hidden': true}">
-    <img
-      class="landscape__image"
-      src="../img/landscapes/murmansk-day.png" />
+    data-ng-class="{'hidden': state.viewDirection === 'up'}">
+    <img class="landscape__image" src="../img/landscapes/murmansk-day.png" />
     <img
       class="landscape__image top"
-      src="../img/landscapes/murmansk-night.png" />
+      src="../img/landscapes/murmansk-night.png"
+      data-ng-style="{'opacity': getNightOpacity()}" />
   </div>
 </div>
