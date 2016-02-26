@@ -63,3 +63,18 @@
 
   width: 100%;
 }
+
+.main-page .murmansk-photo-copyright {
+  position: absolute;
+  z-index: 1;
+  right: 250px;
+  bottom: 82px;
+
+  font-size: 12px;
+}
+
+.main-page .murmansk-photo-copyright a {
+  text-decoration: none;
+
+  color: rgba(255, 255, 255, 0.5);
+}
