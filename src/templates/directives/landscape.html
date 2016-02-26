@@ -1,13 +1,35 @@
 <div class="landscape">
-  <div
-    class="landscape__images-container"
-    data-ng-repeat="city in _.keys(cityList) track by $index"
-    data-ng-show="state.selectedCity === city"
-    data-ng-class="{'hidden': state.viewDirection === 'up'}">
-    <img class="landscape__image" src="../img/landscapes/murmansk-day.png" />
+  <div data-ng-show="state.selectedCity === 'Murmansk'">
     <img
-      class="landscape__image top"
-      src="../img/landscapes/murmansk-night.png"
+      class="landscape__day"
+      src="img/landscapes/murmansk-day.png"
+      data-ng-class="{'hidden': state.viewDirection === 'up'}" />
+    <img
+      class="landscape__night"
+      src="img/landscapes/murmansk-night.png"
+      data-ng-class="{'hidden': state.viewDirection === 'up'}"
+      data-ng-style="{'opacity': getNightOpacity()}" />
+  </div>
+  <div data-ng-show="state.selectedCity === 'Moscow'">
+    <img
+      class="landscape__day"
+      src="img/landscapes/moscow-day.png"
+      data-ng-class="{'hidden': state.viewDirection === 'up'}" />
+    <img
+      class="landscape__night"
+      src="img/landscapes/moscow-night.png"
+      data-ng-class="{'hidden': state.viewDirection === 'up'}"
+      data-ng-style="{'opacity': getNightOpacity()}" />
+  </div>
+  <div data-ng-show="state.selectedCity !== 'Murmansk' && state.selectedCity !== 'Moscow'">
+    <img
+      class="landscape__day"
+      src="img/landscapes/anapa-day.png"
+      data-ng-class="{'hidden': state.viewDirection === 'up'}" />
+    <img
+      class="landscape__night"
+      src="img/landscapes/anapa-night.png"
+      data-ng-class="{'hidden': state.viewDirection === 'up'}"
       data-ng-style="{'opacity': getNightOpacity()}" />
   </div>
 </div>
