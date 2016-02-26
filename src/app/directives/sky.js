@@ -5,9 +5,9 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
         replace: true,
         link: function link($scope, $element) {
 
-            var landscapeHeight = 80;
+            var landscapeHeight = 60;
             var width = $element.width(),
-                height = window.innerHeight - landscapeHeight;
+                height = $element.height() - landscapeHeight;
 
             var sunImgWidth = 150;
             var sunImg = d3.select($element[0]).select('.sky__sun')
@@ -20,7 +20,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
             var bufferCanvas = document.createElement('canvas');
 
-            var normalProjectionScale = 450;
+            var normalProjectionScale = 700;
             var normalProjectionTranslate = [width / 2, height];
             var normalProjectionRotate = [0, 0];
 
@@ -257,10 +257,11 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             function makeEclipticGradient(startTailCoordinates) {
                 var endTailPx = projection(startYearSunPosition);
                 var startTailPx = projection(startTailCoordinates);
+                var color = d3.rgb('#fff');
                 var linearGradient = ctx.createLinearGradient(startTailPx[0], startTailPx[1], endTailPx[0], endTailPx[1]);
-                linearGradient.addColorStop(0.0, rgbaFromRgb(colors.ecliptic, eclipticOpacity));
-                linearGradient.addColorStop(0.2, rgbaFromRgb(colors.ecliptic, eclipticOpacity));
-                linearGradient.addColorStop(1, rgbaFromRgb(colors.ecliptic, 0));
+                linearGradient.addColorStop(0.0, rgbaFromRgb(color, eclipticOpacity));
+                linearGradient.addColorStop(0.2, rgbaFromRgb(color, eclipticOpacity));
+                linearGradient.addColorStop(1, rgbaFromRgb(color, 0));
                 ctx.strokeStyle = linearGradient;
             }
 
@@ -418,7 +419,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 ctx.stroke();
 
                 //эклиптика
-                ctx.strokeStyle = rgbaFromRgb(colors.ecliptic, eclipticOpacity);
+                ctx.strokeStyle = rgbaFromRgb(d3.rgb('#fff'), eclipticOpacity);
                 ctx.lineWidth = 0.5;
                 var eclipticPart = eclipticCoordinates.filter(function (coord) {
                     return coord[0] > sunCoordinates[0] && coord[0] < startTailSunPosition[0]
@@ -677,7 +678,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 var newLat = getCurrentLat($scope.state.selectedCity);
                 if (currentLat > 180) currentLat -= 360;
                 if (newLat > 180) newLat -= 360;
-                var newHeight = ($scope.state.viewDirection == 'horizon') ? (window.innerHeight - landscapeHeight) : window.innerHeight;
+                var newHeight = ($scope.state.viewDirection == 'horizon') ? ($element.height() - landscapeHeight) : window.innerHeight;
                 normalProjectionTranslate = [width / 2, newHeight];
                 if (direction == 'horizon') {
                     var newTranslate = normalProjectionTranslate;
