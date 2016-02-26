@@ -49,7 +49,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: false
       ecliptic: false
       sunTrajectory: false
-      velocity: 10
+      velocity: 1
       viewDirection: 'horizon'
 
       globe: false
