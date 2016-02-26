@@ -19,6 +19,20 @@ zodiac.factory('constellationLoader', function () {
                     'Taurus': 'Телец',
                     'Virgo': 'Дева'
                 };
+                var zodiacNamesDeclension = {
+                    'Aquarius': 'Водолее',
+                    'Aries': 'Овне',
+                    'Cancer': 'Раке',
+                    'Capricornus': 'Козероге',
+                    'Gemini': 'Близнецах',
+                    'Leo': 'Лльве',
+                    'Libra': 'Весах',
+                    'Pisces': 'Рыбах',
+                    'Sagittarius': 'Стрелеце',
+                    'Scorpius': 'Скорпионе',
+                    'Taurus': 'Тельце',
+                    'Virgo': 'Деве'
+                };
                 constellations = constellations.map(function (constellation) {
                     constellation.stars = constellation.stars.filter(function (star) {
                         if (star.mag < maxMag) {
@@ -54,7 +68,8 @@ zodiac.factory('constellationLoader', function () {
                             type: "MultiLineString",
                             coordinates: lines,
                             properties: {
-                                name: zodiacNames[constellation.name]
+                                name: zodiacNames[constellation.name],
+                                nameDeclension: zodiacNamesDeclension[constellation.name]
                             }
                         };
 

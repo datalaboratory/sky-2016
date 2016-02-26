@@ -102,7 +102,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 upProjectionScale = scale.up;
                 updateWidthHeight();
                 draw();
-            });
+            }, true);
 
 
             function getImage(ctx) {
@@ -255,9 +255,9 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 var endTailPx = projection(startYearSunPosition);
                 var startTailPx = projection(startTailCoordinates);
                 var linearGradient = ctx.createLinearGradient(startTailPx[0], startTailPx[1], endTailPx[0], endTailPx[1]);
-                linearGradient.addColorStop(0.0, rgbaFromRgb(d3.rgb("#fff"), eclipticOpacity));
-                linearGradient.addColorStop(0.2, rgbaFromRgb(d3.rgb("#fff"), eclipticOpacity));
-                linearGradient.addColorStop(1, rgbaFromRgb(d3.rgb("#fff"), 0));
+                linearGradient.addColorStop(0.0, rgbaFromRgb(colors.ecliptic, eclipticOpacity));
+                linearGradient.addColorStop(0.2, rgbaFromRgb(colors.ecliptic, eclipticOpacity));
+                linearGradient.addColorStop(1, rgbaFromRgb(colors.ecliptic, 0));
                 ctx.strokeStyle = linearGradient;
             }
 
@@ -409,7 +409,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 ctx.stroke();
 
                 //эклиптика
-                ctx.strokeStyle = rgbaFromRgb(d3.rgb("#fff"), eclipticOpacity);
+                ctx.strokeStyle = rgbaFromRgb(colors.ecliptic, eclipticOpacity);
                 ctx.lineWidth = 0.5;
                 var eclipticPart = eclipticCoordinates.filter(function (coord) {
                     return coord[0] > sunCoordinates[0] && coord[0] < startTailSunPosition[0]
@@ -463,6 +463,8 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         } else if (geo.type == 'MultiLineString') {
                             if (i == minConstellationNumber) {
                                 var opacity = lineOpacityScale(horizontSunCoord[1]) * Math.max(currentConstellationOpacity, constellationOpacity)
+                                $scope.zodiacName.declension = geo.properties.nameDeclension;
+                                $scope.zodiacName.name = geo.properties.name
                             } else {
                                 opacity = lineOpacityScale(horizontSunCoord[1]) * constellationOpacity;
                             }
@@ -544,28 +546,6 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 console.log('draw!');
                 draw();
 
-                var raStart, decStart;
-
-                function getStart() {
-                    raStart = projection.invert(d3.mouse(this))[0];
-                    decStart = fixedProjection.invert(d3.mouse(this))[1];
-                }
-
-                function move() {
-                    var raFinish = projection.invert(d3.mouse(this))[0];
-                    var raRotate = raFinish - raStart;
-
-                    var rotate = projection.rotate();
-                    currentLon = rotate[0] + raRotate;
-
-                    draw();
-                }
-
-                var drag = d3.behavior.drag()
-                    .on("dragstart", getStart)
-                    .on("drag", move);
-                canvas.call(drag);
-
                 playRaf();
                 var frameDuration = 100;
                 var frames = 0;
@@ -581,9 +561,11 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
                 function play() {
                     if (!$scope.state.play) return;
+                    var start = performance.now();
                     $scope.state.currentDate = moment($scope.state.currentDate).add($scope.state.velocity / (1000 / frameDuration), 's').toDate();
                     currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate)) + moment($scope.state.currentDate).dayOfYear()/365 * 360;
                     draw();
+                    frameDuration = performance.now() - start;
                 }
 
                 setInterval(function () {
@@ -720,6 +702,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         }
                     });
             });
+
         }
     }
 });

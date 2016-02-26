@@ -1,4 +1,4 @@
-zodiac.directive('earthOrbit', function () {
+zodiac.directive('earthOrbit', function (cityList) {
     return {
         restrict: 'E',
         templateUrl: 'templates/directives/earthOrbit.html',
@@ -37,8 +37,25 @@ zodiac.directive('earthOrbit', function () {
             var earth = svg.select('.earth-orbit__earth');
             var earthAxis = svg.select('.earth-orbit__axis');
             var earthShadow = svg.select('.earth-orbit__shadow');
+            var earthGraticule = svg.select('.earth-orbit__graticule');
+            var currentPoint = svg.select('.earth-orbit__city');
 
-
+            var projection = d3.geo.orthographic()
+                .translate([0, 0])
+                .rotate([0, 0,-23.26])
+                .scale(20.5)
+                .clipAngle(90);
+            var fixedProjection = d3.geo.orthographic()
+                .translate([0, 0])
+                .rotate([0, 0,-23.26])
+                .scale(20.5)
+                .clipAngle(90);
+            var graticule = d3.geo.graticule();
+            var path = d3.geo.path()
+                .projection(projection);
+            earthGraticule
+                //.attr('d', path(graticule()))
+                .attr('class', 'globe-graticule');
             earth
                 .attr('width', earthWidth)
                 .attr('height', earthWidth)
@@ -65,17 +82,40 @@ zodiac.directive('earthOrbit', function () {
             function updateEarth() {
                 var degrees = degreesScale($scope.state.currentDate);
                 if (degrees < 0) degrees += 2* Math.PI;
+
                 var opacity = (degrees < Math.PI);
                 backSun.style('opacity', opacity * 1);
                 forwardSun.style('opacity', (!opacity) * 1);
-                var hours = $scope.state.currentDate.getHours() + $scope.state.currentDate.getMinutes() / 60;
+                var hours = $scope.state.currentDate.getHours() +
+                    $scope.state.currentDate.getMinutes() / 60 +
+                    24 * moment($scope.state.currentDate).dayOfYear() / 365;
                 earthGroup
                     .attr('transform', 'translate(' + (width / 2 - rx * Math.cos(degrees)) + ',' +
                     (height / 2 + ry * Math.sin(degrees)) + ')');
+                var currentFrame = Math.round(dayImageScale(hours)) + 20;
+                while (currentFrame > 120) {
+                    currentFrame -= 120;
+                }
                 earth
                     .attr('xlink:href', function() {
-                        return 'img/earth-frames/' + Math.round(dayImageScale(hours)) + '.png'
+                        return 'img/earth-frames/' + currentFrame + '.png'
                     });
+                var angle = currentFrame * 3;
+
+                if (angle < 90 - cityList[$scope.state.selectedCity].coordinates[0] || angle > 180 - cityList[$scope.state.selectedCity].coordinates[0]) {
+                    currentPoint.attr('fill', '#fff')
+                } else {
+                    currentPoint.attr('fill', 'none')
+                }
+                projection
+                    .rotate([angle, 0, -23.26]);
+                //earthGraticule
+                  //  .attr('d', path(graticule()));
+                var cityCoordinates = projection(cityList[$scope.state.selectedCity].coordinates);
+                var fixedCoordinates = fixedProjection.invert(cityCoordinates);
+                currentPoint
+                    .attr('cx', cityCoordinates[0])
+                    .attr('cy', cityCoordinates[1]);
                 var rightRadius = shadowWidthLeft(degrees);
                 var leftRadius = shadowWidthRight(degrees);
                 var leftSweep = (degrees < 3 * Math.PI /2) * 1;
@@ -87,8 +127,7 @@ zodiac.directive('earthOrbit', function () {
             }
             $scope.$watch('state.currentDate', function() {
                 updateEarth();
-            })
-
+            });
         }
     }
 });
