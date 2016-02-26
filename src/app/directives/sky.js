@@ -269,6 +269,13 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 .range([0, 90])
                 .clamp(true);
 
+            function generateCssGradient(colors) {
+                if (!colors) return;
+                var step = 100 / (colors.length - 1);
+                return 'linear-gradient(top,' + colors.map(function(color, i) {
+                        return color + ' ' + step * i + '%'
+                    }).join(',') + ')'
+            }
             function drawSkyBackground() {
                 var left = (horizontSunCoord[0] < 0) * 1;
 
@@ -276,15 +283,13 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 var degrees = horizontSunCoord[1] - backgroundDegreesCorrector(atmosphereTransparency);
 
                 $scope.backgroundColors = colors.skyColorScale[left](degrees);
+
                 bgScale.range($scope.backgroundColors);
+                var gradient = generateCssGradient($scope.backgroundColors);
                 d3.select($element[0]).style('background',
-                    '-webkit-gradient(linear, left top, left bottom, from(' +
-                    $scope.backgroundColors[0] + '), to(' +
-                    $scope.backgroundColors[1] + '))');
+                    '-webkit-' + gradient);
                 d3.select($element[0]).style('background',
-                    'gradient(linear, left top, left bottom, from(' +
-                    $scope.backgroundColors[0] + '), to(' +
-                    $scope.backgroundColors[1] + '))');
+                    '-moz-' + gradient);
             }
 
             function updateSunCoordinates() {
