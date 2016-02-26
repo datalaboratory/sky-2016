@@ -31,10 +31,12 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
 
   $scope.state = {}
 
+  startDate = moment().startOf 'day'
+
   $scope.states = [
     # 1
     {
-      currentDate: moment().startOf('day').toDate()
+      currentDate: startDate.clone().toDate()
       graticule: false
       sunRiseDegrees: 0
       play: true
@@ -47,7 +49,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: false
       ecliptic: false
       sunTrajectory: false
-      velocity: 1
+      velocity: 10
       viewDirection: 'horizon'
 
       globe: false
@@ -58,6 +60,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 2
     {
+      currentDate: startDate.clone().add(2, 'm').toDate()
       selectedCity: 'Moscow'
       atmosphere: true
       starNames: false
@@ -76,6 +79,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 3
     {
+      currentDate: startDate.clone().add(3, 'h').toDate()
       selectedCity: 'Moscow'
       atmosphere: true
       starNames: true
@@ -83,7 +87,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: false
       ecliptic: false
       sunTrajectory: false
-      velocity: 1
+      velocity: 600
       viewDirection: 'up'
 
       globe: false
@@ -94,6 +98,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 4
     {
+      currentDate: startDate.clone().add(9, 'h').toDate()
       selectedCity: 'Moscow'
       atmosphere: true
       starNames: true
@@ -112,6 +117,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 5
     {
+      currentDate: startDate.clone().add(12, 'h').toDate()
       selectedCity: 'Moscow'
       atmosphere: false
       starNames: true
@@ -119,7 +125,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: true
       ecliptic: false
       sunTrajectory: true
-      velocity: 1
+      velocity: 600
       viewDirection: 'horizon'
 
       globe: false
@@ -130,6 +136,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 6
     {
+      currentDate: startDate.clone().add(18, 'h').toDate()
       selectedCity: 'Moscow'
       atmosphere: false
       starNames: true
@@ -137,7 +144,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: true
       ecliptic: false
       sunTrajectory: true
-      velocity: 1
+      velocity: 600
       viewDirection: 'horizon'
 
       globe: false
@@ -148,6 +155,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 7
     {
+      currentDate: startDate.clone().add(22, 'h').toDate()
       selectedCity: 'Moscow'
       atmosphere: false
       starNames: true
@@ -155,7 +163,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: true
       ecliptic: false
       sunTrajectory: true
-      velocity: 1
+      velocity: 600
       viewDirection: 'horizon'
 
       globe: false
@@ -166,6 +174,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 8
     {
+      currentDate: startDate.clone().add(26, 'h').toDate()
       selectedCity: 'Moscow'
       atmosphere: false
       starNames: true
@@ -173,7 +182,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: true
       ecliptic: true
       sunTrajectory: true
-      velocity: 7200
+      velocity: 72000
       viewDirection: 'horizon'
 
       globe: false
@@ -184,6 +193,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 9
     {
+      currentDate: startDate.clone().add(1, 'month').toDate()
       selectedCity: 'Moscow'
       atmosphere: false
       starNames: true
@@ -202,6 +212,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 10
     {
+      currentDate: startDate.clone().add(1, 'month').add(1, 'd').toDate()
       selectedCity: 'Murmansk'
       atmosphere: false
       starNames: true
@@ -220,35 +231,23 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
   ]
 
-  getTimeoutDuration = (minutes) -> (minutes * 60 / $scope.state.velocity) * 1000
-
   $scope.$watch 'scenario.currentPage', ->
     _.forIn $scope.states[$scope.scenario.currentPage], (value, key) ->
       $scope.state[key] = value if $scope.state[key] isnt value
       return
 
-    if $scope.scenario.currentPage is 1
-      amountOfTime = getTimeoutDuration 120
-
-      setTimeout ->
-        $scope.state.velocity = 1
-        return
-      , amountOfTime
-
-    if $scope.scenario.currentPage is 3
-      currentDate = moment $scope.state.currentDate
-      noon = currentDate.clone().startOf('day').add 12, 'h'
-      minutesTillNoon = noon.diff currentDate, 'minutes'
-      amountOfTime = getTimeoutDuration minutesTillNoon
-
-      setTimeout ->
-        $scope.state.velocity = 1
-        return
-      , amountOfTime
-
     if $scope.scenario.currentPage is $scope.scenario.nOfPages
       $('.copyright').css 'visibility', 'visible'
       $('.likely').css 'visibility', 'visible'
+    return
+
+  $scope.$watch 'state.currentDate', ->
+    i = 1
+    while i <= $scope.scenario.nOfPages
+      if $scope.state.currentDate > $scope.states[i]['currentDate'] and
+      $scope.scenario.currentPage < i
+        $scope.scenario.currentPage = i
+      i++
     return
 
   return
