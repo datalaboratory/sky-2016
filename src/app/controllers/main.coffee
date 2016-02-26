@@ -243,11 +243,11 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentDate: moment().toDate()
       graticule: false
       selectedCity: 'Moscow'
-      atmosphere: false
+      atmosphere: true
       starNames: false
-      constellations: true
-      currentConstellation: true
-      ecliptic: true
+      constellations: false
+      currentConstellation: false
+      ecliptic: false
       sunTrajectory: true
       velocity: 1
       viewDirection: 'horizon'
