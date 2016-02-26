@@ -271,6 +271,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     return
 
   $scope.$watch 'state.currentDate', ->
+    return if $scope.scenario.currentPage is $scope.scenario.nOfPages
     return if $scope.scenario.currentPage is $scope.scenario.nOfPages - 1
 
     if $scope.state.currentDate > $scope.states[$scope.scenario.currentPage + 1]['currentDate']
