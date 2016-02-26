@@ -44,7 +44,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: true
-      starNames: false
+      starNames: true
       constellations: false
       currentConstellation: false
       ecliptic: false
@@ -64,7 +64,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: true
-      starNames: false
+      starNames: true
       constellations: false
       currentConstellation: false
       ecliptic: false
@@ -84,7 +84,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: true
       selectedCity: 'Moscow'
       atmosphere: true
-      starNames: false
+      starNames: true
       constellations: false
       currentConstellation: false
       ecliptic: false
@@ -104,7 +104,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: true
       selectedCity: 'Moscow'
       atmosphere: true
-      starNames: false
+      starNames: true
       constellations: false
       currentConstellation: false
       ecliptic: false
@@ -124,7 +124,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: true
       selectedCity: 'Moscow'
       atmosphere: true
-      starNames: false
+      starNames: true
       constellations: false
       currentConstellation: false
       ecliptic: false
@@ -144,7 +144,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
-      starNames: false
+      starNames: true
       constellations: false
       currentConstellation: true
       ecliptic: false
@@ -164,7 +164,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
-      starNames: false
+      starNames: true
       constellations: false
       currentConstellation: true
       ecliptic: false
@@ -184,7 +184,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
-      starNames: false
+      starNames: true
       constellations: true
       currentConstellation: true
       ecliptic: true
@@ -204,7 +204,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
-      starNames: false
+      starNames: true
       constellations: true
       currentConstellation: true
       ecliptic: true
@@ -224,7 +224,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
-      starNames: false
+      starNames: true
       constellations: true
       currentConstellation: true
       ecliptic: true
@@ -244,7 +244,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: true
-      starNames: false
+      starNames: true
       constellations: false
       currentConstellation: false
       ecliptic: false
