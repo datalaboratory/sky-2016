@@ -3,11 +3,11 @@
     data-ng-repeat="city in _.keys(cityList) track by $index"
     data-ng-show="state.selectedCity === city">
     <img
-      class="landscape__day"
+      class="landscape__day {{city.toLowerCase()}}"
       once-src="'img/landscapes/' + city.toLowerCase() + '-day.png'"
       data-ng-class="{'hidden': state.viewDirection === 'up'}" />
     <img
-      class="landscape__night"
+      class="landscape__night {{city.toLowerCase()}}"
       once-src="'img/landscapes/' + city.toLowerCase() + '-night.png'"
       data-ng-class="{'hidden': state.viewDirection === 'up'}"
       data-ng-style="{'opacity': getNightOpacity()}" />

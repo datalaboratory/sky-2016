@@ -1,6 +1,5 @@
 .landscape__day, .landscape__night {
   position: absolute;
-  top: 86%;
   left: 0;
 
   width: 100%;
@@ -10,4 +9,28 @@
 
 .landscape__day.hidden, .landscape__night.hidden {
   top: 100%;
+}
+
+.landscape__day.murmansk, .landscape__night.murmansk {
+  top: 85%;
+}
+
+.landscape__day.moscow, .landscape__night.moscow {
+  top: 80%;
+}
+
+.landscape__day.anapa, .landscape__night.anapa {
+  top: 85%;
+}
+
+.landscape__day.mecca, .landscape__night.mecca {
+  top: 85%;
+}
+
+.landscape__day.nairobi, .landscape__night.nairobi {
+  top: 82%;
+}
+
+.landscape__day.johannesburg, .landscape__night.johannesburg {
+  top: 80%;
 }
