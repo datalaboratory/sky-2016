@@ -21,10 +21,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     {full: 'декабря', short: 'дек'}
   ]
 
-  $scope.zodiacName = {
-    name: '',
+  $scope.zodiacName =
+    name: ''
     declension: ''
-  }
 
   $scope.scenario =
     nOfPages: 9

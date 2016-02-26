@@ -20,18 +20,18 @@ zodiac.factory('constellationLoader', function () {
                     'Virgo': 'Дева'
                 };
                 var zodiacNamesDeclension = {
-                    'Aquarius': 'Водолее',
-                    'Aries': 'Овне',
-                    'Cancer': 'Раке',
-                    'Capricornus': 'Козероге',
-                    'Gemini': 'Близнецах',
-                    'Leo': 'Лльве',
-                    'Libra': 'Весах',
-                    'Pisces': 'Рыбах',
-                    'Sagittarius': 'Стрелеце',
-                    'Scorpius': 'Скорпионе',
-                    'Taurus': 'Тельце',
-                    'Virgo': 'Деве'
+                    'Aquarius': 'Водолея',
+                    'Aries': 'Овна',
+                    'Cancer': 'Рака',
+                    'Capricornus': 'Козерога',
+                    'Gemini': 'Близнецов',
+                    'Leo': 'Льва',
+                    'Libra': 'Весов',
+                    'Pisces': 'Рыб',
+                    'Sagittarius': 'Стрелеца',
+                    'Scorpius': 'Скорпиона',
+                    'Taurus': 'Тельца',
+                    'Virgo': 'Девы'
                 };
                 constellations = constellations.map(function (constellation) {
                     constellation.stars = constellation.stars.filter(function (star) {

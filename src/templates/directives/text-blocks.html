@@ -59,8 +59,10 @@
     data-ng-show="scenario.currentPage === 4">
     Солнце движется по небосводу<br />
     вместе со звёздами. Сейчас оно<br />
-    располагается в созвездии Овна,<br />
-    а в январе &mdash; находилось в Козероге.
+    располагается в созвездии {{zodiacName.declension}},<br />
+    а в {{state.currentDate.getMonth() ? 'январе' : 'феврале'}}&nbsp;&mdash;&nbsp;
+    {{state.currentDate.getMonth() ? 'находилось' : 'будет находиться'}}&nbsp;в&nbsp;
+    {{state.currentDate.getMonth() ? 'Козероге' : 'Водолее'}}.
     <div
       class="text-blocks__button next"
       data-ng-click="scenario.currentPage = 5">
