@@ -29,11 +29,10 @@
   <div
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 2">
-    Полярная звезда, в окрестности которой указывает<br />
-    земная ось, практически неподвижна. Чем дальше звезда смещена<br />
-    от полюса к экватору звёздной сферы, тем быстрее<br />
-    она движется (Альтаир, Арктур и Вега). Звёзд, расположенных<br />
-    над южным полушарием, в северном не видно.
+    Окружим Землю воображаемой небесной сферой,<br />
+    на которую спроецируем все видимые звёзды.<br />
+    Звезда пффф, расположенная над земным экватором,<br />
+    окажется на экваторе небесной сферы.
     <div
       class="text-blocks__button next"
       data-ng-click="scenario.currentPage = 3">
@@ -44,6 +43,19 @@
   <div
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 3">
+    Полярная звезда, в окрестности которой указывает<br />
+    земная ось, окажется в полюсе небесной сферы.<br />
+    На небосводе она практически неподвижна.
+    <div
+      class="text-blocks__button next"
+      data-ng-click="scenario.currentPage = 4">
+      <img src="../img/accessories/next.png" />
+    </div>
+  </div>
+  <!--5-->
+  <div
+    class="text-blocks__block"
+    data-ng-show="scenario.currentPage === 4">
     Постепенно вращаясь, Земля поворачивает<br />
     наблюдателя к Солнцу &mdash; наступает утро.<br />
     С восходом солнца, звёзды исчезают с небосвода,<br />
@@ -51,58 +63,41 @@
     Чтобы увидеть звёзды,
     <div
       class="text-blocks__button"
-      data-ng-click="scenario.currentPage = 4">отключите атмосферу</div>.
-  </div>
-  <!--5-->
-  <div
-    class="text-blocks__block"
-    data-ng-show="scenario.currentPage === 4">
-    Солнце движется по небосводу<br />
-    вместе со звёздами. Сейчас оно<br />
-    располагается в созвездии {{zodiacName.declension}},<br />
-    а в {{state.currentDate.getMonth() ? 'январе' : 'феврале'}} &mdash;
-    {{state.currentDate.getMonth() ? 'находилось' : 'будет находиться'}} в
-    {{state.currentDate.getMonth() ? 'Козероге' : 'Водолее'}}.
-    <div
-      class="text-blocks__button next"
-      data-ng-click="scenario.currentPage = 5">
-      <img src="../img/accessories/next.png" />
-    </div>
+      data-ng-click="scenario.currentPage = 5">отключим атмосферу</div>.
   </div>
   <!--6-->
   <div
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 5">
-    Это движение обусловлено годовым вращением<br />
-    Земли вокруг Солнца. Перемещающийся вокруг<br />
-    Солнца наблюдатель видит его на фоне разных<br />
-    звёзд, при этом Солнце и звёзды неподвижны.
+    Солнце располагается в созвездии {{zodiacName.declension}}<br />
+    и движется по небосводу вместе со звёздами.<br />
+    Смещение Солнца относительно звёзд<br />
+    незаметно в масштабе суток. Оно обусловлено<br />
     <div
-      class="text-blocks__button next"
-      data-ng-click="scenario.currentPage = 6">
-      <img src="../img/accessories/next.png" />
-    </div>
+      class="text-blocks__button standalone"
+      data-ng-click="scenario.currentPage = 6">годовым вращением Земли</div>.
   </div>
   <!--7-->
   <div
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 6">
-    Движение Солнца относительно звёзд<br />
-    незаметно в течение суток. Оно медленно<br />
-    перемещается из созвездия в созвездие,<br />
-    описывая за год полный круг по небосводу.<br />
+    Перемещающийся вокруг Солнца наблюдатель,<br />
+    видит его на небосводе на фоне разных созвездий,<br />
+    при этом Солнце и звёзды<br />
+    неподвижны относительно друг друга.
     <div
-      class="text-blocks__button standalone"
-      data-ng-click="scenario.currentPage = 7">Турбо-ускорение времени</div>.
+      class="text-blocks__button next"
+      data-ng-click="scenario.currentPage = 7">
+      <img src="../img/accessories/next.png" />
+    </div>
   </div>
   <!--8-->
   <div
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 7">
-    Траектория движения солнца по звёздной<br />
-    сфере называется <span class="garamond-italic">эклиптикой</span>. Вдоль эклиптики<br />
-    располагаются зодиакальные созвездия,<br />
-    известные нам, как знаки зодиака.
+    В январе Солнце находилось в Козероге,<br />
+    в июле &mdash; окажется в Близнецах,<br />
+    в октябре &mdash; в Деве, в декабре — в Стрельце.
     <div
       class="text-blocks__button next"
       data-ng-click="scenario.currentPage = 8">
@@ -113,12 +108,27 @@
   <div
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 8">
-    В разных широтах на небосводе видны<br />
-    разные звёзды, но хотя бы одно зодиакальное<br />
-    созвездие видно отовсюду, кроме заполярных<br />
-    широт зимой. Убедитесь в этом, взглянув<br />
+    За год Солнце описывает по небесной сфере окружность,<br />
+    называемую <span class="garamond-italic">эклиптикой</span>. Плоскость эклиптики<br />
+    совпадает с плоскостью земной орбиты. Созвездия,<br />
+    расположенные вдоль неё, известны нам, как знаки зодиака.
+    <div
+      class="text-blocks__button next"
+      data-ng-click="scenario.currentPage = 9">
+      <img src="../img/accessories/next.png" />
+    </div>
+  </div>
+  <!--10-->
+  <div
+    class="text-blocks__block"
+    data-ng-show="scenario.currentPage === 9">
+    Небосвод зависит не только от времени года,<br />
+    но и от положения наблюдателя.<br />
+    Изучите заполярное небо Мурманска,<br />
+    звёзды южного полушария над Йоханесбургом<br />
+    и небосводы других широт<br />
     <div
       class="text-blocks__button standalone"
-      data-ng-click="scenario.currentPage = 9">на небосвод над Мурманском</div>.
+      data-ng-click="scenario.currentPage = 10">на интерактивной визуализации</div>.
   </div>
 </div>

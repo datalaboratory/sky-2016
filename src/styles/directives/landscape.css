@@ -1,23 +1,13 @@
-.landscape__images-container {
+.landscape__day, .landscape__night {
   position: absolute;
-  bottom: 0;
+  top: 86%;
   left: 0;
 
   width: 100%;
 
-  transition: transform 1s linear;
+  transition: top 1s linear;
 }
 
-.landscape__images-container.hidden {
-  transform: translateY(100%);
-}
-
-.landscape__image {
-  width: 100%;
-}
-
-.landscape__image.top {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.landscape__day.hidden, .landscape__night.hidden {
+  top: 100%;
 }
