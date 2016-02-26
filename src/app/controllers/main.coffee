@@ -229,7 +229,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: true
       ecliptic: true
       sunTrajectory: false
-      velocity: 1
+      velocity: 600
       viewDirection: 'horizon'
 
       globe: false
@@ -249,7 +249,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: true
       ecliptic: true
       sunTrajectory: false
-      velocity: 600
+      velocity: 1
       viewDirection: 'horizon'
 
       globe: true
@@ -271,8 +271,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     return
 
   $scope.$watch 'state.currentDate', ->
-    return if $scope.scenario.currentPage is $scope.scenario.nOfPages
-    return if $scope.scenario.currentPage is $scope.scenario.nOfPages - 1
+    return if $scope.scenario.currentPage > $scope.scenario.nOfPages - 2
 
     if $scope.state.currentDate > $scope.states[$scope.scenario.currentPage + 1]['currentDate']
       $scope.scenario.currentPage += 1
