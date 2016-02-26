@@ -34,6 +34,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: false
       sunRiseDegrees: 0
       play: true
+      tails: false
 
       selectedCity: 'Moscow'
       atmosphere: true
@@ -43,7 +44,6 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       ecliptic: false
       sunTrajectory: false
       velocity: 1
-      tails: false
       viewDirection: 'horizon'
 
       globe: false
@@ -62,7 +62,6 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       ecliptic: false
       sunTrajectory: false
       velocity: 600
-      tails: true
       viewDirection: 'horizon'
 
       globe: false
@@ -81,7 +80,6 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       ecliptic: false
       sunTrajectory: false
       velocity: 1
-      tails: false
       viewDirection: 'up'
 
       globe: false
@@ -99,8 +97,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: false
       ecliptic: false
       sunTrajectory: true
-      velocity: 3600
-      tails: false
+      velocity: 600
       viewDirection: 'horizon'
 
       globe: false
@@ -119,7 +116,6 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       ecliptic: false
       sunTrajectory: true
       velocity: 1
-      tails: false
       viewDirection: 'horizon'
 
       globe: false
@@ -138,7 +134,6 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       ecliptic: false
       sunTrajectory: true
       velocity: 1
-      tails: false
       viewDirection: 'horizon'
 
       globe: false
@@ -157,7 +152,6 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       ecliptic: false
       sunTrajectory: true
       velocity: 1
-      tails: false
       viewDirection: 'horizon'
 
       globe: false
@@ -176,7 +170,6 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       ecliptic: true
       sunTrajectory: true
       velocity: 7200
-      tails: false
       viewDirection: 'horizon'
 
       globe: false
@@ -195,7 +188,6 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       ecliptic: true
       sunTrajectory: true
       velocity: 7200
-      tails: false
       viewDirection: 'horizon'
 
       globe: false
@@ -214,7 +206,6 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       ecliptic: false
       sunTrajectory: true
       velocity: 1
-      tails: false
       viewDirection: 'horizon'
 
       globe: true
