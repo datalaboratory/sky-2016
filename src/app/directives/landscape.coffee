@@ -10,7 +10,9 @@ zodiac.directive 'landscape', ->
     .range opacityLimits
 
     $scope.getNightOpacity = ->
-      if $scope.state.sunRiseDegrees < thresholdAngles[0]
+      unless $scope.state.atmosphere
+        opacityLimits[0]
+      else if $scope.state.sunRiseDegrees < thresholdAngles[0]
         opacityLimits[0]
       else if $scope.state.sunRiseDegrees > thresholdAngles[1]
         opacityLimits[1]
