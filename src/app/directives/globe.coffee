@@ -80,7 +80,6 @@ zodiac.directive 'globe', ->
     cityGroup.on 'click', (d) ->
       $scope.state.selectedCity = d
       $scope.$apply()
-      checkClass()
       return
 
     cityGroup.on 'mouseover', (d) ->
@@ -93,6 +92,6 @@ zodiac.directive 'globe', ->
       $scope.$apply()
       return
 
-    checkClass()
+    $scope.$watch 'state.selectedCity', -> checkClass()
 
     return
