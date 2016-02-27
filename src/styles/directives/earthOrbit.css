@@ -9,7 +9,7 @@
 
 .earth-orbit__orbit {
   fill: none;
-  stroke: #610E7A;
+  stroke: rgba(255, 0, 255, 0.5);
   stroke-width: 1;
   stroke-dasharray: 5;
 }

@@ -3,7 +3,9 @@ zodiac.controller 'protoCtrl', ($scope, $rootScope, $http, constellationLoader) 
     $scope.geoConstellations = constellationLoader.load response.data
     $('.loading-cover').fadeOut()
     return
-
+  $scope.zodiacName =
+    name: ''
+    declension: ''
   $scope.state =
     selectedCity: 'Moscow'
     currentDate: moment().toDate()

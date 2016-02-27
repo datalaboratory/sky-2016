@@ -14,5 +14,13 @@ zodiac.constant('brightStarsList', {
     Polaris: {
         coordinates: [-15*(2 + 31/60 + 48.7/3600), (89 + 15/60)],
         name: 'Полярная'
+    },
+    Heze: {
+        coordinates: [-15*(13 + 37/60), (-36/60)],
+        name: 'Хезе'
+    },
+    Porrima: {
+        coordinates: [-15*(12 + 41/60 + 39.6/3600), (-1 - 26/60 - 58/3600)],
+        name: 'Поррима'
     }
 });

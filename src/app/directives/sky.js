@@ -10,12 +10,14 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 height = $element.height();
 
             var sunImgWidth = 150;
-            var sunImg = d3.select($element[0]).select('.sky__sun')
+            var element = $element[0];
+            var d3element = d3.select(element);
+            var sunImg = d3element.select('.sky__sun')
                 .attr('width', sunImgWidth)
                 .attr('height', sunImgWidth);
 
 
-            var canvas = d3.select($element[0]).select('canvas');
+            var canvas = d3element.select('canvas');
             var offScreenCanvas = document.createElement('canvas');
 
             var bufferCanvas = document.createElement('canvas');
@@ -179,6 +181,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             var eclipticOpacity = $scope.state.ecliptic * 1;
             var starNamesOpacity = $scope.state.starNames * 1;
             var sunTrajectoryOpacity = $scope.state.sunTrajectory * 1;
+            var sightElevation = 0;
 
             var lineOpacityScale = d3.scale.linear()
                 .domain([5, -5])
@@ -269,7 +272,10 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 .domain([0, 1])
                 .range([0, 90])
                 .clamp(true);
-
+            var backgroundColorAtmosphereCorrector = d3.scale.linear()
+                .domain([0, 1]);
+            var backgroundColorUpDirectionCorrector = d3.scale.linear()
+                .domain([0, 1]);
             function generateCssGradient(colors) {
                 if (!colors) return;
                 var step = 100 / (colors.length - 1);
@@ -281,17 +287,21 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 var left = (horizontSunCoord[0] < 0) * 1;
 
                 left = (currentReverse) ? Math.abs(left - 1) : left;
-                var degrees = horizontSunCoord[1] - backgroundDegreesCorrector(atmosphereTransparency);
+                var degrees = horizontSunCoord[1];
+                var sourceColors =  colors.skyColorScale[left](degrees);
+                backgroundColorUpDirectionCorrector.range([sourceColors, [sourceColors[0], sourceColors[0], sourceColors[0]]]);
 
-                $scope.backgroundColors = colors.skyColorScale[left](degrees);
+                var correctedColors = backgroundColorUpDirectionCorrector(sightElevation);
+                console.log(correctedColors, sightElevation);
+                backgroundColorAtmosphereCorrector.range([correctedColors, ['#000', '#000', '#000']]);
+
+                $scope.backgroundColors = backgroundColorAtmosphereCorrector(atmosphereTransparency);
 
                 bgScale.range($scope.backgroundColors);
                 bgScale.domain(d3.range(0, (height + 0.1), height / ($scope.backgroundColors.length - 1)));
-               var gradient = generateCssGradient($scope.backgroundColors);
-                d3.select($element[0]).style('background',
-                    '-webkit-' + gradient);
-                d3.select($element[0]).style('background',
-                    '-moz-' + gradient);
+                var gradient = generateCssGradient($scope.backgroundColors);
+                d3element.style('background', '-webkit-' + gradient);
+                d3element.style('background', '-moz-' + gradient);
             }
             //console.log($scope.backgroundColors.length, height / $scope.backgroundColors.length);
             function updateSunCoordinates() {
@@ -680,11 +690,13 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                     var newScale = normalProjectionScale;
                     var newRotate = normalProjectionRotate;
                     var newEquatorTextCoordinates = currentReverse ? [0, -newLat] : [0, newLat];
+                    var newSightElevation = 0;
                 } else {
                     newTranslate = upProjectionTranslate;
                     newScale = upProjectionScale;
                     newRotate = upProjectionRotate;
                     newEquatorTextCoordinates = currentReverse ? [0, -newLat + 90] : [0, newLat + 90];
+                    newSightElevation = 1;
                 }
 
                 d3.transition('viewDirection')
@@ -695,7 +707,9 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         var rotate = d3.interpolate(fixedProjection.rotate(), newRotate);
                         var lat = d3.interpolate(currentLat, newLat);
                         var interpolatedHeight = d3.interpolate(height, newHeight);
+                        var elevation = d3.interpolate(sightElevation, newSightElevation);
                         return function (t) {
+                            sightElevation = elevation(t);
                             height = interpolatedHeight(t);
                             updateWidthHeight(height, translate(t), rotate(t), scale(t));
                             currentLat = lat(t);
