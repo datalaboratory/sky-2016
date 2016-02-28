@@ -50,3 +50,22 @@
   width: 6px;
   height: 9px;
 }
+
+.text-blocks__month-name {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.25s ease-out;
+
+  color: #fff;
+  border-bottom: 1px dashed rgba(255,255,255,.7);
+}
+
+.text-blocks__month-name:hover {
+  color: #0ff;
+  border-bottom: 1px dashed rgba(0,255,255,.7);
+}
+
+.text-blocks__month-name.selected {
+  color: #0ff;
+  border-bottom: none;
+}

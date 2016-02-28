@@ -25,13 +25,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     name: ''
     declension: ''
 
-  $scope.scenario =
-    nOfPages: 10
-    currentPage: 0
+  startDate = moment().startOf 'day'
 
   $scope.state = {}
-
-  startDate = moment().startOf 'day'
 
   $scope.states = [
     # 1
@@ -185,10 +181,73 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       velocitySelector: false
       sliders: false
     }
-    # 8
+    # 8.1
     {
       currentDate: startDate.clone().add(11, 'h').toDate()
       limitDate: startDate.clone().add(11.5, 'h').toDate()
+      graticule: false
+      selectedCity: 'Moscow'
+      atmosphere: false
+      starNames: true
+      constellations: true
+      currentConstellation: true
+      ecliptic: true
+      sunTrajectory: false
+      velocity: 300
+      viewDirection: 'horizon'
+
+      globe: false
+      checkboxes: false
+      earthOrbit: true
+      velocitySelector: false
+      sliders: false
+    }
+    # 8.2
+    {
+      currentDate: startDate.clone().month(2).add(11, 'h').toDate()
+      limitDate: startDate.clone().month(2).add(11.5, 'h').toDate()
+      graticule: false
+      selectedCity: 'Moscow'
+      atmosphere: false
+      starNames: true
+      constellations: true
+      currentConstellation: true
+      ecliptic: true
+      sunTrajectory: false
+      velocity: 300
+      viewDirection: 'horizon'
+
+      globe: false
+      checkboxes: false
+      earthOrbit: true
+      velocitySelector: false
+      sliders: false
+    }
+    # 8.3
+    {
+      currentDate: startDate.clone().month(3).add(11, 'h').toDate()
+      limitDate: startDate.clone().month(3).add(11.5, 'h').toDate()
+      graticule: false
+      selectedCity: 'Moscow'
+      atmosphere: false
+      starNames: true
+      constellations: true
+      currentConstellation: true
+      ecliptic: true
+      sunTrajectory: false
+      velocity: 300
+      viewDirection: 'horizon'
+
+      globe: false
+      checkboxes: false
+      earthOrbit: true
+      velocitySelector: false
+      sliders: false
+    }
+    # 8.4
+    {
+      currentDate: startDate.clone().month(1).add(11, 'h').toDate()
+      limitDate: startDate.clone().month(1).add(11.5, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
@@ -270,6 +329,10 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       sliders: true
     }
   ]
+
+  $scope.scenario =
+    nOfPages: $scope.states.length - 1
+    currentPage: 0
 
   $scope.$watch 'scenario.currentPage', ->
     if $scope.state.currentDate < $scope.states[$scope.scenario.currentPage]['currentDate']

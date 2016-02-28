@@ -89,44 +89,55 @@
       <img src="../img/accessories/next.png" />
     </div>
   </div>
-  <!--8-->
+  <!--8.1, 8.2, 8.3 & 8.4-->
   <div
     class="text-blocks__block"
-    data-ng-show="scenario.currentPage === 7">
+    data-ng-show="scenario.currentPage === 7 || scenario.currentPage === 8 || scenario.currentPage === 9 || scenario.currentPage === 10">
     Перемещающийся вокруг Солнца наблюдатель,<br />
-    видит его на небосводе на фоне разных созвездий<br />
-    в марте, апреле и в феврале. При этом Солнце<br />
+    видит его на небосводе на фоне разных созвездий<br />в
+    <span
+      class="text-blocks__month-name"
+      data-ng-click="scenario.currentPage = 8"
+      data-ng-class="{'selected': scenario.currentPage === 8}">марте</span>,
+    <span
+      class="text-blocks__month-name"
+      data-ng-click="scenario.currentPage = 9"
+      data-ng-class="{'selected': scenario.currentPage === 9}">апреле</span> и в
+    <span
+      class="text-blocks__month-name"
+      data-ng-click="scenario.currentPage = 10"
+      data-ng-class="{'selected': scenario.currentPage === 10}">феврале</span>. При этом Солнце<br />
     и звёзды остаются неподвижными.
     <div
       class="text-blocks__button next"
-      data-ng-click="scenario.currentPage = 8">
+      data-ng-click="scenario.currentPage = 11">
       <img src="../img/accessories/next.png" />
     </div>
   </div>
   <!--9-->
   <div
     class="text-blocks__block"
-    data-ng-show="scenario.currentPage === 8">
+    data-ng-show="scenario.currentPage === 11">
     За год Солнце описывает по небесной сфере окружность,<br />
     называемую <span class="garamond-italic">эклиптикой</span>. Плоскость эклиптики<br />
     совпадает с плоскостью земной орбиты. Созвездия,<br />
     расположенные вдоль неё, известны нам, как знаки зодиака.
     <div
       class="text-blocks__button next"
-      data-ng-click="scenario.currentPage = 9">
+      data-ng-click="scenario.currentPage = 12">
       <img src="../img/accessories/next.png" />
     </div>
   </div>
   <!--10-->
   <div
     class="text-blocks__block"
-    data-ng-show="scenario.currentPage === 9">
+    data-ng-show="scenario.currentPage === 12">
     Наблюдайте небосвод над Москвой,<br />
     заполярное небо Мурманска, звёзды южного<br />
     полушария над Йоханесбургом и небосводы<br />
     других широт &mdash;
     <div
       class="text-blocks__button"
-      data-ng-click="scenario.currentPage = 10">на интерактивной визуализации</div>.
+      data-ng-click="scenario.currentPage = 13">на интерактивной визуализации</div>.
   </div>
 </div>
