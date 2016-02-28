@@ -425,10 +425,11 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 });
                 var equatorTextWidth = ctx.measureText('Небесный экватор').width + 4;
                 var textHeight = 16;
-                ctx.fillStyle = rgbaFromRgb(d3.rgb("#fff"), graticuleOpacity * 0.2);
-                ctx.fillRect(equatorTextPosition[0] - equatorTextWidth / 2, equatorTextPosition[1] - textHeight / 2, equatorTextWidth, textHeight);
-                ctx.fillStyle = rgbaFromRgb(d3.rgb("#fff"), graticuleOpacity * 0.4);
 
+                ctx.fillStyle = makeSunBackgroundGradient(16, equatorTextPosition);
+                ctx.fillRect(equatorTextPosition[0] - equatorTextWidth / 2, equatorTextPosition[1] - textHeight / 2, equatorTextWidth, textHeight);
+
+                ctx.fillStyle = rgbaFromRgb(d3.rgb("#fff"), graticuleOpacity * 0.4);
                 ctx.fillText('Небесный экватор', equatorTextPosition[0], equatorTextPosition[1]);
 
                 //эклиптика
