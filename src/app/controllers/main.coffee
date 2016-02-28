@@ -37,7 +37,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       tails: false
 
       currentDate: startDate.clone().toDate()
-      limitDate: startDate.clone().add(1, 'm').toDate()
+      limitDate: startDate.clone().add(30, 's').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: true
@@ -169,7 +169,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 7
     {
       currentDate: startDate.clone().add(9, 'h').toDate()
-      limitDate: startDate.clone().add(11, 'h').toDate()
+      limitDate: startDate.clone().add(10, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
@@ -190,8 +190,8 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 8.1
     {
-      currentDate: startDate.clone().add(11, 'h').toDate()
-      limitDate: startDate.clone().add(11.5, 'h').toDate()
+      currentDate: startDate.clone().month(2).add(10, 'h').toDate()
+      limitDate: startDate.clone().month(2).add(10.5, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
@@ -212,8 +212,8 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 8.2
     {
-      currentDate: startDate.clone().month(2).add(11, 'h').toDate()
-      limitDate: startDate.clone().month(2).add(11.5, 'h').toDate()
+      currentDate: startDate.clone().month(3).add(10, 'h').toDate()
+      limitDate: startDate.clone().month(3).add(10.5, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
@@ -234,30 +234,8 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 8.3
     {
-      currentDate: startDate.clone().month(3).add(11, 'h').toDate()
-      limitDate: startDate.clone().month(3).add(11.5, 'h').toDate()
-      graticule: false
-      selectedCity: 'Moscow'
-      atmosphere: false
-      starNames: false
-      zodiacConstellations: true
-      otherConstellations: false
-      currentConstellation: true
-      ecliptic: true
-      sunTrajectory: false
-      velocity: 300
-      viewDirection: 'horizon'
-
-      globe: false
-      checkboxes: false
-      earthOrbit: true
-      velocitySelector: false
-      sliders: false
-    }
-    # 8.4
-    {
-      currentDate: startDate.clone().month(1).add(11, 'h').toDate()
-      limitDate: startDate.clone().month(1).add(11.5, 'h').toDate()
+      currentDate: startDate.clone().month(1).add(10, 'h').toDate()
+      limitDate: startDate.clone().month(1).add(11, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
@@ -278,7 +256,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 9
     {
-      currentDate: startDate.clone().add(11.5, 'h').toDate()
+      currentDate: startDate.clone().add(11, 'h').toDate()
       limitDate: startDate.clone().add(13, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
@@ -301,7 +279,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 10
     {
       currentDate: startDate.clone().add(13, 'h').toDate()
-      limitDate: startDate.clone().add(18, 'h').toDate()
+      limitDate: startDate.clone().add(15, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
