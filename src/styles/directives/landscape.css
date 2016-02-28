@@ -4,7 +4,11 @@
 
   width: 100%;
 
-  transition: top 1s linear;
+  transition: top 1.25s linear;
+}
+
+.landscape__night {
+  transition: opacity 1.25s linear;
 }
 
 .landscape__day.murmansk, .landscape__night.murmansk {
