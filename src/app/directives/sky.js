@@ -306,6 +306,10 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 d3element.style('background', '-webkit-' + gradient);
                 d3element.style('background', '-moz-' + gradient);
             }
+            var sunOpacityScale = d3.scale.linear()
+                .domain([-5, 15])
+                .range([0, 1])
+                .clamp(true);
             function updateSunCoordinates() {
                 sunCoordinates = sunScale(moment($scope.state.currentDate).dayOfYear() + $scope.state.currentDate.getHours() / 24);
                 sunPx = projection(sunCoordinates);
@@ -315,6 +319,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 });
                 horizontSunCoord = fixedProjection.invert(sunPx);
                 $scope.state.sunRiseDegrees = horizontSunCoord[1];
+                sunImg.style('opacity', (sunOpacityScale(horizontSunCoord[1])));
             }
 
             function drawSunPath() {
