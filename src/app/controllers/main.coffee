@@ -216,11 +216,11 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       checkboxes: false
       earthOrbit: true
       velocitySelector: false
-      sliders: true
+      sliders: false
     }
     # 10
     {
-      currentDate: startDate.clone().add(12, 'h').toDate()
+      currentDate: startDate.clone().add(13, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
@@ -236,7 +236,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       checkboxes: false
       earthOrbit: true
       velocitySelector: false
-      sliders: true
+      sliders: false
     }
     # 11
     {
