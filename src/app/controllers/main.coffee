@@ -196,7 +196,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       checkboxes: false
       earthOrbit: true
       velocitySelector: false
-      sliders: true
+      sliders: false
     }
     # 9
     {
