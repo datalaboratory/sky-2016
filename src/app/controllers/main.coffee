@@ -41,9 +41,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: true
-      starNames: false
+      starNames: true
       zodiacConstellations: false
-      otherConstellations: false
+      otherConstellations: true
       currentConstellation: false
       ecliptic: false
       sunTrajectory: false
@@ -63,9 +63,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: true
-      starNames: false
+      starNames: true
       zodiacConstellations: false
-      otherConstellations: false
+      otherConstellations: true
       currentConstellation: false
       ecliptic: false
       sunTrajectory: false
@@ -326,7 +326,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       limitDate: undefined
       graticule: false
       selectedCity: 'Moscow'
-      atmosphere: true
+      atmosphere: false
       starNames: false
       zodiacConstellations: true
       otherConstellations: false

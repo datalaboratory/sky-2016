@@ -41,10 +41,6 @@ zodiac.constant('brightStarsList', {
         coordinates: [-15*(5 + 16/60 + 41/3600), (45 + 59/60 + 53/3600)],
         name: 'Капелла'
     },
-    Betelgeuse: {
-        coordinates: [-15*(5 + 55/60 + 10/3600), (7 + 24/60 + 25/3600)],
-        name: 'Бетельгейзе'
-    },
     Aldebaran: {
         coordinates: [-15*(4 + 35/60 + 55/3600), (16 + 30/60 + 33/3600)],
         name: 'Альдебаран'

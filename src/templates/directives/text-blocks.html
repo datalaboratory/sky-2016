@@ -29,8 +29,9 @@
     data-ng-show="scenario.currentPage === 2">
     Окружим Землю воображаемой небесной сферой,<br />
     на которую спроецируем все видимые звёзды.<br />
-    Звезды Хезе и Поррима, расположенные над земным экватором,<br />
-    видны вблизи экватора небесной сферы.
+    Звезды Хезе и Поррима, расположенные непосредственно<br />
+    над земным экватором, видны вблизи экватора<br />
+    небесной сферы.
     <div
       class="text-blocks__button next"
       data-ng-click="scenario.currentPage = 3">
@@ -81,8 +82,8 @@
     data-ng-show="scenario.currentPage === 6">
     В январе Солнце находилось в Козероге,<br />
     в марте окажется в Рыбах, в апреле &mdash; в Овне и т.д.<br />
-    Смещение Солнца по созвездиям обусловлено<br />
-    годовым вращением Земли и незаметно в масштабе суток.
+    Ход Солнца по созвездиям обусловлен годовым<br />
+    вращением Земли и незаметен в масштабе суток.
     <div
       class="text-blocks__button next"
       data-ng-click="scenario.currentPage = 7">
@@ -94,19 +95,19 @@
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 7 || scenario.currentPage === 8 || scenario.currentPage === 9 || scenario.currentPage === 10">
     Перемещающийся вокруг Солнца наблюдатель,<br />
-    видит его на небосводе на фоне разных созвездий<br />в
+    видит его на небосводе на фоне разных созвездий<br />
     <span
       class="text-blocks__month-name"
       data-ng-click="scenario.currentPage = 8"
-      data-ng-class="{'selected': scenario.currentPage === 8}">марте</span>,
+      data-ng-class="{'selected': scenario.currentPage === 8}">в марте</span>,
     <span
       class="text-blocks__month-name"
       data-ng-click="scenario.currentPage = 9"
-      data-ng-class="{'selected': scenario.currentPage === 9}">апреле</span> и в
+      data-ng-class="{'selected': scenario.currentPage === 9}">апреле</span> и
     <span
       class="text-blocks__month-name"
       data-ng-click="scenario.currentPage = 10"
-      data-ng-class="{'selected': scenario.currentPage === 10}">феврале</span>. При этом Солнце<br />
+      data-ng-class="{'selected': scenario.currentPage === 10}">в феврале</span>. При этом Солнце<br />
     и звёзды остаются неподвижными.
     <div
       class="text-blocks__button next"

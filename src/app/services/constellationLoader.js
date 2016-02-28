@@ -25,9 +25,7 @@ zodiac.factory('constellationLoader', function () {
                     'Cassiopeia': 'Кассиопея',
                     'Orion': 'Орион',
                     'Ursa Major': 'Большая Медведица',
-                    'Hercules': 'Геркулес',
                     'Corona Borealis': 'Северная Корона',
-                    'Coma Berenices': 'Волосы Вероники',
                     'Pegasus': 'Пегас'
                 };
                 var zodiacNamesDeclension = {
