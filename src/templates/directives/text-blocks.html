@@ -3,9 +3,8 @@
   <div
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 0">
-    Звёзды кажутся неподвижными.<br />
-    Чтобы увидеть их движение<br />
-    по небосводу,
+    Звёзды на небосводе кажутся неподвижными.<br />
+    Чтобы увидеть их движение,
     <div
       class="text-blocks__button"
       data-ng-click="scenario.currentPage = 1">ускорим время</div>.
@@ -14,8 +13,7 @@
   <div
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 1">
-    Наблюдаемое движение &mdash; результат того,<br />
-    что Земля, а вместе с ней и мы, вращается<br />
+    Земля, а вместе с ней и мы, вращается<br />
     вокруг своей оси в неподвижном космическом<br />
     пространстве. Звёзды проплывают мимо,<br />
     как пейзаж за бортом корабля.
@@ -31,8 +29,8 @@
     data-ng-show="scenario.currentPage === 2">
     Окружим Землю воображаемой небесной сферой,<br />
     на которую спроецируем все видимые звёзды.<br />
-    Звезда пффф, расположенная над земным экватором,<br />
-    окажется на экваторе небесной сферы.
+    Звезды Хезе и Поррима, расположенные над земным экватором,<br />
+    видны вблизи экватора небесной сферы.
     <div
       class="text-blocks__button next"
       data-ng-click="scenario.currentPage = 3">
@@ -70,20 +68,21 @@
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 5">
     Солнце располагается в созвездии {{zodiacName.declension}}<br />
-    и движется по небосводу вместе со звёздами.<br />
-    Смещение Солнца относительно звёзд<br />
-    незаметно в масштабе суток. Оно обусловлено<br />
+    и движется по небосводу вместе со звёздами.
     <div
-      class="text-blocks__button standalone"
-      data-ng-click="scenario.currentPage = 6">годовым вращением Земли</div>.
+      class="text-blocks__button next"
+      data-ng-click="scenario.currentPage = 6">
+      <img src="../img/accessories/next.png" />
+    </div>
   </div>
   <!--7-->
   <div
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 6">
-    Перемещающийся вокруг Солнца наблюдатель,<br />
-    видит его на небосводе на фоне разных созвездий,<br />
-    при этом Солнце и звёзды неподвижны<br />относительно друг друга.
+    В январе Солнце находилось в Козероге,<br />
+    в марте окажется в Рыбах, в апреле &mdash; в Овне и т.д.<br />
+    Смещение Солнца по созвездиям обусловлено<br />
+    годовым вращением Земли и незаметно в масштабе суток.
     <div
       class="text-blocks__button next"
       data-ng-click="scenario.currentPage = 7">
@@ -94,9 +93,9 @@
   <div
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 7">
-    В январе Солнце находилось в Козероге,<br />
-    в июле &mdash; окажется в Близнецах, в октябре &mdash; в Деве,<br />
-    в декабре — в Стрельце.
+    Перемещающийся вокруг Солнца наблюдатель, видит его на небосводе на фоне<br />
+    разных созвездий в марте, апреле и в феврале. При этом Солнце и звёзды<br />
+    остаются неподвижными.
     <div
       class="text-blocks__button next"
       data-ng-click="scenario.currentPage = 8">
@@ -121,10 +120,10 @@
   <div
     class="text-blocks__block"
     data-ng-show="scenario.currentPage === 9">
-    Небосвод зависит не только от времени года, но и от<br />
-    положения наблюдателя. Изучите заполярное небо Мурманска,<br />
-    звёзды южного полушария над Йоханесбургом<br />
-    и небосводы других широт
+    Наблюдайте небосвод над Москвой,<br />
+    заполярное небо Мурманска, звёзды южного<br />
+    полушария над Йоханесбургом и небосводы<br />
+    других широт &mdash; 
     <div
       class="text-blocks__button"
       data-ng-click="scenario.currentPage = 10">на интерактивной визуализации</div>.
