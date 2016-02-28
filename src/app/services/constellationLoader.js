@@ -52,7 +52,6 @@ zodiac.factory('constellationLoader', function () {
                     });
                     return constellation
                 });
-                //console.log(starCount, 'звёзд');
                 var minMaxMag = d3.extent(starsMag);
                 var opacityScale = d3.scale.linear()
                     .domain(minMaxMag)
@@ -65,8 +64,6 @@ zodiac.factory('constellationLoader', function () {
 
                 constellations.forEach(function (constellation) {
                     var geometries = [];
-                    console.log(constellation.name);
-                    if (constellation.name == 'Orion') console.log(constellation);
 
                     if (constellation.zodiac || noZodiacNames[constellation.name]) {
                         var lines = constellation.lines.map(function (line) {
@@ -129,7 +126,6 @@ zodiac.factory('constellationLoader', function () {
                     };
                     geoConstellations.push(geoConstellation)
                 });
-                //console.log('constellations loaded');
                 return geoConstellations
 
         }

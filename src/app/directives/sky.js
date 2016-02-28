@@ -186,6 +186,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             var starNamesOpacity = $scope.state.starNames * 1;
             var sunTrajectoryOpacity = $scope.state.sunTrajectory * 1;
             var sightElevation = 0;
+            var partConstellationOpacity = (!$scope.state.showPartConstellations) * 1 || 0;
 
             var lineOpacityScale = d3.scale.linear()
                 .domain([5, -5])
@@ -319,7 +320,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 });
                 horizontSunCoord = fixedProjection.invert(sunPx);
                 $scope.state.sunRiseDegrees = horizontSunCoord[1];
-                sunImg.style('opacity', (sunOpacityScale(horizontSunCoord[1])));
+                sunImg.style('opacity', (Math.max(atmosphereTransparency, sunOpacityScale(horizontSunCoord[1]))));
             }
 
             function drawSunPath() {
@@ -496,7 +497,8 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                                 $scope.zodiacName.declension = geo.properties.nameDeclension;
                                 $scope.zodiacName.name = geo.properties.name
                             } else {
-                                opacity = isZodiac ? lineOpacityScale(horizontSunCoord[1]) * zodiacOpacity : lineOpacityScale(horizontSunCoord[1]) * noZodiacOpacity;
+                                opacity = isZodiac ? lineOpacityScale(horizontSunCoord[1]) * zodiacOpacity :
+                                lineOpacityScale(horizontSunCoord[1]) * noZodiacOpacity * (1 - 0.5 * partConstellationOpacity);
                             }
                             var color = isZodiac ? colors.zodiacLine : d3.rgb('#fff');
                             ctx.strokeStyle = rgbaFromRgb(color, opacity * 0.5);
@@ -505,10 +507,11 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                             ctx.stroke();
 
                             color = colors.zodiacText;
+                            var textOpacity = isZodiac ? opacity : (1 - partConstellationOpacity);
                             _.assign(ctx, {
                                 textAlign: "center",
                                 font: "italic 16px OriginalGaramondBTWebItalic",
-                                fillStyle: rgbaFromRgb(color, opacity * 0.4)
+                                fillStyle: rgbaFromRgb(color, textOpacity * 0.4)
                             });
 
                             var projectedCenter = projection(geo.properties.center);
@@ -574,7 +577,6 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
             $scope.$watch('geoConstellations', function (geoConstellations) {
                 if (!geoConstellations) return;
-                console.log('draw!');
                 draw();
 
                 playRaf();
@@ -685,6 +687,11 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             }, function(interpolatedValue) {
                 sunTrajectoryOpacity = interpolatedValue
             }, 1, 0);
+            createAnimationWatch('partConstellationOpacity', function() {
+                return partConstellationOpacity
+            }, function(interpolatedValue) {
+                partConstellationOpacity = interpolatedValue
+            }, 0, 1);
             createAnimationWatch('atmosphere', function() {
                 return atmosphereTransparency
             }, function(interpolatedValue) {
