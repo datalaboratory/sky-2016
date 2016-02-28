@@ -41,6 +41,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       tails: false
 
       currentDate: startDate.clone().toDate()
+      limitDate: startDate.clone().add(1, 'm').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: true
@@ -61,6 +62,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 2
     {
       currentDate: startDate.clone().add(1, 'm').toDate()
+      limitDate: startDate.clone().add(2, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: true
@@ -81,6 +83,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 3
     {
       currentDate: startDate.clone().add(2, 'h').toDate()
+      limitDate: startDate.clone().add(4, 'h').toDate()
       graticule: true
       selectedCity: 'Moscow'
       atmosphere: true
@@ -101,6 +104,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 4
     {
       currentDate: startDate.clone().add(4, 'h').toDate()
+      limitDate: startDate.clone().add(6, 'h').toDate()
       graticule: true
       selectedCity: 'Moscow'
       atmosphere: true
@@ -121,6 +125,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 5
     {
       currentDate: startDate.clone().add(6, 'h').toDate()
+      limitDate: startDate.clone().add(8, 'h').toDate()
       graticule: true
       selectedCity: 'Moscow'
       atmosphere: true
@@ -141,6 +146,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 6
     {
       currentDate: startDate.clone().add(8, 'h').toDate()
+      limitDate: startDate.clone().add(9, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
@@ -161,6 +167,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 7
     {
       currentDate: startDate.clone().add(9, 'h').toDate()
+      limitDate: startDate.clone().add(11, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
@@ -181,6 +188,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 8
     {
       currentDate: startDate.clone().add(11, 'h').toDate()
+      limitDate: startDate.clone().add(11.5, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
@@ -201,6 +209,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 9
     {
       currentDate: startDate.clone().add(11.5, 'h').toDate()
+      limitDate: startDate.clone().add(13, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
@@ -221,6 +230,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 10
     {
       currentDate: startDate.clone().add(13, 'h').toDate()
+      limitDate: startDate.clone().add(18, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
@@ -241,6 +251,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 11
     {
       currentDate: moment().toDate()
+      limitDate: undefined
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: true
@@ -261,6 +272,11 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
   ]
 
   $scope.$watch 'scenario.currentPage', ->
+    if $scope.state.currentDate < $scope.states[$scope.scenario.currentPage]['currentDate']
+      console.log 'Speedy Gonzales'
+    else
+      console.log 'Slowpoke'
+
     _.forIn $scope.states[$scope.scenario.currentPage], (value, key) ->
       $scope.state[key] = value if $scope.state[key] isnt value
       return
@@ -271,9 +287,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     return
 
   $scope.$watch 'state.currentDate', ->
-    return if $scope.scenario.currentPage > $scope.scenario.nOfPages - 2
+    return if $scope.scenario.currentPage is $scope.scenario.nOfPages
 
-    if $scope.state.currentDate > $scope.states[$scope.scenario.currentPage + 1]['currentDate']
+    if $scope.state.currentDate > $scope.states[$scope.scenario.currentPage]['limitDate']
       $scope.scenario.currentPage += 1
     return
 

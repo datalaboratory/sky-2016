@@ -43,7 +43,7 @@ zodiac.factory('constellationLoader', function () {
                     });
                     return constellation
                 });
-                console.log(starCount, 'звёзд');
+                //console.log(starCount, 'звёзд');
                 var minMaxMag = d3.extent(starsMag);
                 var opacityScale = d3.scale.linear()
                     .domain(minMaxMag)
@@ -116,7 +116,7 @@ zodiac.factory('constellationLoader', function () {
                     };
                     geoConstellations.push(geoConstellation)
                 });
-                console.log('constellations loaded');
+                //console.log('constellations loaded');
                 return geoConstellations
 
         }

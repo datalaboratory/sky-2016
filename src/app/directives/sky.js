@@ -121,7 +121,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 if ($scope.state.viewDirection == 'horizon') {
                     height = $element.height();
                     updateWidthHeight(height, normalProjectionTranslate, normalProjectionRotate, normalProjectionScale);
-                    console.log(height, normalProjectionTranslate, normalProjectionRotate, normalProjectionScale, 'from resize')
+                    //console.log(height, normalProjectionTranslate, normalProjectionRotate, normalProjectionScale, 'from resize')
                 } else {
                     height = $element.height();
                     updateWidthHeight(height, upProjectionTranslate, upProjectionRotate, upProjectionScale);
@@ -292,7 +292,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 backgroundColorUpDirectionCorrector.range([sourceColors, [sourceColors[0], sourceColors[0], sourceColors[0]]]);
 
                 var correctedColors = backgroundColorUpDirectionCorrector(sightElevation);
-                console.log(correctedColors, sightElevation);
+                //console.log(correctedColors, sightElevation);
                 backgroundColorAtmosphereCorrector.range([correctedColors, ['#000', '#000', '#000']]);
 
                 $scope.backgroundColors = backgroundColorAtmosphereCorrector(atmosphereTransparency);
@@ -559,7 +559,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
             $scope.$watch('geoConstellations', function (geoConstellations) {
                 if (!geoConstellations) return;
-                console.log('draw!');
+                //console.log('draw!');
                 draw();
 
                 playRaf();
@@ -586,7 +586,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
                 setInterval(function () {
                     var fps = frames / 10 + ' fps';
-                    console.log(fps);
+                    //console.log(fps);
                     frames = 0
                 }, 10000)
             });
