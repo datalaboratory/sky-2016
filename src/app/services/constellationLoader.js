@@ -19,6 +19,17 @@ zodiac.factory('constellationLoader', function () {
                     'Taurus': 'Телец',
                     'Virgo': 'Дева'
                 };
+                var noZodiacNames = {
+                    'Andromeda': 'Андромеда',
+                    'Crux': 'Южный Крест',
+                    'Cassiopeia': 'Кассиопея',
+                    'Orion': 'Орион',
+                    'Ursa Major': 'Большая Медведица',
+                    'Hercules': 'Геркулес',
+                    'Corona Borealis': 'Северная Корона',
+                    'Coma Berenices': 'Волосы Вероники',
+                    'Pegasus': 'Пегас'
+                };
                 var zodiacNamesDeclension = {
                     'Aquarius': 'Водолея',
                     'Aries': 'Овна',
@@ -56,20 +67,24 @@ zodiac.factory('constellationLoader', function () {
 
                 constellations.forEach(function (constellation) {
                     var geometries = [];
+                    console.log(constellation.name);
+                    if (constellation.name == 'Orion') console.log(constellation);
 
-                    if (constellation.zodiac) {
+                    if (constellation.zodiac || noZodiacNames[constellation.name]) {
                         var lines = constellation.lines.map(function (line) {
                             var p1 = [-line.ra1, line.dec1];
                             var p2 = [-line.ra2, line.dec2];
 
                             return [p1, p2]
                         });
+                        var name = constellation.zodiac ? zodiacNames[constellation.name] : noZodiacNames[constellation.name];
+                        var nameDeclension = constellation.zodiac ? zodiacNamesDeclension[constellation.name] : '';
                         var geometry = {
                             type: "MultiLineString",
                             coordinates: lines,
                             properties: {
-                                name: zodiacNames[constellation.name],
-                                nameDeclension: zodiacNamesDeclension[constellation.name]
+                                name: name,
+                                nameDeclension: nameDeclension
                             }
                         };
 

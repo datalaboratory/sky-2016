@@ -23,7 +23,7 @@ zodiac.constant('cityList', {
         coordinates: [36.82, -1.29],
         name: 'Найроби',
         case: 'Найроби',
-        reverse: true
+        reverse: false
     },
     Johannesburg: {
         coordinates:[28.04, -26.19],
