@@ -57,12 +57,12 @@
   transition: color 0.25s ease-out;
 
   color: #fff;
-  border-bottom: 1px dashed rgba(255,255,255,.7);
+  border-bottom: 1px dashed rgba(255, 255, 255, .3);
 }
 
 .text-blocks__month-name:hover {
   color: #0ff;
-  border-bottom: 1px dashed rgba(0,255,255,.7);
+  border-bottom: 1px dashed rgba(0, 255, 255, .3);
 }
 
 .text-blocks__month-name.selected {
