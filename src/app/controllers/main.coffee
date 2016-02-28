@@ -32,7 +32,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
   $scope.states = [
     # 1
     {
-      sunRiseDegrees: 0
+      sunRiseDegrees: -Infinity
       play: true
       tails: false
 
