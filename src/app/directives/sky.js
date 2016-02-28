@@ -687,7 +687,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             }, function(interpolatedValue) {
                 sunTrajectoryOpacity = interpolatedValue
             }, 1, 0);
-            createAnimationWatch('partConstellationOpacity', function() {
+            createAnimationWatch('showPartConstellations', function() {
                 return partConstellationOpacity
             }, function(interpolatedValue) {
                 partConstellationOpacity = interpolatedValue
