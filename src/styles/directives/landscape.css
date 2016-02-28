@@ -7,10 +7,6 @@
   transition: top 1s linear;
 }
 
-.landscape__day.hidden, .landscape__night.hidden {
-  top: 100%;
-}
-
 .landscape__day.murmansk, .landscape__night.murmansk {
   top: 85%;
 }
@@ -33,4 +29,8 @@
 
 .landscape__day.johannesburg, .landscape__night.johannesburg {
   top: 80%;
+}
+
+.landscape__day.hidden, .landscape__night.hidden {
+  top: 100% !important;
 }

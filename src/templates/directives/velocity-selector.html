@@ -1,5 +1,5 @@
 <div class="velocity-selector">
-  <div class="velocity-selector__caption garamond-italic inline">Ускориться&nbsp;в&nbsp;</div>
+  <div class="velocity-selector__caption garamond-italic inline">Ускорение&nbsp;в&nbsp;</div>
   <div
     class="velocity-selector__button inline"
     data-ng-class="{'active': state.velocity === 600}"
@@ -7,21 +7,13 @@
     <span class="tooltip helvetica-neue">10 минут за секунду</span>
     <span class="value garamond-italic">600</span>
   </div>
-  <div class="velocity-selector__caption garamond-italic inline">,&nbsp;</div>
+  <div class="velocity-selector__caption garamond-italic inline">&nbsp;или&nbsp;в&nbsp;</div>
   <div
     class="velocity-selector__button inline"
-    data-ng-class="{'active': state.velocity === 3600}"
-    data-ng-click="state.velocity === 3600 ? state.velocity = 1 : state.velocity = 3600">
-    <span class="tooltip helvetica-neue">Час за секунду</span>
-    <span class="value garamond-italic">3600</span>
-  </div>
-  <div class="velocity-selector__caption garamond-italic inline">&nbsp;или&nbsp;</div>
-  <div
-    class="velocity-selector__button inline"
-    data-ng-class="{'active': state.velocity === 7200}"
-    data-ng-click="state.velocity === 7200 ? state.velocity = 1 : state.velocity = 7200">
-    <span class="tooltip helvetica-neue">Два часа за секунду</span>
-    <span class="value garamond-italic">7200</span>
+    data-ng-class="{'active': state.velocity === 60000}"
+    data-ng-click="state.velocity === 60000 ? state.velocity = 1 : state.velocity = 60000">
+    <span class="tooltip helvetica-neue">16 часов за секунду</span>
+    <span class="value garamond-italic">60000</span>
   </div>
   <div class="velocity-selector__caption garamond-italic inline">&nbsp;раз</div>
   <br class="clear-both" />

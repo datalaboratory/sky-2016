@@ -69,7 +69,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: false
       ecliptic: false
       sunTrajectory: false
-      velocity: 400
+      velocity: 300
       viewDirection: 'horizon'
 
       globe: false
@@ -89,7 +89,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: false
       ecliptic: false
       sunTrajectory: false
-      velocity: 400
+      velocity: 300
       viewDirection: 'horizon'
 
       globe: false
@@ -109,7 +109,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: false
       ecliptic: false
       sunTrajectory: false
-      velocity: 400
+      velocity: 300
       viewDirection: 'up'
 
       globe: false
@@ -129,7 +129,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: false
       ecliptic: false
       sunTrajectory: false
-      velocity: 400
+      velocity: 300
       viewDirection: 'horizon'
 
       globe: false
@@ -149,7 +149,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: true
       ecliptic: false
       sunTrajectory: false
-      velocity: 400
+      velocity: 300
       viewDirection: 'horizon'
 
       globe: false
@@ -169,7 +169,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: true
       ecliptic: false
       sunTrajectory: false
-      velocity: 400
+      velocity: 300
       viewDirection: 'horizon'
 
       globe: false
@@ -189,7 +189,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: true
       ecliptic: true
       sunTrajectory: false
-      velocity: 400
+      velocity: 300
       viewDirection: 'horizon'
 
       globe: false
@@ -209,7 +209,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: true
       ecliptic: true
       sunTrajectory: false
-      velocity: 400
+      velocity: 300
       viewDirection: 'horizon'
 
       globe: false
@@ -229,7 +229,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: true
       ecliptic: true
       sunTrajectory: false
-      velocity: 400
+      velocity: 300
       viewDirection: 'horizon'
 
       globe: false
