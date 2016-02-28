@@ -300,7 +300,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 11
     {
-      currentDate: moment().toDate()
+      currentDate: startDate.clone().add(15, 'h').toDate()
       limitDate: undefined
       graticule: false
       selectedCity: 'Moscow'
