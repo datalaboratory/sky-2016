@@ -10,7 +10,8 @@ zodiac.controller 'protoCtrl', ($scope, $rootScope, $http, constellationLoader) 
     selectedCity: 'Moscow'
     currentDate: moment().toDate()
     atmosphere: false
-    constellations: true
+    zodiacConstellations: true
+    otherConstellations: true
     currentConstellation: false
     graticule: true
     ecliptic: false

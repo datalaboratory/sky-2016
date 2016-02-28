@@ -103,7 +103,7 @@ zodiac.directive('earthOrbit', function (cityList) {
                 var angle = currentFrame * 3;
 
                 if (angle < 90 - cityList[$scope.state.selectedCity].coordinates[0] || angle > 270 - cityList[$scope.state.selectedCity].coordinates[0]) {
-                    currentPoint.attr('fill', '#fff')
+                    currentPoint.attr('fill', '#f0f')
                 } else {
                     currentPoint.attr('fill', 'none')
                 }
