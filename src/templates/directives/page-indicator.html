@@ -3,10 +3,11 @@
     <div
       class="page-indicator__page"
       data-ng-repeat="circle in _.range(scenario.nOfPages) track by $index"
-      data-ng-click="scenario.currentPage = $index">
+      data-ng-click="scenario.currentPage = $index"
+      data-ng-show="$index !== 8 && $index !== 9 && $index !== 10">
       <div
         class="page-indicator__circle"
-        data-ng-class="{'active': scenario.currentPage === $index}"></div>
+        data-ng-class="{'active': scenario.currentPage === 7 || scenario.currentPage === 8 || scenario.currentPage === 9 || scenario.currentPage === 10 ? ($index === 7) : (scenario.currentPage === $index)}"></div>
     </div>
   </div>
 </div>
