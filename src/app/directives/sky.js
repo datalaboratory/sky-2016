@@ -186,7 +186,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             var starNamesOpacity = $scope.state.starNames * 1;
             var sunTrajectoryOpacity = $scope.state.sunTrajectory * 1;
             var sightElevation = 0;
-            var partConstellationOpacity = (!$scope.state.showPartConstellations) * 1 || 0;
+            var partConstellationOpacity = $scope.state.showPartConstellations * 1 || 0;
 
             var lineOpacityScale = d3.scale.linear()
                 .domain([5, -5])
