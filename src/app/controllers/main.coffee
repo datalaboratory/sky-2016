@@ -45,6 +45,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       zodiacConstellations: false
       otherConstellations: true
       currentConstellation: false
+      showPartConstellations: false
       ecliptic: false
       sunTrajectory: false
       velocity: 1
@@ -67,6 +68,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       zodiacConstellations: false
       otherConstellations: true
       currentConstellation: false
+      showPartConstellations: false
       ecliptic: false
       sunTrajectory: false
       velocity: 300
@@ -89,6 +91,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       zodiacConstellations: false
       otherConstellations: true
       currentConstellation: false
+      showPartConstellations: false
       ecliptic: false
       sunTrajectory: false
       velocity: 300
@@ -111,6 +114,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       zodiacConstellations: false
       otherConstellations: true
       currentConstellation: false
+      showPartConstellations: false
       ecliptic: false
       sunTrajectory: false
       velocity: 300
@@ -133,6 +137,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       zodiacConstellations: false
       otherConstellations: true
       currentConstellation: false
+      showPartConstellations: false
       ecliptic: false
       sunTrajectory: false
       velocity: 300
@@ -155,6 +160,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       zodiacConstellations: false
       otherConstellations: true
       currentConstellation: true
+      showPartConstellations: false
       ecliptic: false
       sunTrajectory: false
       velocity: 300
@@ -175,8 +181,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       atmosphere: false
       starNames: false
       zodiacConstellations: true
-      otherConstellations: false
+      otherConstellations: true
       currentConstellation: true
+      showPartConstellations: true
       ecliptic: true
       sunTrajectory: false
       velocity: 300
@@ -191,14 +198,15 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 8.1
     {
       currentDate: startDate.clone().month(2).add(10, 'h').toDate()
-      limitDate: startDate.clone().month(2).add(10.5, 'h').toDate()
+      limitDate: startDate.clone().month(2).add(11, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
       starNames: false
       zodiacConstellations: true
-      otherConstellations: false
+      otherConstellations: true
       currentConstellation: true
+      showPartConstellations: true
       ecliptic: true
       sunTrajectory: false
       velocity: 300
@@ -213,14 +221,15 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     # 8.2
     {
       currentDate: startDate.clone().month(3).add(10, 'h').toDate()
-      limitDate: startDate.clone().month(3).add(10.5, 'h').toDate()
+      limitDate: startDate.clone().month(3).add(11, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
       starNames: false
       zodiacConstellations: true
-      otherConstellations: false
+      otherConstellations: true
       currentConstellation: true
+      showPartConstellations: true
       ecliptic: true
       sunTrajectory: false
       velocity: 300
@@ -241,8 +250,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       atmosphere: false
       starNames: false
       zodiacConstellations: true
-      otherConstellations: false
+      otherConstellations: true
       currentConstellation: true
+      showPartConstellations: true
       ecliptic: true
       sunTrajectory: false
       velocity: 300
@@ -263,8 +273,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       atmosphere: false
       starNames: false
       zodiacConstellations: true
-      otherConstellations: false
+      otherConstellations: true
       currentConstellation: true
+      showPartConstellations: true
       ecliptic: true
       sunTrajectory: false
       velocity: 300
@@ -285,8 +296,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       atmosphere: false
       starNames: false
       zodiacConstellations: true
-      otherConstellations: false
+      otherConstellations: true
       currentConstellation: true
+      showPartConstellations: true
       ecliptic: true
       sunTrajectory: false
       velocity: 300
@@ -307,8 +319,9 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       atmosphere: false
       starNames: false
       zodiacConstellations: true
-      otherConstellations: false
+      otherConstellations: true
       currentConstellation: false
+      showPartConstellations: true
       ecliptic: false
       sunTrajectory: true
       velocity: 1
