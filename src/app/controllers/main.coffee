@@ -312,7 +312,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 11
     {
-      currentDate: startDate.clone().add(15, 'h').toDate()
+      currentDate: moment().toDate()
       limitDate: undefined
       graticule: false
       selectedCity: 'Moscow'
@@ -323,7 +323,7 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       currentConstellation: false
       showPartConstellations: true
       ecliptic: false
-      sunTrajectory: true
+      sunTrajectory: false
       velocity: 1
       viewDirection: 'horizon'
 
