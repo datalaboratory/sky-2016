@@ -507,7 +507,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                             ctx.stroke();
 
                             color = colors.zodiacText;
-                            var textOpacity = isZodiac ? opacity : (1 - partConstellationOpacity);
+                            var textOpacity = isZodiac ? opacity : opacity * (1 - partConstellationOpacity);
                             _.assign(ctx, {
                                 textAlign: "center",
                                 font: "italic 16px OriginalGaramondBTWebItalic",
