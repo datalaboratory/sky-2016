@@ -427,6 +427,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
                 _.assign(ctx, {
                     textAlign: "center",
+                    textBaseline: 'middle',
                     font: "italic 16px OriginalGaramondBTWebItalic"
                 });
                 var equatorTextWidth = ctx.measureText('Небесный экватор').width + 4;
@@ -511,6 +512,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                             _.assign(ctx, {
                                 textAlign: "center",
                                 font: "italic 16px OriginalGaramondBTWebItalic",
+                                textBaseline: 'middle',
                                 fillStyle: rgbaFromRgb(color, textOpacity * 0.4)
                             });
 
