@@ -197,29 +197,6 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
     }
     # 8.1
     {
-      currentDate: startDate.clone().month(2).add(10, 'h').toDate()
-      limitDate: startDate.clone().month(2).add(11, 'h').toDate()
-      graticule: false
-      selectedCity: 'Moscow'
-      atmosphere: false
-      starNames: false
-      zodiacConstellations: true
-      otherConstellations: true
-      currentConstellation: true
-      showPartConstellations: true
-      ecliptic: true
-      sunTrajectory: false
-      velocity: 300
-      viewDirection: 'horizon'
-
-      globe: false
-      checkboxes: false
-      earthOrbit: true
-      velocitySelector: false
-      sliders: false
-    }
-    # 8.2
-    {
       currentDate: startDate.clone().month(3).add(10, 'h').toDate()
       limitDate: startDate.clone().month(3).add(11, 'h').toDate()
       graticule: false
@@ -241,10 +218,33 @@ zodiac.controller 'mainCtrl', ($scope, $rootScope, $http, constellationLoader, c
       velocitySelector: false
       sliders: false
     }
+    # 8.2
+    {
+      currentDate: startDate.clone().month(4).add(10, 'h').toDate()
+      limitDate: startDate.clone().month(4).add(11, 'h').toDate()
+      graticule: false
+      selectedCity: 'Moscow'
+      atmosphere: false
+      starNames: false
+      zodiacConstellations: true
+      otherConstellations: true
+      currentConstellation: true
+      showPartConstellations: true
+      ecliptic: true
+      sunTrajectory: false
+      velocity: 300
+      viewDirection: 'horizon'
+
+      globe: false
+      checkboxes: false
+      earthOrbit: true
+      velocitySelector: false
+      sliders: false
+    }
     # 8.3
     {
-      currentDate: startDate.clone().month(1).add(10, 'h').toDate()
-      limitDate: startDate.clone().month(1).add(11, 'h').toDate()
+      currentDate: startDate.clone().month(2).add(10, 'h').toDate()
+      limitDate: startDate.clone().month(2).add(11, 'h').toDate()
       graticule: false
       selectedCity: 'Moscow'
       atmosphere: false
