@@ -104,7 +104,7 @@ zodiac.factory('constellationLoader', function () {
                             type: 'Point',
                             coordinates: [-star.ra, star.dec],
                             properties: {
-                                color: star.color,
+                                color: d3.rgb(star.color),
                                 mag: magScale(star.mag),
                                 currentOpacity: currentOpacity
                             }

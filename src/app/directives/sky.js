@@ -1,9 +1,10 @@
-zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) {
+zodiac.directive('sky', function (cityList, brightStarsList, colors) {
     return {
         restrict: 'E',
         templateUrl: 'templates/directives/sky.html',
         replace: true,
         link: function link($scope, $element) {
+            var WHITE = d3.rgb('#fff');
 
             var landscapeHeight = 60;
             var width = $element.width(),
@@ -56,6 +57,10 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
             var bgScale = d3.scale.linear()
                 .domain([0, height]);
+
+            function getBg(ratio, opacity) {
+                return rgbaFromRgb(d3.rgb(bgScale(ratio)), opacity);
+            }
 
             function updateWidthHeight(height, translate, rotate, scale) {
                 width = $element.width();
@@ -138,9 +143,6 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             var tailPath = d3.geo.path()
                 .projection(projection)
                 .context(tailCtx);
-            var fixedPath = d3.geo.path()
-                .projection(fixedProjection)
-                .context(ctx);
 
             var graticule = d3.geo.graticule()
                 .minorStep([15, 15])
@@ -221,7 +223,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 var currentOpacity = geo.properties.currentOpacity;
                 var radialGradient = ctx.createRadialGradient(x, y, 0, x, y, r);
                 var bgRGB = d3.rgb(bgScale(y));
-                var colorRGB = d3.rgb(geo.properties.color);
+                var colorRGB = geo.properties.color;
 
                 var opacity = currentOpacity(sunDeg);
                 if (atmosphereTransparency > 0) {
@@ -235,25 +237,12 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 ctx.fillStyle = radialGradient
             }
 
-            function makeSunGradient(geo) {
-                var x = projection(geo.coordinates)[0];
-                var y = projection(geo.coordinates)[1];
-                var r = geo.properties.mag;
-                var radialGradient = ctx.createRadialGradient(x, y, 0, x, y, r);
-                var colorRGB = d3.rgb(geo.properties.color);
-
-                radialGradient.addColorStop(0.4, rgbaFromRgb(colorRGB, 1));
-                radialGradient.addColorStop(0.8, rgbaFromRgb(colorRGB, 0.2));
-                radialGradient.addColorStop(1, rgbaFromRgb(colorRGB, 0));
-                ctx.fillStyle = radialGradient;
-            }
-
             function makeSunBackgroundGradient(r, sunCenter) {
                 var top = sunCenter[1] - r;
                 var bottom = sunCenter[1] + r;
                 var linearGradient = ctx.createLinearGradient(0, bottom, 0, top);
-                linearGradient.addColorStop(0.0, rgbaFromRgb(d3.rgb(bgScale(bottom)), 1));
-                linearGradient.addColorStop(1, rgbaFromRgb(d3.rgb(bgScale(top)), 1));
+                linearGradient.addColorStop(0.0, getBg(bottom, 1));
+                linearGradient.addColorStop(1, getBg(top, 1));
                 ctx.fillStyle = linearGradient;
             }
 
@@ -265,7 +254,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             function makeEclipticGradient(startTailCoordinates) {
                 var endTailPx = projection(startYearSunPosition);
                 var startTailPx = projection(startTailCoordinates);
-                var color = d3.rgb('#fff');
+                var color = WHITE;
                 var linearGradient = ctx.createLinearGradient(startTailPx[0], startTailPx[1], endTailPx[0], endTailPx[1]);
                 linearGradient.addColorStop(0.0, rgbaFromRgb(color, eclipticOpacity));
                 linearGradient.addColorStop(0.2, rgbaFromRgb(color, eclipticOpacity));
@@ -273,10 +262,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 ctx.strokeStyle = linearGradient;
             }
 
-            var backgroundDegreesCorrector = d3.scale.linear()
-                .domain([0, 1])
-                .range([0, 90])
-                .clamp(true);
+
             var backgroundColorAtmosphereCorrector = d3.scale.linear()
                 .domain([0, 1]);
             var backgroundColorUpDirectionCorrector = d3.scale.linear()
@@ -340,7 +326,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                     Object.keys(cityList).forEach(function (city) {
                         ctx.strokeStyle = "#fff";
                         if (city == $scope.showCitySunPath) {
-                            ctx.strokeStyle = colors.ecliptic;
+                            ctx.strokeStyle = colors.selected;
                         }
                         projection.rotate([currentLon, getCurrentLat(city), getReverse(city)]);
                         //ctx.setLineDash([5]);
@@ -359,9 +345,9 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
 
                     });
                     Object.keys(cityList).forEach(function (city) {
-                        ctx.fillStyle = rgbaFromRgb(d3.rgb("#fff"), 0.4);
+                        ctx.fillStyle = rgbaFromRgb(WHITE, 0.4);
                         if (city == $scope.showCitySunPath) {
-                            ctx.fillStyle = rgbaFromRgb(colors.ecliptic, 0.4);
+                            ctx.fillStyle = rgbaFromRgb(colors.selected, 0.4);
                         }
                         projection.rotate([currentLon, getCurrentLat(city), getReverse(city)]);
                         var sunCenter = projection(sunCoordinates);
@@ -372,7 +358,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         ctx.fillText(cityList[city].name, sunCenter[0] + r + 5, sunCenter[1])
                     })
                 } else {
-                    ctx.strokeStyle = rgbaFromRgb(colors.ecliptic, sunTrajectoryOpacity);
+                    ctx.strokeStyle = rgbaFromRgb(colors.selected, sunTrajectoryOpacity);
                     //ctx.setLineDash([5]);
                     ctx.lineWidth = 0.4;
                     drawSunPath();
@@ -401,127 +387,81 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 ctx.clearRect(0, 0, width, height);
 
                 updateSunCoordinates();
-                var sunGeo = {
-                    type: "Point",
-                    coordinates: sunCoordinates,
-                    properties: {
-                        mag: 35,
-                        color: '#fff'
-                    }
-                };
                 drawSkyBackground();
                 drawSunTrajectory(center);
 
                 //сетка + экватор
-                ctx.strokeStyle = rgbaFromRgb(d3.rgb("#fff"), graticuleOpacity * 0.8);
-                ctx.lineWidth = .1;
-                ctx.beginPath();
-                path(graticule());
-                ctx.stroke();
-
-                ctx.lineWidth = 0.15;
-                ctx.beginPath();
-                var equator = [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]];
-                path({type: "LineString", coordinates: equator});
-                ctx.stroke();
-
-                _.assign(ctx, {
-                    textAlign: "center",
-                    textBaseline: 'middle',
-                    font: "italic 16px OriginalGaramondBTWebItalic"
-                });
-                var equatorTextWidth = ctx.measureText('Небесный экватор').width + 4;
-                var textHeight = 16;
-
-                ctx.fillStyle = makeSunBackgroundGradient(16, equatorTextPosition);
-                ctx.fillRect(equatorTextPosition[0] - equatorTextWidth / 2, equatorTextPosition[1] - textHeight / 2, equatorTextWidth, textHeight);
-
-                ctx.fillStyle = rgbaFromRgb(d3.rgb("#fff"), graticuleOpacity * 0.4);
-                ctx.fillText('Небесный экватор', equatorTextPosition[0], equatorTextPosition[1]);
-
-                //эклиптика
-                ctx.strokeStyle = rgbaFromRgb(d3.rgb('#fff'), eclipticOpacity);
-                ctx.lineWidth = 0.5;
-                var eclipticPart = eclipticCoordinates.filter(function (coord) {
-                    return coord[0] > sunCoordinates[0] && coord[0] < startTailSunPosition[0]
-                });
-                if (eclipticPart.length < 2) {
-                    var tail = [sunCoordinates, startYearSunPosition];
-                } else {
-                    eclipticPart = [startTailSunPosition].concat(eclipticPart).concat([sunCoordinates]);
-                    tail = tailCoordinates;
+                if (graticuleOpacity) {
+                    ctx.strokeStyle = rgbaFromRgb(WHITE, graticuleOpacity * 0.8);
+                    ctx.lineWidth = .1;
                     ctx.beginPath();
-                    path({type: "LineString", coordinates: eclipticPart});
+                    path(graticule());
+                    ctx.stroke();
+
+                    ctx.lineWidth = 0.15;
+                    ctx.beginPath();
+                    var equator = [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]];
+                    path({type: "LineString", coordinates: equator});
+                    ctx.stroke();
+
+                    _.assign(ctx, {
+                        textAlign: "center",
+                        textBaseline: 'middle',
+                        font: "italic 16px OriginalGaramondBTWebItalic"
+                    });
+                    var equatorTextWidth = ctx.measureText('Небесный экватор').width + 4;
+                    var textHeight = 16;
+
+                    ctx.fillStyle = makeSunBackgroundGradient(16, equatorTextPosition);
+                    ctx.fillRect(equatorTextPosition[0] - equatorTextWidth / 2, equatorTextPosition[1] - textHeight / 2, equatorTextWidth, textHeight);
+
+                    ctx.fillStyle = rgbaFromRgb(WHITE, graticuleOpacity * 0.4);
+                    ctx.fillText('Небесный экватор', equatorTextPosition[0], equatorTextPosition[1]);
+                }
+                //эклиптика
+
+                if (eclipticOpacity) {
+                    ctx.strokeStyle = rgbaFromRgb(WHITE, eclipticOpacity);
+                    ctx.lineWidth = 0.5;
+                    var eclipticPart = eclipticCoordinates.filter(function (coord) {
+                        return coord[0] > sunCoordinates[0] && coord[0] < startTailSunPosition[0]
+                    });
+                    if (eclipticPart.length < 2) {
+                        var tail = [sunCoordinates, startYearSunPosition];
+                    } else {
+                        eclipticPart = [startTailSunPosition].concat(eclipticPart).concat([sunCoordinates]);
+                        tail = tailCoordinates;
+                        ctx.beginPath();
+                        path({type: "LineString", coordinates: eclipticPart});
+                        ctx.stroke();
+                    }
+
+                    makeEclipticGradient(tail[0]);
+                    ctx.beginPath();
+                    path({type: "LineString", coordinates: tail});
                     ctx.stroke();
                 }
 
-                makeEclipticGradient(tail[0]);
-                ctx.beginPath();
-                path({type: "LineString", coordinates: tail});
-                ctx.stroke();
-
+                ctx.lineWidth = 0.7;
 
                 //линии созвездий и звезды
-                var minConstellationNumber = 0;
-                var minDistance = distance(projection(constellations[0].properties.center), sunPx);
-                constellations.forEach(function(constellation, i) {
-                    if (!constellation.properties.zodiac) return;
+                var nearestConstellation;
+                var minDistance = Infinity;
+                var constellation;
+                var i;
+                for (i = 0; i < constellations.length; i++) {
+                    constellation = constellations[i];
+                    if (!constellation.properties.zodiac) continue;
                     var currentDistance = distance(projection(constellation.properties.center), sunPx);
                     if (currentDistance < minDistance) {
-                        minConstellationNumber = i;
+                        nearestConstellation = constellation;
                         minDistance = currentDistance
                     }
-                });
-                ctx.lineWidth = 0.7;
-                constellations.forEach(function drawConstellation(constellation, i) {
-                    constellation.geometry.geometries.forEach(function drawStarsAndLines(geo) {
-                        var isZodiac = constellation.properties.zodiac;
-                        if (geo.type == 'Point') {
-                            if ($scope.state.atmosphere && Math.random() < 0.005) return;
-                            var coordinates = projection(geo.coordinates);
-                            if (coordinates[0] < 0 || coordinates[0] > width || coordinates[1] < 0 || coordinates[1] > height) return;
-                            makeRadialGradient(geo, coordinates, horizontSunCoord[1]);
-                            path.pointRadius([geo.properties.mag]);
-                            ctx.beginPath();
-                            path(geo);
-                            ctx.fill();
-                            if ($scope.state.tails) {
-                                tailCtx.fillStyle = rgbaFromRgb(d3.rgb(geo.properties.color), 0.3);
-                                tailPath.pointRadius([geo.properties.mag / 3]);
-                                tailCtx.beginPath();
-                                tailPath(geo);
-                                tailCtx.fill();
-                            }
-                        } else if (geo.type == 'MultiLineString') {
-                            if (i == minConstellationNumber) {
-                                var opacity = lineOpacityScale(horizontSunCoord[1]) * Math.max(currentConstellationOpacity, zodiacOpacity);
-                                $scope.zodiacName.declension = geo.properties.nameDeclension;
-                                $scope.zodiacName.name = geo.properties.name
-                            } else {
-                                opacity = isZodiac ? lineOpacityScale(horizontSunCoord[1]) * zodiacOpacity :
-                                lineOpacityScale(horizontSunCoord[1]) * noZodiacOpacity * (1 - 0.5 * partConstellationOpacity);
-                            }
-                            var color = isZodiac ? colors.zodiacLine : d3.rgb('#fff');
-                            ctx.strokeStyle = rgbaFromRgb(color, opacity * 0.5);
-                            ctx.beginPath();
-                            path(geo);
-                            ctx.stroke();
-
-                            color = colors.zodiacText;
-                            var textOpacity = isZodiac ? opacity : opacity * (1 - partConstellationOpacity);
-                            _.assign(ctx, {
-                                textAlign: "center",
-                                font: "italic 16px OriginalGaramondBTWebItalic",
-                                textBaseline: 'middle',
-                                fillStyle: rgbaFromRgb(color, textOpacity * 0.4)
-                            });
-
-                            var projectedCenter = projection(geo.properties.center);
-                            var offset = 50;
-                            ctx.fillText(geo.properties.name, projectedCenter[0], projectedCenter[1] - offset)
-                        }
-                    })
-                });
+                }
+                for (i = 0; i < constellations.length; i++) {
+                    constellation = constellations[i];
+                    drawConstellation(constellation, constellation == nearestConstellation);
+                }
 
                 Object.keys(brightStarsList).forEach(function(star) {
                     var opacity = lineOpacityScale(horizontSunCoord[1]) * starNamesOpacity;
@@ -529,7 +469,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                         textAlign: "left",
                         font: "italic 16px OriginalGaramondBTWebItalic",
                         textBaseline: 'middle',
-                        fillStyle: rgbaFromRgb(d3.rgb("#fff"), opacity * 0.4)
+                        fillStyle: rgbaFromRgb(WHITE, opacity * 0.4)
                     });
                     var projectedCenter = projection(brightStarsList[star].coordinates);
                     var offset = brightStarsList[star].offsetY || 0;
@@ -545,6 +485,76 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                     ctx.drawImage(bufferCanvas, 0, 0);
                     ctx.scale(ratio, ratio);
                 }
+            }
+
+            function drawConstellation(constellation, isCurrentConstellation) {
+                for (var i = 0; i < constellation.geometry.geometries.length; i++) {
+                    var geo = constellation.geometry.geometries[i];
+                    if (geo.type == 'Point' && (atmosphereTransparency || horizontSunCoord[1] < 15)) {
+                        drawStar(geo);
+                    } else if (geo.type == 'MultiLineString') {
+                        drawLines(geo, isCurrentConstellation, constellation.properties.zodiac)
+                    }
+                }
+            }
+
+            function drawStar(geo) {
+                if ($scope.state.atmosphere && Math.random() < 0.005) return;
+                var coordinates = projection(geo.coordinates);
+                if (coordinates[0] < 0 || coordinates[0] > width || coordinates[1] < 0 || coordinates[1] > height) return;
+                makeRadialGradient(geo, coordinates, horizontSunCoord[1]);
+                path.pointRadius([geo.properties.mag]);
+                ctx.beginPath();
+                path(geo);
+                ctx.fill();
+                if ($scope.state.tails) {
+                    tailCtx.fillStyle = rgbaFromRgb(geo.properties.color, 0.3);
+                    tailPath.pointRadius([geo.properties.mag / 3]);
+                    tailCtx.beginPath();
+                    tailPath(geo);
+                    tailCtx.fill();
+                }
+            }
+
+            function drawLines(geo, isCurrentConstellation, isZodiac) {
+                if (isCurrentConstellation) {
+                    var opacity = lineOpacityScale(horizontSunCoord[1]) * Math.max(currentConstellationOpacity, zodiacOpacity);
+                    $scope.zodiacName.declension = geo.properties.nameDeclension;
+                    $scope.zodiacName.name = geo.properties.name
+                } else {
+                    opacity = isZodiac ? lineOpacityScale(horizontSunCoord[1]) * zodiacOpacity :
+                    lineOpacityScale(horizontSunCoord[1]) * noZodiacOpacity * (1 - 0.5 * partConstellationOpacity);
+                }
+
+                if (!opacity) return;
+                var color = isZodiac ? colors.zodiacLine : WHITE;
+                ctx.strokeStyle = rgbaFromRgb(color, opacity * 0.5);
+                ctx.beginPath();
+
+                for (var i = 0; i < geo.coordinates.length; i++) {
+                    var sourceLine = geo.coordinates[i];
+                    var start = projection(sourceLine[0]);
+                    var end = projection(sourceLine[1]);
+                    if ((start[0] > width || start[0] < 0 || start[1] > height || start[1] < 0) &&
+                        (end[0] > width || end[0] < 0 || end[1] > height || end[1] < 0)) continue;
+                    ctx.moveTo(start[0], start[1]);
+                    ctx.lineTo(end[0], end[1]);
+                }
+                //path(geo);
+                ctx.stroke();
+
+                color = colors.zodiacText;
+                var textOpacity = isZodiac ? opacity : opacity * (1 - partConstellationOpacity);
+                _.assign(ctx, {
+                    textAlign: "center",
+                    font: "italic 16px OriginalGaramondBTWebItalic",
+                    textBaseline: 'middle',
+                    fillStyle: rgbaFromRgb(color, textOpacity * 0.4)
+                });
+
+                var projectedCenter = projection(geo.properties.center);
+                var offset = 50;
+                ctx.fillText(geo.properties.name, projectedCenter[0], projectedCenter[1] - offset)
             }
 
 
@@ -573,6 +583,7 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
             }
 
             var currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate)) + moment($scope.state.currentDate).dayOfYear()/365 * 360;
+            var prevLon = currentLon;
             var currentLat = getCurrentLat($scope.state.selectedCity);
             var currentReverse = getReverse($scope.state.selectedCity);
             var equatorTextPosition = fixedProjection([0, currentLat]);
@@ -581,26 +592,33 @@ zodiac.directive('sky', function (cityList, brightStarsList, colors, $document) 
                 if (!geoConstellations) return;
                 draw();
 
-                playRaf();
-                var frameDuration = 100;
+                window.requestAnimationFrame(playRaf);
                 var frames = 0;
 
                 function playRaf() {
                     frames++;
                     play();
-                    window.requestAnimationFrame(function () {
-                        playRaf();
-                        $scope.$apply();
-                    });
+                    $scope.$apply();
+                    window.requestAnimationFrame(playRaf);
                 }
+                var n = 0;
+                var frameStart;
 
                 function play() {
                     if (!$scope.state.play) return;
-                    var start = performance.now();
-                    $scope.state.currentDate = moment($scope.state.currentDate).add($scope.state.velocity / (1000 / frameDuration), 's').toDate();
-                    currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate)) + moment($scope.state.currentDate).dayOfYear()/365 * 360;
-                    draw();
-                    frameDuration = performance.now() - start;
+                    var now = performance.now();
+                    var frameDuration = 0;
+                    if (frameStart) frameDuration = now - frameStart;
+                    frameStart = now;
+                    n++;
+                    var newCurrentDate = moment($scope.state.currentDate).add($scope.state.velocity * frameDuration / 1000, 's');
+                    $scope.state.currentDate = newCurrentDate.toDate();
+                    currentLon = lonHourScale(getSecondsFromStartDay($scope.state.currentDate)) + newCurrentDate.dayOfYear() / 365 * 360;
+                    if (Math.abs(currentLon - prevLon) > 0.1 || n > 30) {
+                        draw();
+                        prevLon = currentLon;
+                        n = 0;
+                    }
                 }
 
                 setInterval(function () {

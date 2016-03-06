@@ -21,6 +21,7 @@ zodiac.constant('colors', {
     ],
     zodiacLine: d3.rgb("#f0f"),
     zodiacText: d3.rgb("#fff"),
-    ecliptic: d3.rgb("#29E6E6"),
+    ecliptic: d3.rgb("#fff"),
+    selected: d3.rgb("#29E6E6"),
     constellationLine: "#999"
 });
